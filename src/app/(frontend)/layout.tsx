@@ -31,6 +31,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
         <meta name="mitgo-verification" content="28d34b81-9840-44ac-adb1-9ae7ef0ae384" />
+        <meta name="impact-site-verification" content="fd59399a-96f0-482a-8eb3-e33a18a33668" />
       </head>
       <body>
         <Providers>
