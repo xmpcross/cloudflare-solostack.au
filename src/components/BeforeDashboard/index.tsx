@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { ExternalLink, Globe, Tag, Sparkles, SlidersHorizontal } from 'lucide-react'
+import { ExternalLink, Globe, Tag, Sparkles } from 'lucide-react'
 
 const BeforeDashboard: React.FC = () => {
   return (
@@ -113,27 +113,6 @@ const BeforeDashboard: React.FC = () => {
           <ExternalLink style={{ width: '12px', height: '12px', opacity: 0.6 }} />
         </a>
 
-        {/* Link to Affiliate Networks */}
-        <Link
-          href="/admin/collections/affiliate-networks"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            backgroundColor: 'var(--theme-elevation-100, #FFFFFF)',
-            color: 'var(--theme-elevation-900, #1F1E1B)',
-            border: '1px solid var(--theme-elevation-200, #D5D1C5)',
-            fontSize: '13px',
-            fontWeight: 600,
-            padding: '8px 14px',
-            borderRadius: '7px',
-            textDecoration: 'none',
-            transition: 'background-color 0.15s ease',
-          }}
-        >
-          <SlidersHorizontal style={{ width: '14px', height: '14px', opacity: 0.7 }} />
-          <span>Affiliate Networks</span>
-        </Link>
       </div>
     </div>
   )

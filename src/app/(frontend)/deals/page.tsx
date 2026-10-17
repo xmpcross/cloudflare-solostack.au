@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import configPromise from '@payload-config'
-import { getPayload } from 'payload'
+import { affiliateHubCoupons } from '@/utilities/affiliateHub'
 import React from 'react'
 import { DealsClient, DealItem } from '@/components/marketing/DealsClient'
 import { Tag, ShieldCheck, Flame, Percent, CheckCircle2 } from 'lucide-react'
@@ -33,18 +33,7 @@ export default async function DealsPage() {
   let deals: DealItem[] = []
 
   try {
-    const payload = await getPayload({ config: configPromise })
-    const result = await payload.find({
-      collection: 'affiliate-coupons',
-      where: {
-        and: [
-          { isActive: { not_equals: false } },
-          { or: [{ expiryDate: { exists: false } }, { expiryDate: { greater_than: new Date().toISOString() } }] },
-        ],
-      },
-      sort: '-clicks',
-      limit: MAX_DEALS,
-    })
+    const result = { docs: (await affiliateHubCoupons()).slice(0, MAX_DEALS) }
 
     deals = (result.docs || []).map((doc: any) => ({
       id: doc.id,

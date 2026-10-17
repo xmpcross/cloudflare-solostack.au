@@ -13,10 +13,6 @@ import { Tools } from './collections/Tools'
 import { Hardware } from './collections/Hardware'
 import { Stacks } from './collections/Stacks'
 import { Comparisons } from './collections/Comparisons'
-import { AffiliateNetworks } from './collections/AffiliateNetworks'
-import { AffiliateFeeds } from './collections/AffiliateFeeds'
-import { AffiliateCoupons } from './collections/AffiliateCoupons'
-import { AffiliateClicks } from './collections/AffiliateClicks'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
@@ -65,7 +61,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL || process.env.DATABASE_URI || '',
     },
-    push: true,
+    push: false,
   }),
   collections: [
     Pages,
@@ -74,10 +70,6 @@ export default buildConfig({
     Hardware,
     Stacks,
     Comparisons,
-    AffiliateNetworks,
-    AffiliateFeeds,
-    AffiliateCoupons,
-    AffiliateClicks,
     Media,
     Categories,
     Users,
@@ -85,7 +77,7 @@ export default buildConfig({
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins,
-  secret: process.env.PAYLOAD_SECRET || 'cb807cc09337265b004fdba9',
+  secret: process.env.PAYLOAD_SECRET || '',
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

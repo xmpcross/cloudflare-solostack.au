@@ -301,3 +301,10 @@ You can also deploy your app manually, check out the [deployment documentation](
 ## Questions
 
 If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+
+
+## Affiliate management — moved 17 October 2026 (Perth)
+
+Affiliate networks, imports, coupons and reporting are now managed at https://affiliates.fxnstudio.com/admin in `/kspellman/sites/affiliates.fxnstudio.com`. This site's public coupon/deals page reads a sanitized site-specific cache under the hub's `data/distribution/`, refreshed every minute. Expiry is also checked when rendering. The original affiliate tables and admin navigation were removed on 17 October 2026. A full pre-removal database backup is retained at `/kspellman/backups/affiliate-removal-20261017/`; restoring an old build alone is insufficient for rollback. Editorial content and published products remain in this site's database.
+
+Migration backup: `/kspellman/backups/affiliate-hub-20261017/`. Previous build: `app/.next-before-affiliate-hub-20261017`. See the hub's `docs/DEPLOY.md` for rollback; stop central imports before restoring old import jobs.

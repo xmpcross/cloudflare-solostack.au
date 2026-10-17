@@ -20,3 +20,11 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Affiliate hub cutover rollback/build artifacts
+.next-before-affiliate-hub-20261017/
+.next-affiliate/
+
+.next-before-affiliate-removal-20261017/
+
+.next-remove-affiliates/
