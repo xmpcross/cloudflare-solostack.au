@@ -23,7 +23,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html
       className={cn(GeistSans.variable, GeistMono.variable)}
       data-theme="light"
-      lang="en"
+      lang="en-AU"
       suppressHydrationWarning
     >
       <head>

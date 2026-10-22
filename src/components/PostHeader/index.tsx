@@ -21,7 +21,7 @@ export const PostHeader: React.FC<PostHeaderProps> = ({ post, readingTime = 5 })
   const authorInitial = authorName.charAt(0).toUpperCase()
 
   const formattedDate = publishedAt
-    ? new Date(publishedAt).toLocaleDateString('en-US', {
+    ? new Date(publishedAt).toLocaleDateString('en-AU', {
         month: 'long',
         day: 'numeric',
         year: 'numeric',

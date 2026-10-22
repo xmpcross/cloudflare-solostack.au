@@ -35,7 +35,7 @@ export const metadata: Metadata = {
         alt: 'SoloStack Modern Blueprint Platform',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_AU',
     type: 'website',
   },
   twitter: {

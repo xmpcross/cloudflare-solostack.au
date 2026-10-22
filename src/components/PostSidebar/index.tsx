@@ -35,7 +35,7 @@ export const PostSidebar: React.FC<PostSidebarProps> = ({
             <div className="flex flex-col divide-y divide-border">
               {popularPosts.slice(0, 5).map((post) => {
                 const dateStr = post.publishedAt
-                  ? new Date(post.publishedAt).toLocaleDateString('en-US', {
+                  ? new Date(post.publishedAt).toLocaleDateString('en-AU', {
                       month: 'short',
                       day: 'numeric',
                       year: 'numeric',
