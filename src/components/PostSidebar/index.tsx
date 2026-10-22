@@ -73,27 +73,6 @@ export const PostSidebar: React.FC<PostSidebarProps> = ({
           </div>
         )}
 
-        {/* Widget 2: Deals & Software Discounts Callout */}
-        <div className="widget-deals rounded-3xl border border-emerald-500/30 bg-emerald-500/5 dark:bg-emerald-950/20 p-6 space-y-4 shadow-2xs">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <span>Verified Partner Deals</span>
-          </div>
-          <h3 className="text-lg font-bold text-neutral-900 dark:text-white leading-tight">
-            Save up to 70% on Solopreneur Software &amp; Workstations
-          </h3>
-          <p className="text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">
-            Exclusive reader discounts on Riverside.fm, Descript, NordVPN, Canva Pro, and ergonomics gear.
-          </p>
-          <Link
-            href="/deals"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm py-2.5 px-4 transition-colors shadow-xs"
-          >
-            <span>Browse All Deals</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </Link>
-        </div>
-
         {/* Widget 3: Suggested Topics / Categories */}
         {categories.length > 0 && (
           <div className="widget-categories rounded-3xl border border-border bg-neutral-50/80 dark:bg-card p-6 space-y-4 shadow-2xs">

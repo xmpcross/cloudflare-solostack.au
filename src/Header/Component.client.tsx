@@ -47,13 +47,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
           {/* Mobile Navigation Toggle Button */}
           <div className="flex items-center gap-2 md:hidden">
-            <Link
-              href="/deals"
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-300"
-            >
-              <Tag className="w-3 h-3 text-emerald-600" />
-              <span>Deals</span>
-            </Link>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -101,13 +94,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           </div>
 
           <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-            <Link
-              href="/deals"
-              className="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-emerald-600 text-white text-xs font-bold shadow-sm"
-            >
-              <Tag className="w-3.5 h-3.5" />
-              <span>Verified Deals & Vouchers</span>
-            </Link>
             <Link
               href="/search"
               className="ml-2 p-2 rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100"

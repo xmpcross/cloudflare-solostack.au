@@ -59,20 +59,6 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         )
       })}
 
-      {/* Verified Deals Pill (Pulsing Badge) */}
-      <Link
-        href="/deals"
-        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs lg:text-sm font-bold transition-all duration-200 border ${
-          pathname === '/deals'
-            ? 'bg-emerald-600 text-white border-emerald-500 shadow-sm'
-            : 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/80'
-        }`}
-      >
-        <Tag className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-        <span className="text-emerald-900 dark:text-emerald-200">Deals</span>
-        <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-      </Link>
-
       {/* Search Button Link */}
       <Link
         href="/search"

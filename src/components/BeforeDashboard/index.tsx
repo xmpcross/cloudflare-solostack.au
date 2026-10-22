@@ -88,31 +88,6 @@ const BeforeDashboard: React.FC = () => {
           <ExternalLink style={{ width: '13px', height: '13px', opacity: 0.8 }} />
         </a>
 
-        {/* View /deals page */}
-        <a
-          href="https://solostack.au/deals"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            backgroundColor: 'var(--theme-elevation-100, #FFFFFF)',
-            color: 'var(--theme-elevation-900, #1F1E1B)',
-            border: '1px solid var(--theme-elevation-200, #D5D1C5)',
-            fontSize: '13px',
-            fontWeight: 600,
-            padding: '8px 14px',
-            borderRadius: '7px',
-            textDecoration: 'none',
-            transition: 'background-color 0.15s ease',
-          }}
-        >
-          <Tag style={{ width: '14px', height: '14px', color: '#10B981' }} />
-          <span>View /deals Page</span>
-          <ExternalLink style={{ width: '12px', height: '12px', opacity: 0.6 }} />
-        </a>
-
       </div>
     </div>
   )

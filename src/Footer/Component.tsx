@@ -77,11 +77,6 @@ export async function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/deals" className="hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors font-medium text-emerald-600 dark:text-emerald-400">
-                  Deals &amp; Coupons
-                </Link>
-              </li>
-              <li>
                 <Link href="/tools" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
                   Software Directory
                 </Link>

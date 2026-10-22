@@ -211,13 +211,6 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware }: H
                   <span>Explore Stacks</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-                <Link
-                  href="/deals"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200/90 font-bold text-sm hover:bg-emerald-100/80 transition-all"
-                >
-                  <Zap className="w-4 h-4 text-emerald-600" />
-                  <span>Browse Verified Deals</span>
-                </Link>
               </div>
 
               {/* Quick Metrics Bar */}
@@ -281,20 +274,6 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware }: H
                     <span className="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[11px] font-medium text-slate-700">Make.com</span>
                     <span className="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[11px] font-medium text-slate-700">Screen Studio</span>
                   </div>
-                </div>
-
-                {/* Partner Deals Live Callout */}
-                <div className="p-3.5 rounded-2xl bg-emerald-50/80 border border-emerald-200/80 flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <div>
-                      <span className="font-bold text-slate-900">Featured Deal: </span>
-                      <span className="text-slate-600">NordVPN 75% OFF + 3 Free Months</span>
-                    </div>
-                  </div>
-                  <Link href="/deals" className="font-bold text-emerald-700 hover:underline shrink-0">
-                    Claim →
-                  </Link>
                 </div>
 
                 {/* Hardware Setup Quick Preview */}

@@ -47,7 +47,7 @@ const FAQS: FAQItem[] = [
   {
     question: 'How do I find discounts on creator gear?',
     answer:
-      'Check the SoloStack deals page for current coupon codes on software and gear, buy from authorised retailers, and watch for seasonal sales. Manufacturer refurbished units often carry the full warranty at a lower price.',
+      'Buy from authorised retailers, and watch for seasonal sales. Manufacturer refurbished units often carry the full warranty at a lower price.',
   },
 ]
 
@@ -252,9 +252,6 @@ export default async function BestGearPage() {
         <div className="flex flex-wrap gap-3">
           <Link href="/tools" className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
             Software directory <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link href="/deals" className="inline-flex items-center gap-1.5 rounded-lg border px-4 py-2 text-sm font-semibold hover:bg-muted">
-            Current deals and coupons <ArrowRight className="h-4 w-4" />
           </Link>
           <Link href="/stacks" className="inline-flex items-center gap-1.5 rounded-lg border px-4 py-2 text-sm font-semibold hover:bg-muted">
             Stack blueprints <ArrowRight className="h-4 w-4" />
