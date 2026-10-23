@@ -34,11 +34,26 @@ const manrope = localFont({
   display: 'swap',
 })
 
+// Homepage type: Urbanist for display and headings, Figtree for text (SIL Open Font License, Latin subsets kept in src/fonts).
+const urbanist = localFont({
+  src: [{ path: '../../fonts/urbanist/Urbanist-Variable-latin.woff2', weight: '100 900', style: 'normal' }],
+  variable: '--font-display',
+  display: 'swap',
+  adjustFontFallback: 'Arial',
+})
+
+const figtree = localFont({
+  src: [{ path: '../../fonts/figtree/Figtree-Variable-latin.woff2', weight: '300 900', style: 'normal' }],
+  variable: '--font-body',
+  display: 'swap',
+  adjustFontFallback: 'Arial',
+})
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <html
-      className={cn(mulish.variable, manrope.variable, GeistSans.variable, GeistMono.variable)}
+      className={cn(mulish.variable, manrope.variable, urbanist.variable, figtree.variable, GeistSans.variable, GeistMono.variable)}
       data-theme="light"
       lang="en-AU"
       suppressHydrationWarning

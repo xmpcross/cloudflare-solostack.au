@@ -78,6 +78,8 @@ const getImageUrl = (imageObj: any): string | null => {
   return imageObj.url || imageObj.sizes?.medium?.url || imageObj.sizes?.thumbnail?.url || null
 }
 
+const postImage = (post: PostData) => getImageUrl(post.heroImage || post.meta?.image)
+
 const postCategory = (post: PostData) => {
   const c = post.categories?.[0]
   return typeof c === 'object' && c ? { title: c.title as string, slug: c.slug as string } : null
@@ -88,15 +90,113 @@ const formatDate = (iso?: string) => {
   return new Date(iso).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })
 }
 
-export function HomePageClient({
-  categories,
-  posts,
-  stacks,
-  tools,
-  hardware,
-  gearCount = 0,
-  providerCount = 0,
-}: HomePageClientProps) {
+// Sum of the "A$xx/mo" starting prices of a stack's tools; null when any price does not parse, so the stored figure is used.
+const monthlyTotal = (tools: any[] = []) => {
+  let total = 0
+  let n = 0
+  for (const t of tools) {
+    if (typeof t !== 'object' || !t) continue
+    const m = /A\$([\d.,]+)\s*\/\s*mo/i.exec(t.startingPrice || '')
+    if (!m) return null
+    total += parseFloat(m[1].replace(/,/g, ''))
+    n += 1
+  }
+  return n ? Math.round(total) : null
+}
+
+/**
+ * A drawn eucalyptus sprig: a curved stem with paired leaves, in the manner of a botanical plate.
+ * Authored in code (no stock art); positions are computed from the stem curve so every render is identical.
+ */
+function Sprig({
+  className = '',
+  stroke = 'var(--fg-ink)',
+  leaf = 'var(--fg-leaf)',
+  draw = false,
+}: {
+  className?: string
+  stroke?: string
+  leaf?: string
+  draw?: boolean
+}) {
+  const P0 = [34, 318]
+  const P1 = [30, 150]
+  const P2 = [176, 22]
+  const leaves = Array.from({ length: 10 }, (_, i) => {
+    const t = (i + 1.2) / 11.4
+    const u = 1 - t
+    const x = u * u * P0[0] + 2 * u * t * P1[0] + t * t * P2[0]
+    const y = u * u * P0[1] + 2 * u * t * P1[1] + t * t * P2[1]
+    const dx = 2 * u * (P1[0] - P0[0]) + 2 * t * (P2[0] - P1[0])
+    const dy = 2 * u * (P1[1] - P0[1]) + 2 * t * (P2[1] - P1[1])
+    const heading = (Math.atan2(dy, dx) * 180) / Math.PI
+    const side = i % 2 === 0 ? 1 : -1
+    return { x, y, rot: heading + side * 62, scale: 1.05 - t * 0.5, delay: 0.35 + t * 1.15 }
+  })
+  return (
+    <svg viewBox="0 0 220 330" aria-hidden className={className} fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <path
+        className={draw ? 'fg-stem' : undefined}
+        d={`M${P0[0]} ${P0[1]} Q${P1[0]} ${P1[1]} ${P2[0]} ${P2[1]}`}
+        stroke={stroke}
+        strokeWidth="2"
+      />
+      {leaves.map((l, i) => (
+        <g key={i} transform={`translate(${l.x.toFixed(1)} ${l.y.toFixed(1)}) rotate(${l.rot.toFixed(1)}) scale(${l.scale.toFixed(2)})`}>
+          <path
+            className={draw ? 'fg-leaf' : undefined}
+            style={draw ? ({ ['--d' as any]: `${l.delay.toFixed(2)}s` } as React.CSSProperties) : undefined}
+            d="M0 0 C10 -15 38 -15 52 0 C38 15 10 15 0 0Z"
+            fill={leaf}
+            fillOpacity="0.9"
+            stroke={stroke}
+            strokeWidth="1.6"
+          />
+          <path d="M3 0 L46 0" stroke={stroke} strokeWidth="1" opacity="0.55" />
+        </g>
+      ))}
+    </svg>
+  )
+}
+
+const GLYPHS: Record<string, string[]> = {
+  mic: ['M9 3h6v8a3 3 0 0 1-6 0V3z', 'M5 11a7 7 0 0 0 14 0', 'M12 18v3', 'M9 21h6'],
+  light: ['M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z', 'M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2'],
+  camera: ['M12 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10z', 'M12 8.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z', 'M8 21h8M12 15v6'],
+  monitor: ['M4.5 4h15A1.5 1.5 0 0 1 21 5.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 14.5v-9A1.5 1.5 0 0 1 4.5 4z', 'M8 20h8M12 16v4'],
+  mouse: ['M12 3a5 5 0 0 0-5 5v8a5 5 0 0 0 10 0V8a5 5 0 0 0-5-5z', 'M12 3v7'],
+  stand: ['M5 8h14a1 1 0 0 1 1 1v2H4V9a1 1 0 0 1 1-1z', 'M8 11v9M16 11v9M5 20h14'],
+  desk: ['M4 7h16v12H4z', 'M9 7V5h6v2'],
+}
+
+/** One drawn specimen mark per gear kind, so gear reads as a set rather than a mix of logos and initials. */
+function GearGlyph({ name }: { name: string }) {
+  const n = name.toLowerCase()
+  const kind = /mic/.test(n)
+    ? 'mic'
+    : /light/.test(n)
+      ? 'light'
+      : /cam/.test(n)
+        ? 'camera'
+        : /monitor|display/.test(n)
+          ? 'monitor'
+          : /mouse/.test(n)
+            ? 'mouse'
+            : /stand/.test(n)
+              ? 'stand'
+              : 'desk'
+  return (
+    <span className="grid size-12 shrink-0 place-items-center rounded-lg bg-[color:var(--fg-salt)] text-[color:var(--fg-ink)] ring-1 ring-[color:var(--fg-rule)]">
+      <svg viewBox="0 0 24 24" aria-hidden className="size-7" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        {GLYPHS[kind].map((d, i) => (
+          <path key={i} d={d} />
+        ))}
+      </svg>
+    </span>
+  )
+}
+
+export function HomePageClient({ categories, posts, stacks, tools, hardware, gearCount = 0 }: HomePageClientProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState<string>('')
 
@@ -106,7 +206,7 @@ export function HomePageClient({
         const inCat = posts.filter((p) =>
           p.categories?.some((c) => (typeof c === 'object' ? c.slug === cat.slug : c === cat.slug)),
         )
-        return { ...cat, count: inCat.length, latest: inCat[0] }
+        return { ...cat, count: inCat.length }
       }),
     [categories, posts],
   )
@@ -117,8 +217,7 @@ export function HomePageClient({
       const inCategory =
         selectedCategory === 'all' ||
         post.categories?.some((cat) => (typeof cat === 'object' ? cat.slug === selectedCategory : cat === selectedCategory))
-      const inSearch =
-        !q || post.title.toLowerCase().includes(q) || post.meta?.description?.toLowerCase().includes(q)
+      const inSearch = !q || post.title.toLowerCase().includes(q) || post.meta?.description?.toLowerCase().includes(q)
       return inCategory && inSearch
     })
   }, [posts, selectedCategory, searchQuery])
@@ -127,358 +226,240 @@ export function HomePageClient({
   const lead = shown[0]
   const rest = shown.slice(1)
   const stack = stacks[0]
+  const stackTools = (stack?.tools || []).filter((t: any) => typeof t === 'object')
+  const stackTotal = monthlyTotal(stackTools)
+  const stackCost = stackTotal ? `≈A$${stackTotal}/mo` : stack?.monthlySoftwareCost
 
+  // A photograph for the business section: the newest post with an image that is not the lead guide.
+  const aboutPost = posts.find((p) => postImage(p) && p.slug !== lead?.slug)
+
+  // Move focus to the guides so keyboard and screen-reader users land where the list changed.
   const jumpToGuides = () => {
-    document.getElementById('guides')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const el = document.getElementById('guides')
+    if (!el) return
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    el.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' })
+    el.focus({ preventScroll: true })
   }
 
-  const lanes = [
-    { label: 'Guides', note: `${posts.length} to read`, href: '/posts', show: posts.length > 0 },
-    { label: 'Stack blueprints', note: `${stacks.length} worked out`, href: '/stacks', show: stacks.length > 0 },
-    { label: 'Software', note: `${tools.length} tools priced`, href: '/tools', show: tools.length > 0 },
-    { label: 'Best gear', note: `${gearCount} picks`, href: '/best-gear', show: gearCount > 0 },
-    {
-      label: 'Hosting & domains',
-      note: `${providerCount} providers`,
-      href: '/posts/category/websites-hosting',
-      show: providerCount > 0,
-    },
-  ].filter((l) => l.show)
+  const services = [
+    { title: 'Plain-answer guides', body: 'Each opens with the answer, then gives the detail and says who it is not for.', note: `${posts.length} guides`, href: '/posts' },
+    { title: 'Stack blueprints', body: 'Whole setups, tool by tool and in buying order. Most start on free plans.', note: `${stacks.length} stacks`, href: '/stacks' },
+    { title: 'A software directory', body: 'Free plan, starting price in Australian dollars, who it suits and where it falls short.', note: `${tools.length} tools priced`, href: '/tools' },
+    { title: 'Gear picks and comparisons', body: 'Hardware for a desk that works, with side-by-side comparisons when two tools do the same job.', note: `${gearCount} gear picks`, href: '/best-gear' },
+  ]
 
   return (
-    <main className="road min-h-screen">
-      {/* 1. GANTRY: the first viewport is an overhead sign pointing to the site's real sections */}
-      <section className="relative overflow-hidden bg-[color:var(--road-tint)] text-[color:var(--road-ink)]">
-        <div className={`${WRAP} grid gap-10 pb-16 pt-12 lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-20`}>
+    <main className="fg min-h-screen">
+      {/* COVER: the one stack in the guide, drawn as a specimen plate on Bass Strait sea-green */}
+      <section className="fg-field-sea relative overflow-hidden">
+        <Sprig
+          draw
+          stroke="var(--fg-sea-deep)"
+          leaf="var(--fg-sea-deep)"
+          className="pointer-events-none absolute -bottom-32 -left-16 hidden h-[22rem] w-auto opacity-70 lg:block"
+        />
+        <div className={`${WRAP} relative grid gap-12 pb-20 pt-12 lg:grid-cols-12 lg:items-center lg:gap-10 lg:pb-28 lg:pt-20`}>
           <div className="lg:col-span-6">
-            <h1 className="sign-type text-balance text-[2.6rem] font-bold leading-[1.04] tracking-tight sm:text-6xl">
-              Tools, gear and stacks for a business of one.
+            <h1 className="fg-t-display">
+              A field guide to the one‑person business.
             </h1>
-            <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-[color:var(--road-muted)]">
+            <p className="fg-muted fg-t-lede mt-7 max-w-[32rem]">
               Guides, gear picks, software reviews and a worked-out stack for people running a business on their own in
               Australia.
             </p>
 
             <form
               role="search"
-              className="mt-8 max-w-[34rem]"
+              className="mt-9 max-w-[32rem]"
               onSubmit={(e) => {
                 e.preventDefault()
-                setSelectedCategory('all')
                 jumpToGuides()
               }}
             >
               <label htmlFor="home-search" className="sr-only">
                 Search guides
               </label>
-              <div className="on-light flex items-center rounded-xl bg-[color:var(--sign-white)] p-1.5 text-[color:var(--road-ink)]">
-                <Search aria-hidden className="ml-3 size-5 shrink-0 text-[color:var(--road-muted)]" />
+              <div className="fg-field-salt flex items-center rounded-full p-1.5 focus-within:outline focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-[color:var(--fg-coral)]">
+                <Search aria-hidden className="fg-muted ml-4 size-5 shrink-0" />
                 <input
                   id="home-search"
                   type="search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={`Search ${posts.length} guides`}
-                  className="w-full bg-transparent px-3 py-3 text-base placeholder:text-[color:var(--road-muted)]/80 focus:outline-none"
+                  className="w-full bg-transparent px-3 py-3 text-base placeholder:text-[color:var(--fg-muted)] focus:outline-none"
                 />
                 {searchQuery ? (
                   <button
                     type="button"
                     onClick={() => setSearchQuery('')}
                     aria-label="Clear search"
-                    className="mr-1 grid size-9 place-items-center rounded-lg text-[color:var(--road-muted)] hover:bg-black/5"
+                    className="fg-muted mr-1 grid size-11 shrink-0 place-items-center rounded-full hover:bg-black/5"
                   >
                     <X className="size-4" />
                   </button>
                 ) : null}
-                <button
-                  type="submit"
-                  className="sign-type rounded-lg bg-[color:var(--sign-yellow)] px-5 py-3 text-sm font-bold text-[color:var(--road-green-deep)] hover:brightness-95"
-                >
+                <button type="submit" className="fg-btn !min-h-11 !px-6 !py-2.5 text-sm">
                   Search
                 </button>
               </div>
             </form>
+
+            {stack ? (
+              <div className="mt-8">
+                <Link href={`/stacks/${stack.slug}`} className="fg-btn group text-base">
+                  Open the stack
+                  <ArrowRight aria-hidden className="size-5 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            ) : null}
           </div>
 
-          <nav aria-label="Browse SoloStack" className="lg:col-span-6">
-            <div className="panel p-3 sm:p-4">
-              <ul className="divide-y divide-[color:var(--road-rule)]">
-                {lanes.map((lane, i) => (
-                  <li key={lane.href} className="lane-in" style={{ ['--i' as any]: i }}>
-                    <Link
-                      href={lane.href}
-                      className="lane group flex items-center justify-between gap-4 rounded-lg px-4 py-5 hover:bg-[color:var(--road-green)]/10 sm:px-6"
-                    >
-                      <span>
-                        <span className="sign-type block text-2xl font-bold leading-tight sm:text-3xl">{lane.label}</span>
-                        <span className="num mt-1 block text-sm text-[color:var(--road-muted)]">{lane.note}</span>
-                      </span>
-                      <ArrowRight aria-hidden className="lane-arrow size-8 shrink-0 text-[color:var(--road-green)] sm:size-10" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </nav>
-        </div>
-        {/* centre line */}
-        <div
-          aria-hidden
-          className="h-2 w-full"
-          style={{
-            background:
-              'repeating-linear-gradient(90deg, var(--sign-yellow) 0 56px, var(--road-green) 56px 96px)',
-          }}
-        />
-      </section>
-
-      {/* 2. LANES: the six categories, each pointing at its newest guide */}
-      <section className="border-b border-[color:var(--road-rule)] py-16 sm:py-20">
-        <div className={WRAP}>
-          <h2 className="sign-type max-w-2xl text-balance text-3xl font-bold tracking-tight sm:text-4xl">
-            Start with the part of the business you are building
-          </h2>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {categoryStats.map((cat) => {
-              const active = selectedCategory === cat.slug
-              return (
-                <li key={cat.id}>
-                  <button
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() => {
-                      setSelectedCategory(active ? 'all' : cat.slug)
-                      setSearchQuery('')
-                      jumpToGuides()
-                    }}
-                    className={`lane group flex h-full w-full flex-col justify-between gap-6 rounded-xl border-2 p-6 text-left ${
-                      active
-                        ? 'border-[color:var(--road-green)] bg-[color:var(--road-green)] text-[color:var(--sign-white)]'
-                        : 'border-[color:var(--road-green)] bg-[color:var(--sign-white)] hover:bg-[color:var(--road-green)] hover:text-[color:var(--sign-white)]'
-                    }`}
-                  >
-                    <span className="flex items-start justify-between gap-4">
-                      <span className="sign-type text-xl font-bold leading-snug">{cat.title}</span>
-                      <span
-                        className={`num sign-type grid size-10 shrink-0 place-items-center rounded-full text-base font-bold ${
-                          active
-                            ? 'bg-[color:var(--sign-yellow)] text-[color:var(--road-green-deep)]'
-                            : 'bg-[color:var(--road-green)] text-[color:var(--sign-white)] group-hover:bg-[color:var(--sign-yellow)] group-hover:text-[color:var(--road-green-deep)]'
-                        }`}
+          {stack ? (
+            <figure className="relative lg:col-span-6 lg:pl-6">
+              <div className="fg-plate p-6 sm:p-9">
+                <Sprig draw className="pointer-events-none absolute -right-3 -top-8 h-28 w-auto rotate-[24deg] sm:-right-8 sm:-top-16 sm:h-64" />
+                <h2 className="max-w-[15ch] pr-14 fg-t-subhead sm:pr-0">{stack.title}</h2>
+                <p className="num fg-muted mt-3 text-base">
+                  {stackCost ? (
+                    <>
+                      <strong className="fg-t-title text-[color:var(--fg-coral-text)]">{stackCost}</strong> for{' '}
+                    </>
+                  ) : null}
+                  {stackTools.length} tools, bought in order
+                </p>
+                <ol className="mt-7 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-[color:var(--fg-rule)] pt-7">
+                  {stackTools.slice(0, 4).map((tool: any, i: number) => (
+                    <li key={tool.id} className="fg-develop" style={{ ['--i' as any]: i }}>
+                      <BrandMark slug={tool.slug} name={tool.name} className="size-[4.5rem]" />
+                      <p className="fg-cap fg-muted mt-3">Fig. {i + 1}</p>
+                      <Link
+                        href={`/tools/${tool.slug}`}
+                        className="fg-t-title -my-2.5 mt-0 block py-2.5 hover:underline"
                       >
-                        {cat.count}
-                      </span>
-                    </span>
-                    {cat.latest ? (
-                      <span className="block text-sm leading-snug opacity-80">
-                        Newest: {cat.latest.title}
-                      </span>
-                    ) : null}
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      </section>
-
-      {/* 3. THE STACK: a priced route through the one published stack blueprint */}
-      {stack ? (
-        <section className="border-y border-[color:var(--road-rule)] bg-[color:var(--sign-white)] py-16 sm:py-24">
-          <div className={`${WRAP} grid gap-12 lg:grid-cols-12 lg:gap-16`}>
-            <div className="lg:col-span-5">
-              <h2 className="sign-type text-balance text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
-                {stack.title}
-              </h2>
-              {stack.description ? (
-                <p className="mt-5 max-w-lg text-lg leading-relaxed text-[color:var(--road-muted)]">{stack.description}</p>
-              ) : null}
-              <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
-                {stack.monthlySoftwareCost ? (
-                  <div>
-                    <dt className="text-sm text-[color:var(--road-muted)]">Software</dt>
-                    <dd className="num sign-type text-3xl font-bold text-[color:var(--road-green)]">
-                      {stack.monthlySoftwareCost}
-                    </dd>
-                  </div>
-                ) : null}
-                {stack.businessModel ? (
-                  <div>
-                    <dt className="text-sm text-[color:var(--road-muted)]">Built for</dt>
-                    <dd className="sign-type text-3xl font-bold capitalize">{stack.businessModel}s</dd>
-                  </div>
-                ) : null}
-              </dl>
-              <Link
-                href={`/stacks/${stack.slug}`}
-                className="sign-type group mt-10 inline-flex items-center gap-3 rounded-xl bg-[color:var(--sign-yellow)] px-6 py-4 text-base font-bold text-[color:var(--road-green-deep)] hover:brightness-95"
-              >
-                Open the full stack
-                <ArrowRight aria-hidden className="size-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
-
-            <div className="lg:col-span-7">
-              <div className="panel p-3 sm:p-4">
-                <ol className="divide-y divide-[color:var(--road-rule)]">
-                  {(stack.tools || [])
-                    .filter((t: any) => typeof t === 'object')
-                    .map((tool: any) => (
-                      <li key={tool.id} className="flex items-center gap-4 px-3 py-4 sm:px-5">
-                        <BrandMark slug={tool.slug} name={tool.name} />
-                        <span className="min-w-0">
-                          <Link href={`/tools/${tool.slug}`} className="sign-type text-lg font-bold hover:underline">
-                            {tool.name}
-                          </Link>
-                          {tool.tagline ? (
-                            <span className="mt-0.5 block text-sm leading-snug text-[color:var(--road-muted)]">{tool.tagline}</span>
-                          ) : null}
-                        </span>
-                        <span className="leader hidden sm:block" aria-hidden />
-                        <span className="num sign-type ml-auto shrink-0 text-lg font-bold sm:ml-0">
-                          {tool.startingPrice}
-                        </span>
-                      </li>
-                    ))}
-                  {(stack.hardware || [])
-                    .filter((h: any) => typeof h === 'object')
-                    .map((h: any) => (
-                      <li key={`hw-${h.id}`} className="flex items-center gap-4 px-3 py-4 sm:px-5">
-                        <BrandMark slug={(h.manufacturer || '').toLowerCase().replace(/\s+/g, '-')} name={h.name} />
-                        <span className="min-w-0">
-                          <span className="sign-type text-lg font-bold">{h.name}</span>
-                          {h.manufacturer ? (
-                            <span className="mt-0.5 block text-sm leading-snug text-[color:var(--road-muted)]">{h.manufacturer}</span>
-                          ) : null}
-                        </span>
-                        <span className="leader hidden sm:block" aria-hidden />
-                        <span className="num sign-type ml-auto shrink-0 text-lg font-bold sm:ml-0">{h.priceRange}</span>
-                      </li>
-                    ))}
+                        {tool.name}
+                      </Link>
+                      {tool.tagline ? <p className="fg-muted mt-1 line-clamp-2 fg-t-small">{tool.tagline}</p> : null}
+                      <p className="num mt-1.5 text-base font-bold text-[color:var(--fg-coral-text)]">
+                        {tool.startingPrice || 'Free'}
+                      </p>
+                    </li>
+                  ))}
                 </ol>
               </div>
-            </div>
-          </div>
-        </section>
-      ) : null}
+              <figcaption className="fg-cap mt-4 text-[color:var(--fg-salt)] sm:pl-1">
+                Plate 1. {stack.title}, {stackTools.length} tools, priced in Australian dollars.
+              </figcaption>
+            </figure>
+          ) : null}
+        </div>
+      </section>
 
-      {/* 4. GUIDES: newest first, filterable, with the lead guide given the room */}
-      <section id="guides" className="scroll-mt-4 py-16 sm:py-24">
+      {/* FIELD NOTES: the guides, with photographs doing half the talking */}
+      <section id="guides" tabIndex={-1} className="fg-field-salt scroll-mt-4 py-16 outline-none sm:py-24">
         <div className={WRAP}>
-          <div className="flex flex-col justify-between gap-6 border-b-2 border-[color:var(--road-green)] pb-6 md:flex-row md:items-end">
-            <h2 className="sign-type text-3xl font-bold tracking-tight sm:text-4xl">Latest guides</h2>
-            <div className="on-light flex flex-wrap gap-2" role="group" aria-label="Filter guides by category">
-              <button
-                type="button"
-                aria-pressed={selectedCategory === 'all'}
-                onClick={() => setSelectedCategory('all')}
-                className={`sign-type rounded-full border-2 border-[color:var(--road-green)] px-4 py-1.5 text-sm font-bold ${
-                  selectedCategory === 'all'
-                    ? 'bg-[color:var(--road-green)] text-[color:var(--sign-white)]'
-                    : 'hover:bg-[color:var(--road-green)]/10'
-                }`}
-              >
-                All <span className="num">{posts.length}</span>
-              </button>
-              {categoryStats.map((cat) => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  aria-pressed={selectedCategory === cat.slug}
-                  onClick={() => setSelectedCategory(cat.slug)}
-                  className={`sign-type rounded-full border-2 border-[color:var(--road-green)] px-4 py-1.5 text-sm font-bold ${
-                    selectedCategory === cat.slug
-                      ? 'bg-[color:var(--road-green)] text-[color:var(--sign-white)]'
-                      : 'hover:bg-[color:var(--road-green)]/10'
-                  }`}
-                >
-                  {cat.title}
-                </button>
-              ))}
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <h2 className="fg-t-headline">Field notes</h2>
+            <div
+              className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
+              role="group"
+              aria-label="Filter guides by category"
+            >
+              {[{ id: 'all', title: 'All', slug: 'all', count: posts.length }, ...categoryStats].map((cat) => {
+                const on = selectedCategory === cat.slug
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    aria-pressed={on}
+                    onClick={() => setSelectedCategory(cat.slug)}
+                    className={`fg-chip min-h-11 shrink-0 whitespace-nowrap rounded-full px-4 text-sm font-bold ring-2 ring-inset ring-[color:var(--fg-ink)] transition-colors ${
+                      on ? 'bg-[color:var(--fg-ink)] text-[color:var(--fg-salt)]' : 'hover:bg-[color:var(--fg-salt-2)]'
+                    }`}
+                  >
+                    {cat.title} <span className="num opacity-70">{cat.count}</span>
+                  </button>
+                )
+              })}
             </div>
           </div>
 
           {searchQuery ? (
-            <p className="mt-4 text-sm text-[color:var(--road-muted)]" role="status">
+            <p className="fg-muted mt-4 text-sm" role="status">
               {matches.length} {matches.length === 1 ? 'guide matches' : 'guides match'} “{searchQuery}”
             </p>
           ) : null}
 
           {shown.length === 0 ? (
-            <div className="mt-10 rounded-xl border-2 border-dashed border-[color:var(--road-green)] p-12 text-center">
-              <p className="sign-type text-xl font-bold">No guides match that.</p>
+            <div className="mt-12 rounded-md border-2 border-dashed border-[color:var(--fg-ink)] p-12 text-center">
+              <p className="fg-t-title-lg">No guides match that.</p>
+              <p className="fg-muted mt-2 text-sm">Try fewer words, or pick another category.</p>
               <button
                 type="button"
                 onClick={() => {
                   setSelectedCategory('all')
                   setSearchQuery('')
                 }}
-                className="sign-type mt-5 rounded-lg bg-[color:var(--road-green)] px-5 py-2.5 text-sm font-bold text-[color:var(--sign-white)]"
+                className="fg-btn mt-6"
               >
                 Show all guides
               </button>
             </div>
           ) : (
-            <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-14">
+            <div key={selectedCategory} className="mt-12 grid gap-12 lg:grid-cols-12 lg:gap-14">
               {lead ? (
-                <article className="group lg:col-span-7">
+                <article className="fg-settle group lg:col-span-7" style={{ ['--i' as any]: 0 }}>
                   <Link href={`/posts/${lead.slug}`} className="block">
-                    <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-[color:var(--road-rule)]">
-                      {getImageUrl(lead.heroImage || lead.meta?.image) ? (
-                        <Image
-                          src={getImageUrl(lead.heroImage || lead.meta?.image) as string}
-                          alt={lead.title}
-                          fill
-                          sizes="(min-width: 1024px) 760px, 100vw"
-                          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                          unoptimized
-                        />
-                      ) : (
-                        <div className="grid size-full place-items-center">
-                          <BookOpen className="size-10 text-[color:var(--road-muted)]" />
-                        </div>
-                      )}
+                    <div className="fg-plate fg-plate-photo">
+                      <div className="relative aspect-[16/10] overflow-hidden bg-[color:var(--fg-salt-2)]">
+                        {postImage(lead) ? (
+                          <Image
+                            src={postImage(lead) as string}
+                            alt={lead.title}
+                            fill
+                            sizes="(min-width: 1024px) 760px, 100vw"
+                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                            unoptimized
+                          />
+                        ) : (
+                          <div className="grid size-full place-items-center">
+                            <BookOpen className="fg-muted size-10" />
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <div className="mt-5 flex items-center gap-3 text-sm text-[color:var(--road-muted)]">
-                      {postCategory(lead) ? (
-                        <span className="sign-type rounded bg-[color:var(--road-green)] px-2.5 py-1 text-xs font-bold text-[color:var(--sign-white)]">
-                          {postCategory(lead)!.title}
-                        </span>
-                      ) : null}
-                      <time className="num" dateTime={lead.publishedAt}>
-                        {formatDate(lead.publishedAt)}
-                      </time>
-                    </div>
-                    <h3 className="sign-type mt-3 text-balance text-2xl font-bold leading-tight group-hover:underline sm:text-4xl">
+                    <h3 className="mt-5 fg-t-subhead group-hover:underline">
                       {lead.title}
                     </h3>
-                    {lead.meta?.description ? (
-                      <p className="mt-3 max-w-2xl text-base leading-relaxed text-[color:var(--road-muted)]">
-                        {lead.meta.description}
-                      </p>
-                    ) : null}
+                    {lead.meta?.description ? <p className="fg-muted mt-3 max-w-2xl">{lead.meta.description}</p> : null}
+                    <p className="fg-cap fg-muted mt-4">
+                      {postCategory(lead)?.title}
+                      {lead.publishedAt ? ` · ${formatDate(lead.publishedAt)}` : ''}
+                    </p>
                   </Link>
                 </article>
               ) : null}
 
-              <ul className="divide-y divide-[color:var(--road-rule)] border-y border-[color:var(--road-rule)] lg:col-span-5 lg:self-start">
-                {rest.map((post) => (
-                  <li key={post.id}>
-                    <Link href={`/posts/${post.slug}`} className="lane group flex gap-4 py-5">
+              <ul className="divide-y divide-[color:var(--fg-rule)] border-y border-[color:var(--fg-rule)] lg:col-span-5 lg:self-start">
+                {rest.map((post, i) => (
+                  <li key={post.id} className="fg-settle" style={{ ['--i' as any]: i + 1 }}>
+                    <Link href={`/posts/${post.slug}`} className="fg-row group flex items-center gap-4 py-4">
+                      <span className="relative block size-20 shrink-0 overflow-hidden rounded-sm bg-[color:var(--fg-salt-2)] sm:size-24">
+                        {postImage(post) ? (
+                          <Image src={postImage(post) as string} alt="" fill sizes="96px" className="object-cover" unoptimized />
+                        ) : null}
+                      </span>
                       <span className="min-w-0 flex-1">
-                        <span className="num block text-xs text-[color:var(--road-muted)]">
+                        <span className="fg-t-title block group-hover:underline">
+                          {post.title}
+                        </span>
+                        <span className="fg-cap fg-muted mt-1 block">
                           {postCategory(post)?.title}
                           {post.publishedAt ? ` · ${formatDate(post.publishedAt)}` : ''}
                         </span>
-                        <span className="sign-type mt-1 block text-lg font-bold leading-snug group-hover:underline">
-                          {post.title}
-                        </span>
                       </span>
-                      <ArrowRight
-                        aria-hidden
-                        className="lane-arrow mt-1 size-5 shrink-0 text-[color:var(--road-green)]"
-                      />
+                      <ArrowRight aria-hidden className="fg-arrow size-5 shrink-0" />
                     </Link>
                   </li>
                 ))}
@@ -486,11 +467,8 @@ export function HomePageClient({
             </div>
           )}
 
-          <div className="mt-10">
-            <Link
-              href="/posts"
-              className="sign-type group inline-flex items-center gap-3 rounded-xl border-2 border-[color:var(--road-green)] px-6 py-3.5 text-base font-bold hover:bg-[color:var(--road-green)] hover:text-[color:var(--sign-white)]"
-            >
+          <div className="mt-12">
+            <Link href="/posts" className="fg-btn fg-btn-line group">
               All {posts.length} guides
               <ArrowRight aria-hidden className="size-5 transition-transform group-hover:translate-x-1" />
             </Link>
@@ -498,158 +476,193 @@ export function HomePageClient({
         </div>
       </section>
 
-      {/* 4b. ABOUT US: who SoloStack is and what it offers, as kilometre markers on a centre line */}
-      <section className="relative overflow-hidden bg-[color:var(--road-green-deep)] py-20 text-[color:var(--sign-white)] sm:py-28">
-        <div className={`${WRAP} grid gap-14 lg:grid-cols-12 lg:gap-20`}>
-          <div className="lg:col-span-5">
-            <div className="lg:sticky lg:top-24">
-              <span className="sign-type inline-block -rotate-2 rounded-md bg-[color:var(--sign-yellow)] px-4 py-1.5 text-sm font-bold uppercase tracking-widest text-[color:var(--road-green-deep)]">
-                About SoloStack
-              </span>
-              <p className="sign-type mt-8 text-balance text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                Fewer tools, bought in the{' '}
-                <span className="text-[color:var(--sign-yellow)]">right order.</span>
+      {/* SOFTWARE: the specimens, priced. A quieter, denser passage on indigo */}
+      <section className="fg-field-ink py-16 sm:py-24">
+        <div className={`${WRAP} grid gap-12 lg:grid-cols-12 lg:gap-16`}>
+          <div className="lg:col-span-4">
+            <div className="lg:sticky lg:top-28">
+              <h2 className="fg-t-headline">Software, priced</h2>
+              <p className="fg-muted fg-t-lede mt-5 max-w-sm">
+                Starting prices in Australian dollars, whether there is a free plan, and who each tool suits.
               </p>
-              <p className="mt-8 max-w-md text-lg leading-relaxed opacity-85">
-                SoloStack is an Australian guide for people who run a business on their own. We are based in West Perth and
-                operated by FXN Holdings. We research software and gear for one person, price it in Australian dollars, and
-                say what to buy first and what can wait. We are reader-supported: some links earn us a commission, and it
-                never changes what we list or the order we list it in.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-                <Link
-                  href="/stacks"
-                  className="sign-type group inline-flex items-center gap-2 rounded-xl bg-[color:var(--sign-yellow)] px-5 py-3 text-sm font-bold text-[color:var(--road-green-deep)] hover:brightness-105"
-                >
-                  See the stack blueprints
-                  <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-                <Link href="/faqs" className="sign-type self-center text-sm font-bold underline underline-offset-4 hover:opacity-80">
-                  How we choose
-                </Link>
-                <Link href="/about" className="sign-type self-center text-sm font-bold underline underline-offset-4 hover:opacity-80">
-                  About us
-                </Link>
-              </div>
+              <Link href="/tools" className="fg-btn mt-8">
+                All tools
+                <ArrowRight aria-hidden className="size-5" />
+              </Link>
             </div>
           </div>
-
-          <ol className="relative lg:col-span-7">
-            {/* the road's centre line, running down the markers */}
-            <span
-              aria-hidden
-              className="absolute bottom-3 left-[1.375rem] top-3 w-0 border-l-[3px] border-dashed border-[color:var(--road-green-line)] sm:left-[1.625rem]"
-            />
-            {[
-              { km: '1', title: 'Plain-answer guides', body: 'Practical guides on podcasting and video, pricing your work, hosting, email and search, and automation. Each opens with the answer, then gives the detail and says who it is not for.' },
-              { km: '2', title: 'Stack blueprints', body: 'Whole setups, tool by tool and in buying order. Most can start on free plans, so you pay only when you hit a limit you actually missed.' },
-              { km: '3', title: 'A software directory', body: 'Tools for one-person businesses with the free plan, the starting price in Australian dollars, who it suits and where it falls short. Conversions are estimates, so confirm the price at checkout.' },
-              { km: '4', title: 'Gear picks and comparisons', body: 'Hardware for a desk that works, with prices gathered from Australian and international retailers, plus side-by-side comparisons when two tools do the same job.' },
-              { km: '5', title: 'Deals we can check', body: 'Software with a free plan or a low starting price, and where to find hardware prices. Brands cannot pay for a review or a better spot, and we update a page when we learn a price has moved.' },
-            ].map((rule) => (
-              <li key={rule.km} className="relative pb-12 pl-[4.25rem] last:pb-0 sm:pl-24">
-                <span className="num sign-type absolute left-0 top-0 grid size-11 place-items-center rounded-lg border-2 border-[color:var(--sign-white)] bg-[color:var(--road-green)] text-xl font-bold shadow-[0_0_0_4px_var(--road-green-deep)] sm:size-[3.25rem] sm:text-2xl">
-                  {rule.km}
-                </span>
-                <h3 className="sign-type text-2xl font-bold leading-snug sm:text-3xl">{rule.title}</h3>
-                <p className="mt-3 max-w-xl text-lg leading-relaxed opacity-80">{rule.body}</p>
+          <ol className="divide-y divide-white/15 border-y border-white/15 lg:col-span-8">
+            {tools.map((tool, i) => (
+              <li key={tool.id}>
+                <Link href={`/tools/${tool.slug}`} className="fg-row group flex items-center gap-4 py-5 sm:gap-6">
+                  <span className="fg-cap hidden w-12 shrink-0 text-white/70 sm:block">Fig. {i + 1}</span>
+                  <BrandMark slug={tool.slug} name={tool.name} className="size-14 sm:size-16" />
+                  <span className="min-w-0 flex-1">
+                    <span className="fg-t-title-lg block group-hover:underline">
+                      {tool.name}
+                    </span>
+                    {tool.tagline ? <span className="fg-muted mt-1 block fg-t-small">{tool.tagline}</span> : null}
+                  </span>
+                  <span className="max-w-[9rem] shrink-0 text-right [overflow-wrap:anywhere] sm:max-w-[13rem]">
+                    <span className="fg-t-title-lg num block">{tool.startingPrice || 'Free'}</span>
+                    <span className="num fg-muted block text-xs">
+                      {tool.pricingType}
+                      {tool.rating ? ` · ${tool.rating}/5` : ''}
+                    </span>
+                  </span>
+                </Link>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      {/* 5. DISTANCE BOARD: software by monthly price, gear by price range */}
-      <section className="border-y border-[color:var(--road-rule)] bg-[color:var(--sign-white)] py-16 sm:py-24">
-        <div className={`${WRAP} grid gap-14 lg:grid-cols-2 lg:gap-20`}>
-          <div>
-            <div className="flex items-end justify-between gap-4">
-              <h2 className="sign-type text-3xl font-bold tracking-tight sm:text-4xl">Software, priced</h2>
-              <Link href="/tools" className="sign-type text-sm font-bold underline underline-offset-4">
-                All tools
-              </Link>
-            </div>
-            <ul className="mt-8 divide-y divide-[color:var(--road-rule)] border-y-2 border-[color:var(--road-green)]">
-              {tools.map((tool) => (
-                <li key={tool.id}>
-                  <Link href={`/tools/${tool.slug}`} className="lane group flex items-center gap-4 py-4">
-                    <BrandMark slug={tool.slug} name={tool.name} />
-                    <span className="min-w-0 flex-1">
-                      <span className="sign-type block text-lg font-bold group-hover:underline">{tool.name}</span>
-                      {tool.tagline ? (
-                        <span className="block text-sm leading-snug text-[color:var(--road-muted)]">{tool.tagline}</span>
-                      ) : null}
-                    </span>
-                    <span className="shrink-0 text-right">
-                      <span className="num sign-type block text-lg font-bold">{tool.startingPrice || 'Free'}</span>
-                      <span className="num block text-xs text-[color:var(--road-muted)]">
-                        {tool.pricingType}
-                        {tool.rating ? ` · ${tool.rating}/5` : ''}
-                      </span>
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+      {/* GEAR: a two-column catalogue of drawn specimens, each with a verdict */}
+      <section className="fg-field-salt2 py-16 sm:py-24">
+        <div className={WRAP}>
+          <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-16">
+            <h2 className="fg-t-headline lg:col-span-5">Gear, picked</h2>
+            <p className="fg-muted fg-t-lede max-w-xl lg:col-span-7">
+              Microphones, webcams, lights, desks, chairs and docks for a desk that works, with prices from Australian and
+              international retailers.
+            </p>
           </div>
-
-          <div>
-            <div className="flex items-end justify-between gap-4">
-              <h2 className="sign-type text-3xl font-bold tracking-tight sm:text-4xl">Gear, picked</h2>
-              <Link href="/best-gear" className="sign-type text-sm font-bold underline underline-offset-4">
-                Best gear
-              </Link>
-            </div>
-            <ul className="mt-8 divide-y divide-[color:var(--road-rule)] border-y-2 border-[color:var(--road-green)]">
-              {hardware.map((item) => (
-                <li key={item.id} className="py-5">
-                  <div className="flex items-baseline gap-3">
-                    <span className="sign-type text-lg font-bold">{item.name}</span>
-                    <span className="leader" aria-hidden />
-                    <span className="num sign-type shrink-0 text-lg font-bold">{item.priceRange}</span>
+          <ol className="mt-12 grid gap-x-14 border-t-2 border-[color:var(--fg-ink)] lg:grid-cols-2">
+            {hardware.map((item, i) => (
+              <li key={item.id} className="flex items-start gap-4 border-b border-[color:var(--fg-rule)] py-6">
+                <GearGlyph name={item.name} />
+                <div className="min-w-0 flex-1">
+                  <p className="fg-cap fg-muted">
+                    Fig. {i + 1}
+                    {item.manufacturer ? ` · ${item.manufacturer}` : ''}
+                  </p>
+                  <div className="mt-1 flex items-baseline gap-3">
+                    <span className="fg-t-title">{item.name}</span>
+                    <span className="fg-leader" aria-hidden />
+                    <span className="fg-t-title num shrink-0 text-[color:var(--fg-coral-text)]">{item.priceRange}</span>
                   </div>
-                  {item.verdict ? (
-                    <p className="mt-1 text-sm leading-snug text-[color:var(--road-muted)]">{item.verdict}</p>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
-            {gearCount > 0 ? (
-              <Link
-                href="/best-gear"
-                className="panel lane group mt-6 flex items-center justify-between gap-4 px-7 py-6 hover:brightness-110"
-              >
-                <span>
-                  <span className="sign-type block text-2xl font-bold">{gearCount} more gear picks</span>
-                  <span className="block text-sm text-[color:var(--road-muted)]">
-                    Microphones, webcams, lights, desks, chairs and docks
-                  </span>
-                </span>
-                <ArrowRight aria-hidden className="lane-arrow size-9 shrink-0 text-[color:var(--road-green)]" />
-              </Link>
-            ) : null}
+                  {item.verdict ? <p className="fg-muted mt-1.5 fg-t-small">{item.verdict}</p> : null}
+                </div>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2">
+            <Link href="/best-gear" className="fg-btn">
+              {gearCount > 0 ? `All ${gearCount} gear picks` : 'Best gear'}
+              <ArrowRight aria-hidden className="size-5" />
+            </Link>
+            <Link href="/comparisons" className="fg-link">
+              Comparisons
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* 6. DISCLOSURE: how the site is paid, plainly */}
-      <section className="bg-[color:var(--sign-yellow)] py-12 text-[color:var(--road-green-deep)]">
-        <div className={`${WRAP} flex flex-col gap-5 md:flex-row md:items-center md:justify-between`}>
+      {/* ABOUT THE BUSINESS AND THE SERVICE: the colophon, on a coral field */}
+      <section className="fg-field-coral relative overflow-hidden py-20 sm:py-28">
+        <Sprig
+          stroke="var(--fg-coral-shade)"
+          leaf="var(--fg-coral-shade)"
+          className="pointer-events-none absolute -right-12 top-6 hidden h-[30rem] w-auto rotate-12 opacity-70 xl:block"
+        />
+        <div className={`${WRAP} relative`}>
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-6">
+              <h2 className="fg-t-headline">Fewer tools, bought in the right order.</h2>
+              <p className="fg-muted fg-t-lede mt-7 max-w-xl">
+                SoloStack is an Australian guide for people who run a business on their own. We research software and gear
+                for one person, price it in Australian dollars, and say what to buy first and what can wait.
+              </p>
+              <dl className="mt-9 grid max-w-xl grid-cols-1 gap-x-8 gap-y-5 fg-hair border-t pt-7 sm:grid-cols-2">
+                <div>
+                  <dt className="fg-cap opacity-80">Operated by</dt>
+                  <dd className="fg-t-title mt-1">FXN Holdings</dd>
+                </div>
+                <div>
+                  <dt className="fg-cap opacity-80">Based in</dt>
+                  <dd className="fg-t-title mt-1">West Perth, Western Australia</dd>
+                </div>
+                <div>
+                  <dt className="fg-cap opacity-80">How it is funded</dt>
+                  <dd className="mt-1 leading-snug">
+                    Reader-supported: some links earn us a commission. It never changes what we list or the order.
+                  </dd>
+                </div>
+                <div>
+                  <dt className="fg-cap opacity-80">Prices</dt>
+                  <dd className="mt-1 leading-snug">
+                    Australian dollars. Conversions are estimates, so confirm the price at checkout.
+                  </dd>
+                </div>
+              </dl>
+              <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-2">
+                <Link href="/about" className="fg-btn">
+                  About SoloStack
+                  <ArrowRight aria-hidden className="size-5" />
+                </Link>
+                <Link href="/contact" className="fg-link">
+                  Contact us
+                </Link>
+                <Link href="/faqs" className="fg-link">
+                  How we choose
+                </Link>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6">
+              {aboutPost ? (
+                <figure>
+                  <div className="fg-plate fg-plate-photo">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-[color:var(--fg-salt-2)]">
+                      <Image
+                        src={postImage(aboutPost) as string}
+                        alt=""
+                        fill
+                        sizes="(min-width: 1024px) 640px, 100vw"
+                        className="object-cover"
+                        unoptimized
+                      />
+                    </div>
+                  </div>
+                  <figcaption className="fg-cap mt-3 opacity-90">From the guides: {aboutPost.title}</figcaption>
+                </figure>
+              ) : null}
+
+              <h3 className="mt-12 fg-t-title-lg">What you can use</h3>
+              <ul className="mt-4 divide-y fg-divide fg-hair border-y">
+                {services.map((s) => (
+                  <li key={s.title}>
+                    <Link href={s.href} className="fg-row group flex items-start gap-4 py-4">
+                      <span className="min-w-0 flex-1">
+                        <span className="fg-t-title block group-hover:underline">{s.title}</span>
+                        <span className="mt-1 block fg-t-small opacity-90">{s.body}</span>
+                      </span>
+                      <span className="num fg-cap shrink-0 pt-1 opacity-90">{s.note}</span>
+                      <ArrowRight aria-hidden className="fg-arrow mt-1 size-5 shrink-0" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* DISCLOSURE: how the site is paid, plainly */}
+      <section className="fg-field-salt py-14">
+        <div className={`${WRAP} flex flex-col gap-6 md:flex-row md:items-center md:justify-between`}>
           <div className="max-w-3xl">
-            <p className="sign-type text-balance text-xl font-bold leading-snug sm:text-2xl">
+            <p className="fg-t-title-lg text-balance">
               Some links earn SoloStack a commission at no extra cost to you. It never changes what we list or the order we
               list it in.
             </p>
-            <p className="mt-4 border-t border-[color:var(--road-green-deep)]/30 pt-4 text-sm leading-relaxed">
+            <p className="fg-muted mt-4 border-t border-[color:var(--fg-rule)] pt-4 fg-t-small">
               <strong>Price note:</strong> Prices are subject to change and may be out of date. Some prices are converted from
               other currencies, such as US dollars, to Australian dollars, so they may not be 100% accurate. Always confirm
               the final price with the seller before you buy.
             </p>
           </div>
-          <Link
-            href="/affiliate-disclosure"
-            className="sign-type group inline-flex shrink-0 items-center gap-3 rounded-xl bg-[color:var(--road-green-deep)] px-6 py-3.5 text-base font-bold text-[color:var(--sign-white)] hover:brightness-125"
-          >
+          <Link href="/affiliate-disclosure" className="fg-btn fg-btn-line group shrink-0">
             Affiliate disclosure
             <ArrowRight aria-hidden className="size-5 transition-transform group-hover:translate-x-1" />
           </Link>

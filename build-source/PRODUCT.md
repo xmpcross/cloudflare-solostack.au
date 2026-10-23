@@ -15,7 +15,7 @@ SoloStack (solostack.au) is an editorial affiliate site: guides, tool reviews, h
 ## Capabilities and Constraints
 - Static export on Cloudflare Pages; content is a snapshot from the Payload database (categories, posts, stacks, tools, hardware, comparisons, coupons).
 - Home page data: categories, 100 newest posts, up to 10 stacks, tools and hardware.
-- Fonts pinned: Inter for h1-h3, Be Vietnam Pro for everything else; weights capped at 700.
+- Fonts: Urbanist for display and headings and Figtree for text, chosen by the owner on 24 Oct 2026 for the redesign (replacing Young Serif, Hanken Grotesk and Funnel trials; the owner asked for a geometric sans like Urbanist or Outfit); applied on the homepage first, rolling out to inner pages (which still use Manrope and Mulish until then). Weights capped at 700.
 - Content max width 1366px, centred (organisation default).
 - Locale en-AU. Affiliate disclosure page exists.
 - Newsletter: no provider is connected; the current form only shows a browser alert.
