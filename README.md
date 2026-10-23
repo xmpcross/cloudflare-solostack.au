@@ -41,6 +41,14 @@ unit still points at the old path, so to rebuild you must first start PostgreSQL
 Rebuild and redeploy after editing content in the Payload admin; Pages does not
 update by itself.
 
+## Setup after a fresh clone or cleanup
+
+- `npm ci` here (for Wrangler); `node_modules/` and `.wrangler/` are not kept.
+- `build-source/` needs its own `node_modules` (`pnpm install --frozen-lockfile` with the pinned Node 22 runtime) and the
+  uploaded media in `build-source/public/media/`, which is git-ignored. The originals are in
+  `/kspellman/sites/payload-backup/solostack.au/app/public/media`.
+- `build-source/.next/` is rebuilt by `scripts/build.sh`.
+
 ## Directory layout
 
 | Path | Purpose |
