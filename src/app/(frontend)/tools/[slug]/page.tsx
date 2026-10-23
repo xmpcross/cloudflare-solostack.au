@@ -41,6 +41,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   if (!tool) return { title: 'Tool Not Found | SoloStack' }
 
   return {
+    alternates: { canonical: `/tools/${slug}` },
     title: `${tool.name} Review & Pricing Guide | SoloStack`,
     description: tool.tagline || `In-depth review and features for ${tool.name}`,
   }
@@ -128,7 +129,7 @@ export default async function ToolDetailPage({ params: paramsPromise }: Args) {
 
       {/* Featured Image - Displayed Full Width */}
       {imageUrl && (
-        <div className="relative w-full aspect-video md:aspect-[21/9] rounded-2xl overflow-hidden shadow-2xl border border-border/80 bg-neutral-100 dark:bg-neutral-900 my-8 group">
+        <div className="relative w-full aspect-video md:aspect-[21/9] rounded-[8px] overflow-hidden shadow-2xl border border-border/80 bg-neutral-100 dark:bg-neutral-900 my-8 group">
           <Image
             src={imageUrl}
             alt={imageAlt}

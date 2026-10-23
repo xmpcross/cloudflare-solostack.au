@@ -94,21 +94,20 @@ export const PostHeader: React.FC<PostHeaderProps> = ({ post, readingTime = 5 })
             <ShareButton title={title} />
           </div>
         </div>
-
-        {/* Featured Image */}
-        {heroImage && typeof heroImage === 'object' && (
-          <div className="relative mt-8 sm:mt-10 overflow-hidden rounded-2xl border border-border shadow-sm bg-neutral-100 dark:bg-neutral-800">
-            <div className="aspect-16/9 w-full">
-              <Media
-                resource={heroImage}
-                priority
-                className="size-full object-cover"
-                imgClassName="size-full object-cover"
-              />
-            </div>
-          </div>
-        )}
       </div>
+      {/* Featured Image, full container width */}
+      {heroImage && typeof heroImage === 'object' && (
+        <div className="relative mt-8 sm:mt-10 overflow-hidden rounded-[8px] border border-border shadow-sm bg-neutral-100 dark:bg-neutral-800">
+          <div className="aspect-16/9 lg:aspect-2/1 w-full">
+            <Media
+              resource={heroImage}
+              priority
+              className="size-full object-cover object-center"
+              imgClassName="size-full object-cover object-center"
+            />
+          </div>
+        </div>
+      )}
     </header>
   )
 }

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 
-import { RelatedPosts } from '@/blocks/RelatedPosts/Component'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
@@ -14,6 +13,10 @@ import { PostHero } from '@/heros/PostHero'
 import { TableOfContents } from '@/components/TableOfContents'
 import { AuthorBio } from '@/components/AuthorBio'
 import { PostSidebar } from '@/components/PostSidebar'
+import { RelatedPostsSlider, type RelatedSlide } from '@/components/RelatedPostsSlider'
+import { PostProducts, type PostProduct } from '@/components/PostProducts'
+import { PostShareRail } from '@/components/PostShareRail'
+import { getServerSideURL } from '@/utilities/getURL'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
@@ -152,8 +155,36 @@ export default async function PostPage({ params: paramsPromise }: Args) {
     console.warn('Sidebar data fetch error:', error)
   }
 
+  const relatedPosts = await getRelatedPosts(post)
+  const postProducts = await getPostProducts(post.id)
+
+  const heroImage = post.heroImage && typeof post.heroImage === 'object' ? post.heroImage : null
+  const authorName =
+    post.populatedAuthors?.[0]?.name || 'SoloStack Editorial Lab'
+  const jsonLdArticle = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.meta?.description || undefined,
+    image: heroImage?.url ? `${getServerSideURL()}${heroImage.url}` : undefined,
+    datePublished: post.publishedAt || post.createdAt,
+    dateModified: post.updatedAt,
+    wordCount,
+    mainEntityOfPage: `${getServerSideURL()}${url}`,
+    author: { '@type': 'Person', name: authorName },
+    publisher: {
+      '@type': 'Organization',
+      name: 'SoloStack',
+      url: 'https://solostack.au',
+    },
+  }
+
   return (
     <article className="pt-6 pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArticle) }}
+      />
       <PageClient />
 
       {/* Allows redirects for valid pages too */}
@@ -164,10 +195,17 @@ export default async function PostPage({ params: paramsPromise }: Args) {
       {/* Editorial Header matching reference design */}
       <PostHero post={post} readingTime={readingTime} />
 
-      {/* 2-Column Content + Sticky Sidebar Layout */}
-      <div className="container mt-12 flex flex-col lg:flex-row gap-10 xl:gap-14">
-        {/* Main Article Column (60% lg / 66% xl) */}
-        <div className="w-full lg:w-3/5 xl:w-2/3 xl:pe-6">
+      {/* 3-Column Layout: share rail + article + sticky sidebar */}
+      <div className="container mt-12 flex flex-col lg:flex-row gap-8 xl:gap-12">
+        {/* Left rail: reading time + share links */}
+        <div className="shrink-0 lg:w-20">
+          <div className="lg:sticky lg:top-28">
+            <PostShareRail title={post.title} readingTime={readingTime} slug={decodedSlug} />
+          </div>
+        </div>
+
+        {/* Main Article Column */}
+        <div className="w-full min-w-0 lg:flex-1">
           {/* The Short Answer / Quick Verdict Callout Box */}
           {post.meta?.description && (
             <div className="mb-8 rounded-2xl bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-800/50 p-6 sm:p-7 shadow-2xs">
@@ -188,6 +226,9 @@ export default async function PostPage({ params: paramsPromise }: Args) {
             <RichText data={post.content} enableGutter={false} />
           </div>
 
+          {/* Approved products linked to this post, with their offer links */}
+          <PostProducts products={postProducts} />
+
           {/* Author Bio Box */}
           <AuthorBio
             authorName={
@@ -196,24 +237,14 @@ export default async function PostPage({ params: paramsPromise }: Args) {
                 : 'SoloStack Editorial Lab'
             }
           />
-
-          {/* Related Posts Section (if defined) */}
-          {post.relatedPosts && post.relatedPosts.length > 0 && (
-            <div className="mt-12 pt-8 border-t border-border">
-              <h3 className="text-xl font-bold mb-6 text-neutral-900 dark:text-white">
-                Related Guides &amp; Stacks
-              </h3>
-              <RelatedPosts
-                className="grid grid-cols-1 md:grid-cols-2 gap-6"
-                docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-              />
-            </div>
-          )}
         </div>
 
         {/* Sticky Sidebar (40% lg / 33% xl) */}
         <PostSidebar popularPosts={popularPosts} categories={categories} />
       </div>
+
+      {/* Related posts slider, above the footer */}
+      <RelatedPostsSlider posts={relatedPosts} />
     </article>
   )
 }
@@ -224,7 +255,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   const decodedSlug = decodeURIComponent(slug)
   const post = await queryPostBySlug({ slug: decodedSlug })
 
-  return generateMeta({ doc: post })
+  return generateMeta({ doc: post, path: `posts/${decodedSlug}` })
 }
 
 const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
@@ -252,3 +283,85 @@ const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
     return null
   }
 })
+
+const RELATED_LIMIT = 8
+
+// Editor-picked related posts first, then posts sharing a category, then the latest posts. Max 8, current post excluded.
+async function getRelatedPosts(post: Post): Promise<RelatedSlide[]> {
+  try {
+    const payload = await getPayload({ config: configPromise })
+    const select = {
+      title: true,
+      slug: true,
+      heroImage: true,
+      meta: true,
+      categories: true,
+      publishedAt: true,
+    } as const
+
+    const picked = (post.relatedPosts || []).filter(
+      (p): p is Post => typeof p === 'object' && p.id !== post.id,
+    )
+    const result: RelatedSlide[] = picked.map((p) => ({
+      id: p.id,
+      slug: p.slug,
+      title: p.title,
+      heroImage: p.heroImage,
+      meta: p.meta,
+      categories: p.categories,
+      publishedAt: p.publishedAt,
+    }))
+    const seen = new Set<number>([post.id, ...result.map((p) => p.id)])
+
+    const categoryIds = (post.categories || []).map((c) => (typeof c === 'object' ? c.id : c))
+
+    const fill = async (where: any) => {
+      if (result.length >= RELATED_LIMIT) return
+      const res = await payload.find({
+        collection: 'posts',
+        depth: 1,
+        limit: RELATED_LIMIT * 2,
+        overrideAccess: false,
+        pagination: false,
+        sort: '-publishedAt',
+        select,
+        where: { id: { not_in: [...seen] }, ...where },
+      })
+      for (const doc of res.docs) {
+        if (result.length >= RELATED_LIMIT) break
+        seen.add(doc.id)
+        result.push(doc as RelatedSlide)
+      }
+    }
+
+    if (categoryIds.length) await fill({ categories: { in: categoryIds } })
+    await fill({})
+
+    return result.slice(0, RELATED_LIMIT)
+  } catch (error) {
+    console.warn('Related posts fetch error:', error)
+    return []
+  }
+}
+
+// Approved products whose "Related posts" include this post. Products are admin-only, so read with overrideAccess
+// and select only the public-safe fields.
+async function getPostProducts(postId: number): Promise<PostProduct[]> {
+  try {
+    const payload = await getPayload({ config: configPromise })
+    const res = await payload.find({
+      collection: 'products' as any,
+      depth: 1,
+      limit: 12,
+      overrideAccess: true,
+      pagination: false,
+      sort: 'name',
+      where: { and: [{ relatedPosts: { contains: postId } }, { status: { not_in: ['rejected', 'discontinued'] } }] },
+      select: { name: true, brand: true, summary: true, image: true, offers: true } as any,
+    })
+    return res.docs as unknown as PostProduct[]
+  } catch (error) {
+    console.warn('Post products fetch error:', error)
+    return []
+  }
+}

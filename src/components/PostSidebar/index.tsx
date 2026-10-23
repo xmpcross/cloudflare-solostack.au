@@ -14,12 +14,12 @@ export const PostSidebar: React.FC<PostSidebarProps> = ({
   categories = [],
 }) => {
   return (
-    <aside className="w-full lg:w-2/5 xl:w-1/3 shrink-0">
+    <aside className="w-full lg:w-72 xl:w-80 shrink-0">
       <div className="space-y-8 lg:sticky lg:top-8">
         {/* Widget 1: Popular / Trending Posts */}
         {popularPosts.length > 0 && (
-          <div className="widget-posts overflow-hidden rounded-3xl border border-border bg-neutral-50/80 dark:bg-card shadow-2xs">
-            <div className="flex items-center justify-between border-b border-border p-5">
+          <div className="widget-posts">
+            <div className="flex items-center justify-between mb-3">
               <h3 className="font-bold text-base sm:text-lg flex items-center gap-2 text-neutral-900 dark:text-white">
                 <Flame className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 Popular guides
@@ -32,7 +32,7 @@ export const PostSidebar: React.FC<PostSidebarProps> = ({
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </div>
-            <div className="flex flex-col divide-y divide-border">
+            <div className="flex flex-col gap-4">
               {popularPosts.slice(0, 5).map((post) => {
                 const dateStr = post.publishedAt
                   ? new Date(post.publishedAt).toLocaleDateString('en-AU', {
@@ -46,7 +46,7 @@ export const PostSidebar: React.FC<PostSidebarProps> = ({
                   <Link
                     key={post.id}
                     href={`/posts/${post.slug}`}
-                    className="group flex items-center justify-between gap-4 p-4 hover:bg-neutral-100 dark:hover:bg-neutral-800/60 transition-colors"
+                    className="group flex items-center justify-between gap-4"
                   >
                     <div className="grow space-y-1.5 min-w-0">
                       <h4 className="text-sm font-semibold leading-snug text-neutral-900 dark:text-neutral-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
@@ -57,7 +57,7 @@ export const PostSidebar: React.FC<PostSidebarProps> = ({
                       </p>
                     </div>
                     {post.heroImage && typeof post.heroImage === 'object' && (
-                      <div className="relative aspect-square w-18 h-18 shrink-0 overflow-hidden rounded-xl border border-border">
+                      <div className="relative aspect-square w-18 h-18 shrink-0 overflow-hidden rounded-[8px] border border-border">
                         <Media
                           resource={post.heroImage}
                           className="size-full object-cover"
