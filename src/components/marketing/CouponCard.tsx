@@ -153,7 +153,7 @@ export function CouponCard({
               <a
                 href={affiliateUrl}
                 target="_blank"
-                rel="noopener noreferrer nofollow"
+                rel="sponsored nofollow noopener noreferrer"
                 className="w-full flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-neutral-100 text-white dark:text-slate-900 rounded-md px-3.5 py-2.5 font-bold text-xs shadow-xs transition-all"
               >
                 <span>Get Deal</span>

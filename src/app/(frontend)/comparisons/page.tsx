@@ -8,11 +8,13 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { DirectoryGuide } from '@/components/marketing/DirectoryGuide'
 
 export const revalidate = 600
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
+    alternates: { canonical: '/comparisons' },
     title: 'Head-to-Head Software & Hardware Battles | SoloStack Comparisons',
     description:
       'Direct comparisons between top B2B tools and hardware equipment to help you decide what to buy.',
@@ -90,6 +92,25 @@ export default async function ComparisonsDirectoryPage() {
           <p className="text-muted-foreground">No comparison battles listed yet.</p>
         </div>
       )}
+
+      <DirectoryGuide
+        heading="How we compare tools and gear"
+        intro="Comparisons help when two products look similar on a feature list but suit different people. Each one sets the options side by side on the points that matter most to a solo operator."
+        points={[
+          {
+            title: 'Price and plans',
+            body: 'We compare the entry price and what each plan includes, because the cheapest tier often leaves out the feature you bought the tool for.',
+          },
+          {
+            title: 'Fit for a one-person workflow',
+            body: 'Features built for large teams, such as approval chains and admin roles, count for less here than speed, simplicity and automation.',
+          },
+          {
+            title: 'Where each option falls short',
+            body: 'Every comparison names the trade-offs of each product alongside its strengths, so the right choice depends on your situation rather than a single winner.',
+          },
+        ]}
+      />
     </div>
   )
 }

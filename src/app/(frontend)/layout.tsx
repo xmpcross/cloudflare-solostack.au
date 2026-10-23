@@ -4,6 +4,7 @@ import { cn } from '@/utilities/ui'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import { Outfit, Urbanist } from 'next/font/google'
+import Script from 'next/script'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
@@ -51,7 +52,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {children}
           <Footer />
         </Providers>
-        <script src="https://convertlink.com/script/ce8f3235-a4ab-4b5b-bde4-b86890fd281b/bundle.js"></script>
+        <Script
+          src="https://convertlink.com/script/ce8f3235-a4ab-4b5b-bde4-b86890fd281b/bundle.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   )
@@ -62,6 +66,6 @@ export const metadata: Metadata = {
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
+    creator: '@solostack',
   },
 }

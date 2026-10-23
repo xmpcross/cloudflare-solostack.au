@@ -91,7 +91,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                 <TableCell className="text-center">
                   {toolAAffiliateUrl && (
                     <Button asChild size="sm" variant="default">
-                      <a href={toolAAffiliateUrl} target="_blank" rel="noopener noreferrer" className="gap-1.5">
+                      <a href={toolAAffiliateUrl} target="_blank" rel="sponsored nofollow noopener noreferrer" className="gap-1.5">
                         <span>Get {toolAName}</span>
                         <ExternalLink className="h-3.5 w-3.5" />
                       </a>
@@ -101,7 +101,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                 <TableCell className="text-center">
                   {toolBAffiliateUrl && (
                     <Button asChild size="sm" variant="outline">
-                      <a href={toolBAffiliateUrl} target="_blank" rel="noopener noreferrer" className="gap-1.5">
+                      <a href={toolBAffiliateUrl} target="_blank" rel="sponsored nofollow noopener noreferrer" className="gap-1.5">
                         <span>Get {toolBName}</span>
                         <ExternalLink className="h-3.5 w-3.5" />
                       </a>

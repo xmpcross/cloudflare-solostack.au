@@ -38,6 +38,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   if (!comparison) return { title: 'Comparison Not Found | SoloStack' }
 
   return {
+    alternates: { canonical: `/comparisons/${slug}` },
     title: `${comparison.title} | SoloStack Showdown`,
     description: `Detailed comparison and verdict for ${comparison.title}`,
   }

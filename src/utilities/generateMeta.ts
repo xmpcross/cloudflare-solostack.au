@@ -8,7 +8,7 @@ import { getServerSideURL } from './getURL'
 const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
   const serverUrl = getServerSideURL()
 
-  let url = serverUrl + '/website-template-OG.webp'
+  let url = serverUrl + '/media/solo-creator-4k-editing-pipeline.webp'
 
   if (image && typeof image === 'object' && 'url' in image) {
     const ogUrl = image.sizes?.og?.url
@@ -19,20 +19,30 @@ const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
   return url
 }
 
+const SITE_NAME = 'SoloStack'
+const MAX_TITLE_LENGTH = 65
+
 export const generateMeta = async (args: {
   doc: Partial<Page> | Partial<Post> | null
+  path?: string
 }): Promise<Metadata> => {
-  const { doc } = args
+  const { doc, path } = args
 
   const ogImage = getImageURL(doc?.meta?.image)
 
-  const title = doc?.meta?.title
-    ? doc?.meta?.title + ' | Payload Website Template'
-    : 'Payload Website Template'
+  const baseTitle = doc?.meta?.title || (doc as { title?: string } | null)?.title || SITE_NAME
+  const suffixed = `${baseTitle} | ${SITE_NAME}`
+  // Skip the brand suffix when it would push the title past what search results display
+  const title = baseTitle === SITE_NAME || suffixed.length > MAX_TITLE_LENGTH ? baseTitle : suffixed
+
+  const canonicalPath = path ?? (Array.isArray(doc?.slug) ? doc?.slug.join('/') : doc?.slug)
+  const canonical = canonicalPath ? `/${canonicalPath}`.replace(/^\/\/+/, '/') : undefined
 
   return {
+    alternates: canonical ? { canonical } : undefined,
     description: doc?.meta?.description,
     openGraph: mergeOpenGraph({
+      type: path?.startsWith('posts/') ? 'article' : 'website',
       description: doc?.meta?.description || '',
       images: ogImage
         ? [
@@ -42,7 +52,7 @@ export const generateMeta = async (args: {
           ]
         : undefined,
       title,
-      url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/',
+      url: canonical ?? '/',
     }),
     title,
   }

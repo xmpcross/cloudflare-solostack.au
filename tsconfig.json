@@ -46,7 +46,9 @@
     "next-sitemap.config.cjs",
     ".next/dev/types/**/*.ts",
     ".next-remove-affiliates/types/**/*.ts",
-    ".next-remove-affiliates/dev/types/**/*.ts"
+    ".next-remove-affiliates/dev/types/**/*.ts",
+    ".next-new/types/**/*.ts",
+    ".next-new/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

@@ -81,7 +81,7 @@ export const AffiliateCTA: React.FC<AffiliateCTAProps> = ({
             size="lg"
             className="font-semibold gap-2 shadow-lg bg-amber-500 hover:bg-amber-600 text-black dark:text-black"
           >
-            <a href={affiliateUrl} target="_blank" rel="noopener noreferrer">
+            <a href={affiliateUrl} target="_blank" rel="sponsored nofollow noopener noreferrer">
               <span>{ctaText}</span>
               <ExternalLink className="h-4 w-4" />
             </a>

@@ -7,7 +7,7 @@ import { HomePageClient } from './HomePageClient'
 export const revalidate = 60 // Revalidate every 60 seconds
 
 export const metadata: Metadata = {
-  title: 'SoloStack | Modern Tech Stacks, AI Automation & Hardware for Solo Operators',
+  title: 'SoloStack | Tech Stacks, AI Automation & Gear for Solo Operators',
   description:
     'Curated blueprints, software tools, hardware reviews, and AI automation guides engineered for 1-person creators, solopreneurs, and remote founders.',
   keywords: [
@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'SoloStack | Tech Stacks, AI Automation & Hardware for Solo Operators',
+    title: 'SoloStack | Tech Stacks, AI Automation & Gear for Solo Operators',
     description:
       'Curated blueprints, software tools, hardware reviews, and AI automation guides engineered for 1-person creators, solopreneurs, and remote founders.',
     url: 'https://solostack.au',
-    siteName: 'SoloStack CMS',
+    siteName: 'SoloStack',
     images: [
       {
         url: '/media/solo-creator-4k-editing-pipeline.webp',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SoloStack | Tech Stacks & AI Automation for Solo Operators',
+    title: 'SoloStack | Tech Stacks, AI Automation & Gear for Solo Operators',
     description:
       'Curated blueprints, software tools, hardware reviews, and AI automation guides engineered for 1-person creators, solopreneurs, and remote founders.',
     images: ['/media/solo-creator-4k-editing-pipeline.webp'],
@@ -72,6 +72,15 @@ export default async function HomePage() {
       limit: 100,
       overrideAccess: true,
       sort: '-publishedAt',
+      // Omit the rich-text body: it is not rendered on the homepage and was bloating the HTML payload
+      select: {
+        title: true,
+        slug: true,
+        publishedAt: true,
+        heroImage: true,
+        categories: true,
+        meta: true,
+      },
     })
     posts = postsRes.docs || []
 
@@ -106,7 +115,7 @@ export default async function HomePage() {
   const jsonLdWebSite = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'SoloStack CMS',
+    name: 'SoloStack',
     url: 'https://solostack.au',
     description:
       'Curated blueprints, software tools, hardware reviews, and AI automation guides engineered for 1-person creators, solopreneurs, and remote founders.',

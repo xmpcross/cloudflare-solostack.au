@@ -56,6 +56,9 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Payload Website Template Posts`,
+    alternates: { canonical: '/posts' },
+    title: 'Articles & Field Manuals for Solo Operators | SoloStack',
+    description:
+      'Practical guides on tech stacks, AI automation, hosting, marketing and operations for one-person businesses.',
   }
 }

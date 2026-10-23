@@ -40,6 +40,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   if (!stack) return { title: 'Stack Not Found | SoloStack' }
 
   return {
+    alternates: { canonical: `/stacks/${slug}` },
     title: `${stack.title} | SoloStack Blueprint`,
     description: stack.description || `Complete tech stack blueprint for ${stack.title}`,
   }

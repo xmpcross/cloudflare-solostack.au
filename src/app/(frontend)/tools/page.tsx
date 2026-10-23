@@ -5,11 +5,13 @@ import React from 'react'
 import { AffiliateCTA } from '@/components/marketing/AffiliateCTA'
 import { Wrench } from 'lucide-react'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { DirectoryGuide } from '@/components/marketing/DirectoryGuide'
 
 export const revalidate = 600
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
+    alternates: { canonical: '/tools' },
     title: 'Software & SaaS Tool Directory for Solo Operators | SoloStack',
     description:
       'Explore top-rated B2B software, automation tools, and productivity SaaS for 1-person businesses.',
@@ -66,6 +68,29 @@ export default async function ToolsDirectoryPage() {
           <p className="text-muted-foreground">No tools listed yet.</p>
         </div>
       )}
+
+      <DirectoryGuide
+        heading="How to choose software for a one-person business"
+        intro="A solo operator pays for every tool twice: once in the subscription and again in the time it takes to learn and maintain it. The tools in this directory are listed because they suit small teams and solo founders, not enterprise rollouts."
+        points={[
+          {
+            title: 'Start with the job, not the category',
+            body: 'Decide which task is costing you the most hours, such as invoicing, editing, scheduling or email, and look for the tool that removes that task. A smaller stack that you use every week beats a large one you do not.',
+          },
+          {
+            title: 'Check pricing at your real scale',
+            body: 'Most tools price by seat, contact count or usage. Each listing shows a starting price, so compare what you will pay at your current size and again if the business doubles.',
+          },
+          {
+            title: 'Prefer tools that connect',
+            body: 'Look for native integrations or a solid automation connector. Moving data by hand between tools is the hidden cost that grows fastest as a solo business takes on more clients.',
+          },
+          {
+            title: 'Keep an exit route',
+            body: 'Choose products that let you export your data in a standard format, so changing tools later does not mean rebuilding your records from scratch.',
+          },
+        ]}
+      />
     </div>
   )
 }

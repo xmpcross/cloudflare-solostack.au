@@ -5,11 +5,13 @@ import React from 'react'
 import { StackCard } from '@/components/marketing/StackCard'
 import { Layers } from 'lucide-react'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import { DirectoryGuide } from '@/components/marketing/DirectoryGuide'
 
 export const revalidate = 600
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
+    alternates: { canonical: '/stacks' },
     title: 'Solopreneur Stack Directory & Operational Blueprints | SoloStack',
     description:
       'Curated software and hardware toolchains for 1-person businesses, creators, and remote agency operators.',
@@ -68,6 +70,25 @@ export default async function StacksPage() {
           <p className="text-muted-foreground">No stack blueprints found yet.</p>
         </div>
       )}
+
+      <DirectoryGuide
+        heading="What is a stack blueprint?"
+        intro="A stack blueprint is a complete, ordered set of software and hardware for one outcome, such as running a video channel or a consulting practice. Instead of reviewing tools one at a time, each blueprint shows how the pieces fit together."
+        points={[
+          {
+            title: 'Built around an outcome',
+            body: 'Every blueprint starts from the result a solo operator wants, then works back to the minimum set of tools and equipment needed to reach it.',
+          },
+          {
+            title: 'Software and hardware together',
+            body: 'Workflows are limited as much by the microphone, camera or desk as by the apps. Blueprints list both, with price ranges so you can budget the whole setup.',
+          },
+          {
+            title: 'Adapt, do not copy',
+            body: 'Treat a blueprint as a starting point. Swap in tools you already own, and add the pieces you are missing one at a time rather than buying everything at once.',
+          },
+        ]}
+      />
     </div>
   )
 }

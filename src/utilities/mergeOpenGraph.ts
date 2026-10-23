@@ -3,14 +3,15 @@ import { getServerSideURL } from './getURL'
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
-  description: 'An open-source website built with Payload and Next.js.',
+  locale: 'en_AU',
+  description: 'Curated blueprints, software tools, hardware reviews, and AI automation guides for 1-person creators, solopreneurs, and remote founders.',
   images: [
     {
-      url: `${getServerSideURL()}/website-template-OG.webp`,
+      url: `${getServerSideURL()}/media/solo-creator-4k-editing-pipeline.webp`,
     },
   ],
-  siteName: 'Payload Website Template',
-  title: 'Payload Website Template',
+  siteName: 'SoloStack',
+  title: 'SoloStack | Tech Stacks, AI Automation & Hardware for Solo Operators',
 }
 
 export const mergeOpenGraph = (og?: Metadata['openGraph']): Metadata['openGraph'] => {
