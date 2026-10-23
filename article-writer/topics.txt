@@ -1,0 +1,67 @@
+# SoloStack article topics. One per line:  category | type | title | main keyword | note
+#   category: creator-media-lab, solopreneur-operations, ai-automation, stacks, websites-hosting, marketing-growth
+#   type:     guide, how-to, comparison, explainer, roundup
+#   title is an English working title; the writer produces the final title. note is optional (keep the field, even empty).
+# Lines starting with # are ignored. A topic that has been written is commented out as "# done <date> ...".
+# Topics whose slug already exists as a post are skipped. Link targets (tools, deals, stacks) come from the database.
+# Avoid income promises and prices. The writer never claims hands-on testing.
+solopreneur-operations | guide | How to Build a Simple Client Proposal Template | client proposal template |
+stacks | roundup | Best Free Tools for Starting a One-Person Business (2026) | free tools for solopreneurs |
+solopreneur-operations | how-to | How to Track Time Without Hating It | time tracking freelancer |
+ai-automation | guide | AI Tools for Solo Founders: What to Automate First | ai tools for solopreneurs |
+websites-hosting | explainer | What Is a CDN and When Does a Small Site Need One | what is a cdn |
+marketing-growth | explainer | What Is a Lead Magnet and How Do You Make One | lead magnet explained |
+marketing-growth | how-to | How to Write Headlines That Get Clicks Without Clickbait | write better headlines |
+creator-media-lab | how-to | How to Write a YouTube Script That Keeps Viewers Watching | youtube script structure |
+marketing-growth | how-to | How to Write a Newsletter People Actually Read | write a newsletter |
+websites-hosting | explainer | What Is an SSL Certificate and Do You Need One | what is ssl certificate |
+creator-media-lab | comparison | USB vs XLR Microphones for Solo Creators | usb vs xlr microphone |
+stacks | guide | The Solo Freelancer Tool Stack: What You Actually Need | freelancer tool stack |
+creator-media-lab | explainer | What Is Remote Recording and Why Solo Podcasters Use It | remote recording podcast |
+solopreneur-operations | how-to | How to Run a Discovery Call With a New Client | client discovery call |
+creator-media-lab | how-to | How to Set Up a Home Podcast Studio on a Small Budget | home podcast studio setup |
+marketing-growth | how-to | How to Collect and Use Testimonials | collect client testimonials |
+creator-media-lab | how-to | How to Plan a Month of YouTube Videos | youtube content calendar |
+ai-automation | roundup | Best AI Transcription Tools for Creators (2026) | best ai transcription tool |
+solopreneur-operations | guide | A Weekly Operating Rhythm for a One-Person Business | solopreneur weekly routine |
+ai-automation | how-to | How to Turn Meeting Recordings Into Notes and Tasks Automatically | automatic meeting notes |
+stacks | guide | A Starter Stack for a Brand-New Freelancer | starter tool stack freelancer |
+ai-automation | how-to | How to Automate Client Follow-Ups With AI and Make.com | automate client follow-up |
+ai-automation | guide | A Safe Way to Use AI With Client Information | ai client data privacy | say to check the tool's data policy
+stacks | guide | The Solo Coach Stack: Booking, Payments and Delivery | coach tool stack |
+websites-hosting | how-to | How to Move Your Website to a New Host Without Downtime | migrate website hosting |
+solopreneur-operations | how-to | How to Write a Freelance Contract That Protects You | freelance contract basics | say to check with a professional
+websites-hosting | explainer | What Is DNS and Why Does It Matter for Your Website | what is dns |
+marketing-growth | guide | A Simple Content Calendar for a One-Person Business | content calendar solopreneur |
+solopreneur-operations | explainer | What Is a Retainer Agreement and When Should You Offer One | retainer agreement freelancer |
+stacks | guide | How to Choose Tools Without Overbuilding Your Stack | choose business tools |
+solopreneur-operations | how-to | How to Fire a Bad-Fit Client Politely | end client relationship |
+solopreneur-operations | roundup | Best Project Management Tools for Solo Freelancers (2026) | best project management tool freelancer |
+websites-hosting | how-to | How to Back Up Your Website Properly | website backup |
+websites-hosting | roundup | Best Website Builders for Solo Businesses (2026) | best website builder |
+ai-automation | how-to | How to Build a Simple Lead Capture Automation | lead capture automation |
+stacks | explainer | What Is a Tool Stack and Why Fewer Tools Win | what is a tool stack |
+websites-hosting | comparison | Squarespace vs Wix vs WordPress for a Solo Business | squarespace vs wix vs wordpress |
+websites-hosting | how-to | How to Set Up Professional Email on Your Own Domain | email on custom domain |
+websites-hosting | guide | A Simple Website Structure for a Freelancer or Consultant | freelancer website structure |
+creator-media-lab | guide | A Simple Audio Chain for Voiceovers and Podcasts | voiceover audio chain |
+websites-hosting | how-to | How to Connect a Domain to Your Website | connect domain to website |
+ai-automation | explainer | What Is a Webhook? A Plain-English Guide for Non-Developers | what is a webhook |
+creator-media-lab | how-to | How to Repurpose a Podcast Episode Into Short Clips | repurpose podcast into clips |
+ai-automation | explainer | What Is an AI Workflow and How Is It Different From a Prompt | ai workflow explained |
+marketing-growth | comparison | Email Marketing Platforms for Solo Creators: Kit vs MailerLite vs beehiiv | kit vs mailerlite vs beehiiv |
+marketing-growth | how-to | How to Do Keyword Research for a Small Site | keyword research small business |
+marketing-growth | how-to | How to Get Your First Ten Clients Without Ads | get first clients freelancer |
+stacks | guide | The One-Person Agency Stack for Client Work | solo agency tools |
+creator-media-lab | guide | Lighting for Video Calls and YouTube: A Simple Three-Light Setup | video lighting setup |
+stacks | guide | The Solo Writer Stack: From Idea to Published Newsletter | writer tool stack |
+ai-automation | how-to | How to Use AI to Draft Emails Without Sounding Robotic | ai email drafting |
+marketing-growth | guide | LinkedIn for Freelancers: A Low-Effort Plan That Works | linkedin for freelancers |
+solopreneur-operations | how-to | How to Send Invoices and Get Paid Faster as a Freelancer | freelance invoicing |
+creator-media-lab | roundup | Best Video Editing Software for Solo Creators (2026) | best video editing software |
+stacks | guide | The Solo YouTuber Stack: Plan, Record, Edit, Publish | youtuber tool stack |
+solopreneur-operations | comparison | Freelance Accounting Software vs a Spreadsheet | freelance accounting software vs spreadsheet |
+marketing-growth | how-to | How to Set Up Google Search Console and Read It | google search console setup |
+creator-media-lab | how-to | How to Record Clean Audio in an Untreated Room | record clean audio at home |
+ai-automation | comparison | Make.com vs Zapier for Solo Businesses | make vs zapier |
+stacks | guide | The Digital Product Seller Stack | digital product tools |
