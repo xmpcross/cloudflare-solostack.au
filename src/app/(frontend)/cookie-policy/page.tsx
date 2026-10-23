@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import React from 'react'
 import Link from 'next/link'
 import { ShieldCheck, Cookie, FileText, Lock, ArrowLeft } from 'lucide-react'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const revalidate = 3600 // Cache for 1 hour
 
@@ -27,6 +28,8 @@ export default function CookiePolicyPage() {
   return (
     <div className="pt-12 pb-24 min-h-screen bg-slate-50/50 dark:bg-neutral-950 text-slate-900 dark:text-neutral-100">
       <div className="container max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
+        <Breadcrumbs items={[{ name: 'Cookie Policy' }]} />
+
         {/* Back Link */}
         <div>
           <Link

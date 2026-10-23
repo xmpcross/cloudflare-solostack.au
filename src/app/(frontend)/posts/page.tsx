@@ -5,6 +5,7 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React, { Suspense } from 'react'
 import PageClient from './page.client'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -40,6 +41,7 @@ export default async function Page() {
     <div className="pt-24 pb-24">
       <PageClient />
       <div className="container mb-10">
+        <Breadcrumbs items={[{ name: 'Articles' }]} className="mb-4" />
         <div className="prose dark:prose-invert max-w-none">
           <h1>Posts</h1>
         </div>

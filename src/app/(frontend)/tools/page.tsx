@@ -4,6 +4,7 @@ import { getPayload } from 'payload'
 import React from 'react'
 import { AffiliateCTA } from '@/components/marketing/AffiliateCTA'
 import { Wrench } from 'lucide-react'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const revalidate = 600
 
@@ -32,6 +33,7 @@ export default async function ToolsDirectoryPage() {
 
   return (
     <div className="pt-20 pb-24 container max-w-5xl mx-auto px-4">
+      <Breadcrumbs items={[{ name: 'Software Directory' }]} className="mb-6" />
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-500 text-sm font-semibold border border-amber-500/20">
           <Wrench className="h-4 w-4" />

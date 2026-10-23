@@ -9,6 +9,7 @@ import { ProsConsBox } from '@/components/marketing/ProsConsBox'
 import { Layers, Wrench, Monitor, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const revalidate = 600
 
@@ -93,6 +94,7 @@ export default async function StackDetailPage({ params: paramsPromise }: Args) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <Breadcrumbs items={[{ name: 'Stacks', href: '/stacks' }, { name: stack.title }]} className="mb-4" />
       <Button asChild variant="ghost" size="sm" className="mb-6 gap-2 text-muted-foreground">
         <Link href="/stacks">
           <ArrowLeft className="h-4 w-4" />

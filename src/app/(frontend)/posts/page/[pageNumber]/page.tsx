@@ -8,6 +8,7 @@ import { getPayload } from 'payload'
 import React from 'react'
 import PageClient from './page.client'
 import { notFound } from 'next/navigation'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const revalidate = 600
 
@@ -41,6 +42,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     <div className="pt-24 pb-24">
       <PageClient />
       <div className="container mb-16">
+        <Breadcrumbs items={[{ name: 'Articles', href: '/posts' }, { name: 'Page' }]} className="mb-4" />
         <div className="prose dark:prose-invert max-w-none">
           <h1>Posts</h1>
         </div>

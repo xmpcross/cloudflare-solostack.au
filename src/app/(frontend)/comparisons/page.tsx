@@ -7,6 +7,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/componen
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const revalidate = 600
 
@@ -35,6 +36,7 @@ export default async function ComparisonsDirectoryPage() {
 
   return (
     <div className="pt-20 pb-24 container max-w-5xl mx-auto px-4">
+      <Breadcrumbs items={[{ name: 'Comparisons' }]} className="mb-6" />
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-500 text-sm font-semibold border border-amber-500/20">
           <Swords className="h-4 w-4" />
