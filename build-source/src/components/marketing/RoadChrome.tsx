@@ -48,7 +48,7 @@ export function RoadHero({
 
 export function DisclosureBand({ text }: { text?: string }) {
   return (
-    <section className="border-y-4 border-[color:var(--sign-yellow)] bg-[color:var(--road-yellow-tint)] py-12 text-[color:var(--road-green-deep)]">
+    <section className="bg-[color:var(--sign-yellow)] py-12 text-[color:var(--road-green-deep)]">
       <div className={`${WRAP} flex flex-col gap-5 md:flex-row md:items-center md:justify-between`}>
         <p className="sign-type max-w-3xl text-balance text-xl font-bold leading-snug sm:text-2xl">
           {text ?? 'Some links on this page are affiliate links. SoloStack may earn a commission at no extra cost to you.'}
