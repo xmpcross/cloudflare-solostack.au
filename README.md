@@ -43,11 +43,16 @@ update by itself.
 
 ## Directory layout
 
-| Directory | Purpose |
+| Path | Purpose |
 | --- | --- |
-| `static/` | Pages project: `dist/` output, `scripts/` (build, export, smoke), `public/_headers`, `wrangler.jsonc` |
-| `build-source/` | Copy of the app used only to render the export (not production) |
-| `migration/` | Deployment record |
+| `scripts/` | `build.sh` (build + crawl), `export.py` (crawler), `smoke.py` (checks) |
+| `build-source/` | Copy of the Payload/Next app with the static-export changes; used only to render the export |
+| `public/_headers` | Cloudflare Pages headers copied into `dist/` |
+| `dist/` | Generated output (not committed) |
+
+This repository is `xmpcross/cloudflare-solostack.au`; **`main` is the only branch**. The original
+Payload app history is in `main`'s history and tagged `payload-final`
+(`git checkout payload-final` to see the app tree as it was).
 
 ### Differences from the app in `build-source/`
 
