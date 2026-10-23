@@ -1,0 +1,25 @@
+packages:
+  - '.'
+
+allowBuilds:
+  '@google/genai': true
+  esbuild: true
+  protobufjs: true
+  sharp: true
+  unrs-resolver: true
+  workerd: true
+
+overrides:
+  '@lexical/code': '0.50.0'
+  '@lexical/html': '0.50.0'
+  '@lexical/link': '0.50.0'
+  '@lexical/list': '0.50.0'
+  '@lexical/mark': '0.50.0'
+  '@lexical/overflow': '0.50.0'
+  '@lexical/plain-text': '0.50.0'
+  '@lexical/react': '0.50.0'
+  '@lexical/rich-text': '0.50.0'
+  '@lexical/selection': '0.50.0'
+  '@lexical/table': '0.50.0'
+  '@lexical/utils': '0.50.0'
+  lexical: '0.50.0'

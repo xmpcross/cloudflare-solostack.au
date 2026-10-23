@@ -1,0 +1,15 @@
+# SoloStack
+
+> SoloStack curates software tools, hardware, stack blueprints and AI automation guides for solopreneurs, indie hackers and creators running one-person businesses. Operated by FXN Holdings (Australia).
+
+## Main sections
+- [Articles & guides](https://solostack.au/posts): practical how-to guides on tech stacks, hosting, marketing and operations
+- [Software directory](https://solostack.au/tools): reviews and pricing for tools suited to solo operators
+- [Stack blueprints](https://solostack.au/stacks): complete toolchains for a specific outcome
+- [Comparisons](https://solostack.au/comparisons): head-to-head software and hardware comparisons
+- [Best gear for creators](https://solostack.au/best-gear): recommended equipment
+
+## About
+- [FAQs and editorial policy](https://solostack.au/faqs)
+- [Affiliate disclosure](https://solostack.au/affiliate-disclosure): some links earn a commission
+- [Contact](https://solostack.au/contact)

@@ -18,9 +18,9 @@ from urllib.parse import urljoin, urlparse, unquote
 import requests
 
 HERE = Path(__file__).resolve().parent.parent
-MEDIA_DIR = HERE.parent / 'build-source' / 'public' / 'media'
-PUBLIC_DIR = HERE.parent / 'build-source' / 'public'
-BUILD_STATIC = HERE.parent / 'build-source' / '.next' / 'static'
+MEDIA_DIR = HERE / 'build-source' / 'public' / 'media'
+PUBLIC_DIR = HERE / 'build-source' / 'public'
+BUILD_STATIC = HERE / 'build-source' / '.next' / 'static'
 
 SEEDS = ['/', '/posts', '/tools', '/stacks', '/comparisons', '/best-gear', '/search', '/cookie-policy']
 SITEMAPS = ['/sitemap.xml', '/pages-sitemap.xml', '/posts-sitemap.xml']

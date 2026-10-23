@@ -3,3 +3,8 @@ dist/
 .wrangler/
 .dev.vars
 __pycache__/
+build-source/node_modules/
+build-source/.next/
+build-source/*.log
+build-source/tsconfig.tsbuildinfo
+build-source/next-env.d.ts

@@ -6,7 +6,7 @@
 # Needs the solostack PostgreSQL service (port 5434) running. Does not touch the live site.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
-SRC="$HERE/../build-source"
+SRC="$HERE/build-source"
 NODE_BIN=/kspellman/sites/payload-backup/solostack.au/runtime/node-v22.23.2/bin
 ENV_FILE=/kspellman/sites/payload-backup/solostack.au/app/.env
 PORT=3099

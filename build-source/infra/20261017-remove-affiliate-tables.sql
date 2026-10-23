@@ -1,0 +1,18 @@
+BEGIN;
+DELETE FROM payload_locked_documents_rels WHERE "affiliate_clicks_id" IS NOT NULL OR "affiliate_coupons_id" IS NOT NULL OR "affiliate_feeds_id" IS NOT NULL OR "affiliate_networks_id" IS NOT NULL;
+ALTER TABLE payload_locked_documents_rels DROP COLUMN "affiliate_clicks_id";
+ALTER TABLE payload_locked_documents_rels DROP COLUMN "affiliate_coupons_id";
+ALTER TABLE payload_locked_documents_rels DROP COLUMN "affiliate_feeds_id";
+ALTER TABLE payload_locked_documents_rels DROP COLUMN "affiliate_networks_id";
+DROP TABLE "affiliate_clicks", "affiliate_coupons", "affiliate_feeds", "affiliate_networks";
+DROP TYPE "enum_affiliate_clicks_network";
+DROP TYPE "enum_affiliate_coupons_category";
+DROP TYPE "enum_affiliate_coupons_network";
+DROP TYPE "enum_affiliate_feeds_advertiser_scope";
+DROP TYPE "enum_affiliate_feeds_feed_type";
+DROP TYPE "enum_affiliate_feeds_network";
+DROP TYPE "enum_affiliate_feeds_status";
+DROP TYPE "enum_affiliate_networks_link_strategy";
+DROP TYPE "enum_affiliate_networks_network_type";
+DROP TYPE "enum_affiliate_networks_status";
+COMMIT;
