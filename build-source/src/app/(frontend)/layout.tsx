@@ -17,24 +17,7 @@ import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
-// Manrope for headings and Mulish for body text, the pair used by blush.xocoweb.workers.dev (owner, 23 Oct 2026). Both are
-// variable fonts under the SIL Open Font License; the Latin subsets are kept in src/fonts so the build needs no network.
-const mulish = localFont({
-  src: [
-    { path: '../../fonts/mulish/Mulish-Variable-latin.woff2', weight: '200 1000', style: 'normal' },
-    { path: '../../fonts/mulish/Mulish-Variable-italic-latin.woff2', weight: '200 1000', style: 'italic' },
-  ],
-  variable: '--font-mulish',
-  display: 'swap',
-})
-
-const manrope = localFont({
-  src: [{ path: '../../fonts/manrope/Manrope-Variable-latin.woff2', weight: '200 800', style: 'normal' }],
-  variable: '--font-manrope',
-  display: 'swap',
-})
-
-// Homepage type: Urbanist for display and headings, Figtree for text (SIL Open Font License, Latin subsets kept in src/fonts).
+// Site type: Urbanist for display and headings, Figtree for text (SIL Open Font License, Latin subsets kept in src/fonts).
 const urbanist = localFont({
   src: [{ path: '../../fonts/urbanist/Urbanist-Variable-latin.woff2', weight: '100 900', style: 'normal' }],
   variable: '--font-display',
@@ -53,7 +36,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html
-      className={cn(mulish.variable, manrope.variable, urbanist.variable, figtree.variable, GeistSans.variable, GeistMono.variable)}
+      className={cn(urbanist.variable, figtree.variable, GeistSans.variable, GeistMono.variable)}
       data-theme="light"
       lang="en-AU"
       suppressHydrationWarning
