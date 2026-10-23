@@ -25,7 +25,7 @@ Content still lives in the SoloStack Payload database. To publish a static snaps
 
 ```sh
 cd /kspellman/sites/cloudflare/solostack.au/static
-./scripts/build.sh          # build ../build-source, crawl it into dist/
+./scripts/build.sh          # build build-source/, crawl it into dist/
 npm run dev                 # optional local preview on http://127.0.0.1:8788
 python3 scripts/smoke.py    # checks a local preview (default http://127.0.0.1:8799)
 npm run deploy              # wrangler pages deploy dist --project-name solostack-au --branch main
