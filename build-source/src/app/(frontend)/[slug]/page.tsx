@@ -12,7 +12,6 @@ import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export async function generateStaticParams() {
   try {
@@ -80,11 +79,6 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      {slug !== 'home' && (
-        <div className="container pt-2 pb-4">
-          <Breadcrumbs items={[{ name: page.title }]} />
-        </div>
-      )}
       <RenderHero {...hero} />
       <RenderBlocks blocks={layout} />
     </article>

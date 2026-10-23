@@ -1,140 +1,101 @@
 import type { Metadata } from 'next'
 import React from 'react'
-import Link from 'next/link'
-import { ShieldCheck, Cookie, FileText, Lock, ArrowLeft } from 'lucide-react'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
 
-export const revalidate = 3600 // Cache for 1 hour
+import { LegalLayout, legalMetadata, type LegalSection } from '@/components/LegalLayout'
+import { BUSINESS } from '@/utilities/business'
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: 'Cookie Policy | SoloStack',
-    description: 'Learn how SoloStack uses cookies and tracking technologies to ensure site functionality, analytics, and affiliate link attribution.',
-    openGraph: {
-      title: 'Cookie Policy | SoloStack',
-      description: 'Learn how SoloStack uses cookies and tracking technologies.',
-      type: 'website',
-      url: 'https://solostack.au/cookie-policy',
-    },
-    alternates: {
-      canonical: 'https://solostack.au/cookie-policy',
-    },
-  }
-}
+export const metadata: Metadata = legalMetadata(
+  'Cookie Policy',
+  'How SoloStack uses cookies and similar technologies for site function, analytics and affiliate link attribution, and how to control them.',
+  '/cookie-policy',
+)
+
+const sections: LegalSection[] = [
+  {
+    id: 'what-are-cookies',
+    title: 'What cookies are',
+    body: (
+      <p>
+        Cookies are small files a website stores on your device. They help a site work, remember your choices, measure how it is used and keep outbound
+        links secure. Similar technologies, such as local storage and tracking parameters in a link, do the same kinds of jobs.
+      </p>
+    ),
+  },
+  {
+    id: 'how-we-use-them',
+    title: 'How SoloStack uses them',
+    body: (
+      <ul>
+        <li>
+          <strong>Strictly necessary.</strong> Needed to show pages, remember your light or dark theme and keep the site secure.
+        </li>
+        <li>
+          <strong>Performance and analytics.</strong> Help us see which pages are read, so we can improve them.
+        </li>
+        <li>
+          <strong>Affiliate attribution.</strong> When you click a partner link or use a coupon, a short-lived cookie or a referral parameter (such as{' '}
+          <code>clickref</code> or <code>sid</code>) is passed to the merchant so a qualifying purchase can be credited to SoloStack.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    id: 'third-parties',
+    title: 'Third-party cookies',
+    body: (
+      <>
+        <p>Some cookies come from our service providers and affiliate networks, not from solostack.au:</p>
+        <ul>
+          <li>
+            <strong>Affiliate networks</strong> such as CJ Affiliate, Awin, Impact, Sovrn Commerce and Takeads. Their tracking cookies usually last
+            30 to 90 days, depending on the merchant.
+          </li>
+          <li>
+            <strong>Google Analytics</strong>, for anonymised performance and engagement reporting.
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    id: 'your-choices',
+    title: 'Your choices',
+    body: (
+      <>
+        <p>
+          You control cookies through your browser. Most browsers let you block, delete or review them. If you block essential cookies, parts of the
+          site may not work as expected.
+        </p>
+        <p>
+          Blocking affiliate cookies does not change the price you pay. It only means a purchase may not be credited to us.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 'changes-and-contact',
+    title: 'Changes and contact',
+    body: (
+      <p>
+        We may update this policy as the site or the law changes, and we will change the date above when we do. Questions? Email{' '}
+        <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a> or write to {BUSINESS.operator}, {BUSINESS.address}.
+      </p>
+    ),
+  },
+]
 
 export default function CookiePolicyPage() {
-  const lastUpdated = 'September 29, 2026'
-
   return (
-    <div className="pt-12 pb-24 min-h-screen bg-slate-50/50 dark:bg-neutral-950 text-slate-900 dark:text-neutral-100">
-      <div className="container max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
-        <Breadcrumbs items={[{ name: 'Cookie Policy' }]} />
-
-        {/* Back Link */}
-        <div>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-neutral-400 hover:text-indigo-600 dark:hover:text-white transition-colors"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Back to Home</span>
-          </Link>
-        </div>
-
-        {/* Page Header */}
-        <div className="space-y-3 border-b border-slate-200 dark:border-neutral-800 pb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold border border-indigo-200/80 dark:border-indigo-800/80">
-            <Cookie className="h-3.5 w-3.5 text-indigo-500" />
-            <span>Privacy & Compliance</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Cookie Policy
-          </h1>
-          <p className="text-xs text-slate-500 dark:text-neutral-400">
-            Last Updated: {lastUpdated} &bull; Operated by FXN Holdings (solostack.au)
-          </p>
-        </div>
-
-        {/* Policy Content Card */}
-        <div className="bg-white dark:bg-neutral-900 border border-slate-200 dark:border-neutral-800 rounded-2xl p-6 sm:p-10 shadow-2xs space-y-8 text-sm text-slate-700 dark:text-neutral-300 leading-relaxed">
-          {/* Section 1 */}
-          <section className="space-y-3">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <span className="w-6 h-6 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xs flex items-center justify-center font-mono font-bold">1</span>
-              What Are Cookies?
-            </h2>
-            <p>
-              Cookies are small data files stored on your device (computer, tablet, or mobile phone) when you visit web pages. They help website owners deliver smooth functionality, retain user preferences, monitor site performance, and ensure secure link navigation.
-            </p>
-          </section>
-
-          {/* Section 2 */}
-          <section className="space-y-3 pt-4 border-t border-slate-100 dark:border-neutral-800">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <span className="w-6 h-6 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xs flex items-center justify-center font-mono font-bold">2</span>
-              How SoloStack Uses Cookies
-            </h2>
-            <p>
-              SoloStack uses cookies and related local storage mechanisms for the following primary operational purposes:
-            </p>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>
-                <strong>Strictly Necessary &amp; Security Cookies:</strong> Essential for standard page rendering, theme toggle states, and preventing security vulnerabilities.
-              </li>
-              <li>
-                <strong>Performance &amp; Analytics Cookies:</strong> Measure visitor traffic patterns and popular blueprint pages so we can continuously improve content quality.
-              </li>
-              <li>
-                <strong>Affiliate &amp; Partner Attribution Cookies:</strong> When you click on partner deals or voucher codes (e.g. CJ Affiliate or Awin Network partner links), a temporary partner cookie or referral parameter (`clickref` or `sid`) is passed to the merchant so that any subsequent qualifying purchase can be accurately attributed to SoloStack.
-              </li>
-            </ul>
-          </section>
-
-          {/* Section 3 */}
-          <section className="space-y-3 pt-4 border-t border-slate-100 dark:border-neutral-800">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <span className="w-6 h-6 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xs flex items-center justify-center font-mono font-bold">3</span>
-              Third-Party Cookies &amp; Partners
-            </h2>
-            <p>
-              Some cookies placed on your browser originate from authorized third-party service providers and affiliate networks:
-            </p>
-            <ul className="list-disc pl-5 space-y-2">
-              <li><strong>CJ Affiliate (Commission Junction):</strong> Tracking cookie duration typically ranges from 30 to 90 days.</li>
-              <li><strong>Awin Network:</strong> Attribution tracking for verified merchant promotional offers.</li>
-              <li><strong>Google Analytics:</strong> Anonymized performance reporting and user engagement metrics.</li>
-            </ul>
-          </section>
-
-          {/* Section 4 */}
-          <section className="space-y-3 pt-4 border-t border-slate-100 dark:border-neutral-800">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <span className="w-6 h-6 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xs flex items-center justify-center font-mono font-bold">4</span>
-              Managing &amp; Disabling Cookies
-            </h2>
-            <p>
-              You have full control over cookie preferences through your web browser settings. Most modern browsers allow you to block, delete, or inspect cookies. Note that disabling essential cookies may impact certain site interactive capabilities.
-            </p>
-          </section>
-
-          {/* Section 5 */}
-          <section className="space-y-3 pt-4 border-t border-slate-100 dark:border-neutral-800">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <span className="w-6 h-6 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xs flex items-center justify-center font-mono font-bold">5</span>
-              Contact Us &amp; Policy Updates
-            </h2>
-            <p>
-              We may update this Cookie Policy periodically to reflect technological or legal updates. If you have questions regarding our cookie practices, please contact us at:
-            </p>
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-neutral-850 border border-slate-200 dark:border-neutral-800 text-xs space-y-1 font-mono">
-              <p className="font-bold text-slate-900 dark:text-white font-sans">SoloStack Compliance Team</p>
-              <p>Operated by FXN Holdings (ABN: 53 274 423 748)</p>
-              <p>Email: <a href="mailto:contact@solostack.au" className="text-indigo-600 dark:text-indigo-400 underline">contact@solostack.au</a></p>
-              <p>Address: PO Box 500, WEST PERTH, WA 6872, Australia</p>
-            </div>
-          </section>
-        </div>
-      </div>
-    </div>
+    <LegalLayout
+      title="Cookie Policy"
+      path="/cookie-policy"
+      intro="The small files this site and its partners use, and how to switch them off."
+      summary={[
+        'We use cookies to make the site work, to see which pages are read, and to credit affiliate referrals.',
+        'Affiliate cookies are set by our partner networks when you click a link, usually for 30 to 90 days.',
+        'You can block or delete cookies in your browser at any time.',
+      ]}
+      sections={sections}
+    />
   )
 }

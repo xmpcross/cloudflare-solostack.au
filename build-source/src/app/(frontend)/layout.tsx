@@ -3,12 +3,13 @@ import type { Metadata } from 'next'
 import { cn } from '@/utilities/ui'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
-import { Outfit, Urbanist } from 'next/font/google'
+import localFont from 'next/font/local'
 import Script from 'next/script'
 import React from 'react'
 
 import { Footer } from '@/Footer/Component'
 import { Header } from '@/Header/Component'
+import { SiteBreadcrumbs } from '@/components/SiteBreadcrumbs'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
@@ -16,16 +17,25 @@ import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
-// Google fonts, self-hosted by next/font at build time (owner, 23 Oct 2026): Urbanist for headings and titles,
-// Outfit for body text.
-const urbanist = Urbanist({ subsets: ['latin'], variable: '--font-urbanist', display: 'swap' })
-const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit', display: 'swap' })
+// Be Vietnam Pro for headings and body text, Geist Mono for numbers and labels (owner, 23 Oct 2026). The font files are
+// kept in src/fonts so the build needs no network; next/font serves them from this site.
+const beVietnamPro = localFont({
+  src: [
+    { path: '../../fonts/be-vietnam-pro/BeVietnamPro-400-latin.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/be-vietnam-pro/BeVietnamPro-500-latin.woff2', weight: '500', style: 'normal' },
+    { path: '../../fonts/be-vietnam-pro/BeVietnamPro-600-latin.woff2', weight: '600', style: 'normal' },
+    { path: '../../fonts/be-vietnam-pro/BeVietnamPro-700-latin.woff2', weight: '700', style: 'normal' },
+    { path: '../../fonts/be-vietnam-pro/BeVietnamPro-800-latin.woff2', weight: '800', style: 'normal' },
+  ],
+  variable: '--font-be-vietnam-pro',
+  display: 'swap',
+})
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <html
-      className={cn(outfit.variable, urbanist.variable, GeistSans.variable, GeistMono.variable)}
+      className={cn(beVietnamPro.variable, GeistSans.variable, GeistMono.variable)}
       data-theme="light"
       lang="en-AU"
       suppressHydrationWarning
@@ -42,6 +52,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Providers>
           {/* Static export: no Payload admin bar (there is no /api on Cloudflare Pages). */}
           <Header />
+          <SiteBreadcrumbs />
           {children}
           <Footer />
         </Providers>

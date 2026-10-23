@@ -3,7 +3,6 @@ import Link from 'next/link'
 import type { Post } from '@/payload-types'
 import { Media } from '@/components/Media'
 import { ShareButton } from '@/components/ShareButton'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 interface PostHeaderProps {
   post: Post
@@ -34,14 +33,6 @@ export const PostHeader: React.FC<PostHeaderProps> = ({ post, readingTime = 5 })
   return (
     <header className="single-header container mt-8 lg:mt-12">
       <div className="mx-auto max-w-4xl space-y-5">
-        {/* Breadcrumb Navigation, with BreadcrumbList data (shared component) */}
-        <Breadcrumbs
-          items={[
-            { name: 'Articles', href: '/posts' },
-            ...(category ? [{ name: categoryTitle, href: `/posts?category=${categorySlug}` }] : []),
-            { name: title },
-          ]}
-        />
 
         {/* Category Badges Row */}
         <div className="flex flex-wrap items-center gap-2">

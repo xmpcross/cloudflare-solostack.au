@@ -6,7 +6,6 @@ import React from 'react'
 import { StaticSearch } from './StaticSearch'
 import PageClient from './page.client'
 import { CardPostData } from '@/components/Card'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export default async function Page() {
   let posts: CardPostData[] = []
@@ -28,7 +27,6 @@ export default async function Page() {
     <div className="pt-24 pb-24">
       <PageClient />
       <div className="container mb-8">
-        <Breadcrumbs items={[{ name: 'Search' }]} className="mb-4" />
         <div className="prose dark:prose-invert max-w-none text-center">
           <h1 className="mb-8 lg:mb-16">Search</h1>
         </div>

@@ -228,14 +228,6 @@ export default async function BestGearPage() {
     },
     {
       '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-        { '@type': 'ListItem', position: 2, name: 'Best Gear', item: PAGE_URL },
-      ],
-    },
-    {
-      '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: FAQS.map((f) => ({
         '@type': 'Question',
@@ -253,10 +245,7 @@ export default async function BestGearPage() {
 
       {/* Hero */}
       <header className="border-b border-border bg-neutral-50/70 dark:bg-card/40">
-        <div className="mx-auto max-w-[1366px] px-4 md:px-8 pt-20 pb-12 lg:pb-16">
-          <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground mb-8">
-            <Link href="/" className="hover:underline">Home</Link> <span aria-hidden>/</span> <span>Best Gear</span>
-          </nav>
+        <div className="mx-auto max-w-[1366px] px-4 md:px-8 pt-12 pb-12 lg:pb-16">
           <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
             <div className="space-y-5">
               <p className="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">

@@ -15,6 +15,8 @@ import { AuthorBio } from '@/components/AuthorBio'
 import { PostSidebar } from '@/components/PostSidebar'
 import { RelatedPostsSlider, type RelatedSlide } from '@/components/RelatedPostsSlider'
 import { PostProducts, type PostProduct } from '@/components/PostProducts'
+import { PostFaq, splitFaq } from '@/components/PostFaq'
+import { pickRelated, productCandidate, toolCandidate, type Candidate } from '@/utilities/relatedProducts'
 import { PostShareRail } from '@/components/PostShareRail'
 import { getServerSideURL } from '@/utilities/getURL'
 import { generateMeta } from '@/utilities/generateMeta'
@@ -113,6 +115,8 @@ export default async function PostPage({ params: paramsPromise }: Args) {
 
   const { tocItems, wordCount } = extractHeadingsAndWordCount(post.content)
   const readingTime = Math.max(1, Math.ceil(wordCount / 220))
+  // A trailing "Questions people ask" section is shown as an accordion (see components/PostFaq).
+  const faq = splitFaq(post.content)
 
   // Fetch sidebar data: popular guides & categories
   let popularPosts: any[] = []
@@ -156,7 +160,7 @@ export default async function PostPage({ params: paramsPromise }: Args) {
   }
 
   const relatedPosts = await getRelatedPosts(post)
-  const postProducts = await getPostProducts(post.id)
+  const postProducts = await getPostProducts(post)
 
   const heroImage = post.heroImage && typeof post.heroImage === 'object' ? post.heroImage : null
   const authorName =
@@ -223,7 +227,15 @@ export default async function PostPage({ params: paramsPromise }: Args) {
 
           {/* Article RichText Content */}
           <div className="article-body">
-            <RichText data={post.content} enableGutter={false} />
+            {faq ? (
+              <>
+                <RichText data={faq.before} enableGutter={false} />
+                <PostFaq heading={faq.heading} items={faq.items} />
+                {faq.after && <RichText data={faq.after} enableGutter={false} />}
+              </>
+            ) : (
+              <RichText data={post.content} enableGutter={false} />
+            )}
           </div>
 
           {/* Approved products linked to this post, with their offer links */}
@@ -344,22 +356,55 @@ async function getRelatedPosts(post: Post): Promise<RelatedSlide[]> {
   }
 }
 
-// Approved products whose "Related posts" include this post. Products are admin-only, so read with overrideAccess
-// and select only the public-safe fields.
-async function getPostProducts(postId: number): Promise<PostProduct[]> {
+// Products shown under a post: the approved products linked to it by hand ("Related posts" on the product) come first, then
+// the best automatic matches (see utilities/relatedProducts) up to four in all, then fewer or none if nothing fits.
+// Products are admin-only, so read with overrideAccess and select only the public-safe fields.
+async function getPostProducts(post: any): Promise<PostProduct[]> {
   try {
     const payload = await getPayload({ config: configPromise })
-    const res = await payload.find({
+    const notBad = { status: { not_in: ['rejected', 'discontinued'] } }
+    const fields = { name: true, brand: true, summary: true, image: true, offers: true, category: true } as any
+
+    const manual = (await payload.find({
       collection: 'products' as any,
       depth: 1,
       limit: 12,
       overrideAccess: true,
       pagination: false,
       sort: 'name',
-      where: { and: [{ relatedPosts: { contains: postId } }, { status: { not_in: ['rejected', 'discontinued'] } }] },
-      select: { name: true, brand: true, summary: true, image: true, offers: true } as any,
-    })
-    return res.docs as unknown as PostProduct[]
+      where: { and: [{ relatedPosts: { contains: post.id } }, notBad] },
+      select: fields,
+    })).docs as any[]
+
+    const [allProducts, allTools] = await Promise.all([
+      payload.find({
+        collection: 'products' as any, depth: 1, limit: 500, overrideAccess: true, pagination: false,
+        where: { and: [{ status: { equals: 'approved' } }] }, select: fields,
+      }),
+      payload.find({
+        collection: 'tools' as any, depth: 1, limit: 100, overrideAccess: true, pagination: false,
+        select: { name: true, slug: true, tagline: true, logo: true } as any,
+      }),
+    ])
+    const byKey = new Map<string, PostProduct>()
+    const candidates: Candidate[] = []
+    for (const p of allProducts.docs as any[]) {
+      const c = productCandidate(p)
+      // A product with no offer link cannot be shown, so it must not take a slot.
+      const hasOffer = (p.offers ?? []).some((o: any) => o?.url)
+      if (c && hasOffer && !manual.some((m) => m.id === p.id)) { candidates.push(c); byKey.set(`product:${p.id}`, p) }
+    }
+    for (const t of allTools.docs as any[]) {
+      const c = toolCandidate(t)
+      if (c) {
+        candidates.push(c)
+        byKey.set(`tool:${t.id}`, { id: 1_000_000 + t.id, name: t.name, summary: t.tagline, image: t.logo, href: `/tools/${t.slug}` })
+      }
+    }
+    const categoryIds = ((post.categories ?? []) as any[]).map((c) => (typeof c === 'object' ? c.id : c))
+    const room = Math.max(0, 4 - manual.length)
+    const auto = room ? pickRelated(post, candidates, categoryIds, room).map((c) => byKey.get(`${c.type}:${c.id}`)!) : []
+    return [...(manual as PostProduct[]), ...auto]
   } catch (error) {
     console.warn('Post products fetch error:', error)
     return []

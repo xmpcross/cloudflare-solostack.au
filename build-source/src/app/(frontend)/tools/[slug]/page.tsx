@@ -10,7 +10,6 @@ import { generateSoftwareSchema } from '@/utilities/generateJsonLd'
 import { ArrowLeft, Wrench, ShieldCheck, Tag, Star } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const revalidate = 600
 
@@ -93,7 +92,6 @@ export default async function ToolDetailPage({ params: paramsPromise }: Args) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <Breadcrumbs items={[{ name: 'Software Directory', href: '/tools' }, { name: tool.name }]} className="mb-8" />
 
       {/* Header */}
       <div className="space-y-4 mb-8">
