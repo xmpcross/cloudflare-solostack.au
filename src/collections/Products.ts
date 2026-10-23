@@ -208,6 +208,7 @@ export const Products: CollectionConfig = {
                 { label: 'Awin', value: 'awin' },
                 { label: 'CJ', value: 'cj' },
                 { label: 'Impact', value: 'impact' },
+                { label: 'Takeads', value: 'takeads' },
                 { label: 'Direct programme', value: 'direct' },
               ],
               admin: { width: '40%' },
@@ -226,6 +227,12 @@ export const Products: CollectionConfig = {
             },
             { name: 'primary', type: 'checkbox', label: 'Main offer', defaultValue: false, admin: { width: '20%' } },
           ],
+        },
+        {
+          name: 'networkNotes',
+          type: 'text',
+          label: 'Also available through',
+          admin: { description: 'Other networks that carry this merchant, for example "Takeads (AU deeplinks); Sovrn".' },
         },
         {
           type: 'row',
