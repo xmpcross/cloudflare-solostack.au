@@ -50,6 +50,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link href="/apple-touch-icon.png" rel="apple-touch-icon" />
         <meta name="mitgo-verification" content="28d34b81-9840-44ac-adb1-9ae7ef0ae384" />
         <meta name="impact-site-verification" content="fd59399a-96f0-482a-8eb3-e33a18a33668" />
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2867376862905050"
+          crossOrigin="anonymous"
+        />
       </head>
       <body>
         <Providers>

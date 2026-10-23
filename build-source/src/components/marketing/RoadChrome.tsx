@@ -17,19 +17,19 @@ export function RoadHero({
   aside?: React.ReactNode
 }) {
   return (
-    <section className="relative overflow-hidden bg-[color:var(--road-green)] text-[color:var(--sign-white)]">
+    <section className="relative overflow-hidden bg-[color:var(--road-tint)] text-[color:var(--road-ink)]">
       <div className={`${WRAP} grid gap-10 pb-16 pt-12 lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-16`}>
         <div className={aside ? 'lg:col-span-6' : 'lg:col-span-8'}>
           <h1 className="sign-type text-balance text-[2.6rem] font-bold leading-[1.04] tracking-tight sm:text-6xl">
             {title}
           </h1>
-          <p className="mt-6 max-w-[36rem] text-lg leading-relaxed text-white/85">{intro}</p>
+          <p className="mt-6 max-w-[36rem] text-lg leading-relaxed text-[color:var(--road-muted)]">{intro}</p>
           {facts?.length ? (
             <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
               {facts.map((f) => (
                 <div key={f.label}>
-                  <dt className="text-sm text-white/70">{f.label}</dt>
-                  <dd className="num sign-type text-3xl font-bold text-[color:var(--sign-yellow)]">{f.value}</dd>
+                  <dt className="text-sm text-[color:var(--road-muted)]">{f.label}</dt>
+                  <dd className="num sign-type text-3xl font-bold text-[color:var(--road-green)]">{f.value}</dd>
                 </div>
               ))}
             </dl>
@@ -40,7 +40,7 @@ export function RoadHero({
       <div
         aria-hidden
         className="h-2 w-full"
-        style={{ background: 'repeating-linear-gradient(90deg, var(--sign-yellow) 0 56px, transparent 56px 96px)' }}
+        style={{ background: 'repeating-linear-gradient(90deg, var(--sign-yellow) 0 56px, var(--road-green) 56px 96px)' }}
       />
     </section>
   )
@@ -48,7 +48,7 @@ export function RoadHero({
 
 export function DisclosureBand({ text }: { text?: string }) {
   return (
-    <section className="bg-[color:var(--sign-yellow)] py-12 text-[color:var(--road-green-deep)]">
+    <section className="border-y-4 border-[color:var(--sign-yellow)] bg-[color:var(--road-yellow-tint)] py-12 text-[color:var(--road-green-deep)]">
       <div className={`${WRAP} flex flex-col gap-5 md:flex-row md:items-center md:justify-between`}>
         <p className="sign-type max-w-3xl text-balance text-xl font-bold leading-snug sm:text-2xl">
           {text ?? 'Some links on this page are affiliate links. SoloStack may earn a commission at no extra cost to you.'}

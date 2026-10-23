@@ -257,6 +257,8 @@ html[data-theme='light'] {
   --road-green: oklch(36% 0.085 160deg);
   --road-green-deep: oklch(28% 0.07 160deg);
   --road-green-line: oklch(46% 0.09 160deg);
+  --road-tint: oklch(94.5% 0.035 150deg);
+  --road-yellow-tint: oklch(95.5% 0.07 95deg);
   --sign-white: oklch(98.5% 0.006 105deg);
   --sign-yellow: oklch(87% 0.17 92deg);
   --road-ink: oklch(21% 0.025 160deg);
@@ -274,13 +276,8 @@ html[data-theme='light'] {
 .road a:focus-visible,
 .road button:focus-visible,
 .road input:focus-visible {
-  outline: 3px solid var(--sign-yellow);
+  outline: 3px solid var(--road-green);
   outline-offset: 3px;
-}
-.road .on-light a:focus-visible,
-.road .on-light button:focus-visible,
-.road .on-light input:focus-visible {
-  outline-color: var(--road-green);
 }
 .road .sign-type {
   font-family: var(--font-heading);
@@ -289,15 +286,15 @@ html[data-theme='light'] {
 .road .num {
   font-variant-numeric: tabular-nums;
 }
-/* A sign panel: reflective white border inset from the edge, like sheeting on an overhead gantry. */
+/* A sign panel: a green border inset from the edge of a white face, like a road sign. */
 .road .panel {
-  background: var(--road-green);
-  color: var(--sign-white);
+  background: var(--sign-white);
+  color: var(--road-ink);
   border-radius: 14px;
   box-shadow:
-    inset 0 0 0 3px var(--road-green),
-    inset 0 0 0 6px var(--sign-white),
-    0 18px 30px -18px oklch(20% 0.05 160deg / 0.55);
+    inset 0 0 0 3px var(--sign-white),
+    inset 0 0 0 6px var(--road-green),
+    0 18px 30px -20px oklch(30% 0.05 160deg / 0.35);
 }
 .road .lane {
   transition:

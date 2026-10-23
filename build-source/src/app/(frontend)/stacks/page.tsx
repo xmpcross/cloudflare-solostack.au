@@ -77,25 +77,25 @@ export default async function StacksPage() {
   return (
     <div className="road">
       {/* 1. HERO: what a blueprint is, beside the one fully priced stack */}
-      <section className="relative overflow-hidden bg-[color:var(--road-green)] text-[color:var(--sign-white)]">
+      <section className="relative overflow-hidden bg-[color:var(--road-tint)] text-[color:var(--road-ink)]">
         <div className={`${WRAP} grid gap-10 pb-16 pt-12 lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-16`}>
           <div className="lg:col-span-6">
             <h1 className="sign-type text-balance text-[2.6rem] font-bold leading-[1.04] tracking-tight sm:text-6xl">
               Stack blueprints for one-person businesses.
             </h1>
-            <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-white/85">
+            <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-[color:var(--road-muted)]">
               A complete, ordered set of software and hardware for one outcome, such as running a video channel or a
               consulting practice. Instead of reviewing tools one at a time, each blueprint shows how the pieces fit
               together.
             </p>
             <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
               <div>
-                <dt className="text-sm text-white/70">Priced stacks</dt>
-                <dd className="num sign-type text-3xl font-bold text-[color:var(--sign-yellow)]">{stacks.length}</dd>
+                <dt className="text-sm text-[color:var(--road-muted)]">Priced stacks</dt>
+                <dd className="num sign-type text-3xl font-bold text-[color:var(--road-green)]">{stacks.length}</dd>
               </div>
               <div>
-                <dt className="text-sm text-white/70">Stack guides</dt>
-                <dd className="num sign-type text-3xl font-bold text-[color:var(--sign-yellow)]">{guides.length}</dd>
+                <dt className="text-sm text-[color:var(--road-muted)]">Stack guides</dt>
+                <dd className="num sign-type text-3xl font-bold text-[color:var(--road-green)]">{guides.length}</dd>
               </div>
             </dl>
           </div>
@@ -124,19 +124,19 @@ export default async function StacksPage() {
                   <div className="min-w-0">
                     <span className="sign-type block text-2xl font-bold leading-tight sm:text-3xl">{stack.title}</span>
                     {stack.businessModel ? (
-                      <span className="mt-1 block text-sm text-white/75">Built for {String(stack.businessModel).toLowerCase()}s</span>
+                      <span className="mt-1 block text-sm text-[color:var(--road-muted)]">Built for {String(stack.businessModel).toLowerCase()}s</span>
                     ) : null}
                   </div>
                   <div className="flex shrink-0 items-center gap-4">
                     {stack.monthlySoftwareCost ? (
                       <span className="text-right">
-                        <span className="num sign-type block text-2xl font-bold text-[color:var(--sign-yellow)]">
+                        <span className="num sign-type block text-2xl font-bold text-[color:var(--road-green)]">
                           {stack.monthlySoftwareCost}
                         </span>
-                        <span className="block text-xs text-white/70">software</span>
+                        <span className="block text-xs text-[color:var(--road-muted)]">software</span>
                       </span>
                     ) : null}
-                    <ArrowRight aria-hidden className="lane-arrow size-8 text-[color:var(--sign-yellow)]" />
+                    <ArrowRight aria-hidden className="lane-arrow size-8 text-[color:var(--road-green)]" />
                   </div>
                 </div>
               </Link>
@@ -146,7 +146,7 @@ export default async function StacksPage() {
         <div
           aria-hidden
           className="h-2 w-full"
-          style={{ background: 'repeating-linear-gradient(90deg, var(--sign-yellow) 0 56px, transparent 56px 96px)' }}
+          style={{ background: 'repeating-linear-gradient(90deg, var(--sign-yellow) 0 56px, var(--road-green) 56px 96px)' }}
         />
       </section>
 
@@ -237,7 +237,7 @@ export default async function StacksPage() {
             <div className="flex flex-wrap items-end justify-between gap-4 border-b-2 border-[color:var(--road-green)] pb-6">
               <h2 className="sign-type text-3xl font-bold tracking-tight sm:text-4xl">Stack guides</h2>
               <Link
-                href="/posts?category=stacks"
+                href="/posts/category/stacks"
                 className="sign-type text-sm font-bold underline underline-offset-4"
               >
                 All stack guides
@@ -328,7 +328,7 @@ export default async function StacksPage() {
       </section>
 
       {/* 5. DISCLOSURE */}
-      <section className="bg-[color:var(--sign-yellow)] py-12 text-[color:var(--road-green-deep)]">
+      <section className="border-y-4 border-[color:var(--sign-yellow)] bg-[color:var(--road-yellow-tint)] py-12 text-[color:var(--road-green-deep)]">
         <div className={`${WRAP} flex flex-col gap-5 md:flex-row md:items-center md:justify-between`}>
           <p className="sign-type max-w-3xl text-balance text-xl font-bold leading-snug sm:text-2xl">
             Some links on this page are affiliate links. SoloStack may earn a commission at no extra cost to you.

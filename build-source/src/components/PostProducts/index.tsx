@@ -13,22 +13,23 @@ export type PostProduct = {
   offers?: any[] | null
   // Tools link to their own SoloStack page (which carries the affiliate link) instead of a merchant.
   href?: string | null
+  slug?: string | null
 }
 
 // Offers keep the plain merchant URL in `url`. The network's tracked link is saved in `networkNotes` as
 // "...: https://..." until the offers have a dedicated field, so pull it out here (and only here).
-const trackedLink = (offer: any): string | null => {
+export const trackedLink = (offer: any): string | null => {
   if (!offer || !offer.network || offer.network === 'none') return null
   const match = typeof offer.networkNotes === 'string' ? offer.networkNotes.match(/https?:\/\/\S+$/) : null
   return match ? match[0] : null
 }
 
-const pickOffer = (offers?: any[] | null) => {
+export const pickOffer = (offers?: any[] | null) => {
   if (!offers || offers.length === 0) return null
   return offers.find((o) => o.primary) || offers[0]
 }
 
-export const PostProducts: React.FC<{ products: PostProduct[] }> = ({ products }) => {
+export const PostProducts: React.FC<{ products: PostProduct[]; heading?: string }> = ({ products, heading = 'Related products and tools' }) => {
   const items = products
     .map((product) => {
       if (product.href) return { product, offer: null, href: product.href, affiliate: false, internal: true }
@@ -44,7 +45,7 @@ export const PostProducts: React.FC<{ products: PostProduct[] }> = ({ products }
   return (
     <section aria-labelledby="post-products-h" className="my-10">
       <h2 id="post-products-h" className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
-        Related products and tools
+        {heading}
       </h2>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         {items.map(({ product, offer, href, affiliate, internal }) => (

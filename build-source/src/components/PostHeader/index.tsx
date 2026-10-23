@@ -38,7 +38,7 @@ export const PostHeader: React.FC<PostHeaderProps> = ({ post, readingTime = 5 })
         <div className="flex flex-wrap items-center gap-2">
           {category && (
             <Link
-              href={`/posts?category=${categorySlug}`}
+              href={`/posts/category/${categorySlug}`}
               className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/40 hover:bg-emerald-100 transition-colors"
             >
               {categoryTitle}

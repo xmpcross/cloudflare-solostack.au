@@ -84,7 +84,7 @@ export const PostSidebar: React.FC<PostSidebarProps> = ({
               {categories.map((cat) => (
                 <Link
                   key={cat.id}
-                  href={`/posts?category=${cat.slug}`}
+                  href={`/posts/category/${cat.slug}`}
                   className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium border border-border bg-white dark:bg-neutral-800 text-neutral-700 hover:border-emerald-500 hover:text-emerald-600 dark:text-neutral-300 dark:hover:text-emerald-400 transition-colors"
                 >
                   <span>{cat.title}</span>

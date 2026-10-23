@@ -26,7 +26,7 @@ async function getTopics(): Promise<{ title: string; href: string }[]> {
       .filter((cat) => cat.title && cat.slug)
       .map((cat) => ({
         title: cat.title,
-        href: TOPIC_HREF_OVERRIDES[cat.slug as string] || `/posts?category=${cat.slug}`,
+        href: TOPIC_HREF_OVERRIDES[cat.slug as string] || `/posts/category/${cat.slug}`,
       }))
   } catch (error) {
     console.warn('Footer categories fetch error:', error)

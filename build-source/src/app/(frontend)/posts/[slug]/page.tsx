@@ -15,6 +15,8 @@ import { AuthorBio } from '@/components/AuthorBio'
 import { PostSidebar } from '@/components/PostSidebar'
 import { RelatedPostsSlider, type RelatedSlide } from '@/components/RelatedPostsSlider'
 import { PostProducts, type PostProduct } from '@/components/PostProducts'
+import { InlineProduct } from '@/components/PostProducts/InlineProduct'
+import { placeProducts, splitAtProducts } from '@/utilities/placeProducts'
 import { PostFaq, splitFaq } from '@/components/PostFaq'
 import { pickRelated, productCandidate, toolCandidate, type Candidate } from '@/utilities/relatedProducts'
 import { PostShareRail } from '@/components/PostShareRail'
@@ -115,9 +117,6 @@ export default async function PostPage({ params: paramsPromise }: Args) {
 
   const { tocItems, wordCount } = extractHeadingsAndWordCount(post.content)
   const readingTime = Math.max(1, Math.ceil(wordCount / 220))
-  // A trailing "Questions people ask" section is shown as an accordion (see components/PostFaq).
-  const faq = splitFaq(post.content)
-
   // Fetch sidebar data: popular guides & categories
   let popularPosts: any[] = []
   let categories: any[] = []
@@ -160,7 +159,22 @@ export default async function PostPage({ params: paramsPromise }: Args) {
   }
 
   const relatedPosts = await getRelatedPosts(post)
-  const postProducts = await getPostProducts(post)
+  const { products: postProducts, candidates: productMatchers } = await getPostProducts(post)
+
+  // Each related product goes inside the article, after the paragraph that discusses it; the rest are listed below.
+  const placed = placeProducts(post.content, postProducts, productMatchers)
+  const productById = new Map(postProducts.map((p) => [p.id, p]))
+  const leftoverProducts = postProducts.filter((p) => !placed.placedIds.has(p.id))
+  // A trailing "Questions people ask" section is shown as an accordion (see components/PostFaq).
+  const faq = splitFaq(placed.content)
+  const renderArticle = (data: any) =>
+    splitAtProducts(data).map((seg, i) =>
+      seg.kind === 'text' ? (
+        <RichText key={i} data={seg.data} enableGutter={false} />
+      ) : productById.get(seg.productId) ? (
+        <InlineProduct key={i} product={productById.get(seg.productId)!} />
+      ) : null,
+    )
 
   const heroImage = post.heroImage && typeof post.heroImage === 'object' ? post.heroImage : null
   const authorName =
@@ -229,17 +243,20 @@ export default async function PostPage({ params: paramsPromise }: Args) {
           <div className="article-body">
             {faq ? (
               <>
-                <RichText data={faq.before} enableGutter={false} />
+                {renderArticle(faq.before)}
                 <PostFaq heading={faq.heading} items={faq.items} />
-                {faq.after && <RichText data={faq.after} enableGutter={false} />}
+                {faq.after && renderArticle(faq.after)}
               </>
             ) : (
-              <RichText data={post.content} enableGutter={false} />
+              renderArticle(placed.content)
             )}
           </div>
 
           {/* Approved products linked to this post, with their offer links */}
-          <PostProducts products={postProducts} />
+          <PostProducts
+            products={leftoverProducts}
+            heading={placed.placedIds.size ? 'More products and tools' : 'Related products and tools'}
+          />
 
           {/* Author Bio Box */}
           <AuthorBio
@@ -359,7 +376,7 @@ async function getRelatedPosts(post: Post): Promise<RelatedSlide[]> {
 // Products shown under a post: the approved products linked to it by hand ("Related posts" on the product) come first, then
 // the best automatic matches (see utilities/relatedProducts) up to four in all, then fewer or none if nothing fits.
 // Products are admin-only, so read with overrideAccess and select only the public-safe fields.
-async function getPostProducts(post: any): Promise<PostProduct[]> {
+async function getPostProducts(post: any): Promise<{ products: PostProduct[]; candidates: Map<number, Candidate> }> {
   try {
     const payload = await getPayload({ config: configPromise })
     const notBad = { status: { not_in: ['rejected', 'discontinued'] } }
@@ -388,6 +405,7 @@ async function getPostProducts(post: any): Promise<PostProduct[]> {
     ])
     const byKey = new Map<string, PostProduct>()
     const candidates: Candidate[] = []
+    const matchers = new Map<number, Candidate>() // by PostProduct id
     for (const p of allProducts.docs as any[]) {
       const c = productCandidate(p)
       // A product with no offer link cannot be shown, so it must not take a slot.
@@ -398,15 +416,25 @@ async function getPostProducts(post: any): Promise<PostProduct[]> {
       const c = toolCandidate(t)
       if (c) {
         candidates.push(c)
-        byKey.set(`tool:${t.id}`, { id: 1_000_000 + t.id, name: t.name, summary: t.tagline, image: t.logo, href: `/tools/${t.slug}` })
+        byKey.set(`tool:${t.id}`, { id: 1_000_000 + t.id, name: t.name, summary: t.tagline, image: t.logo, href: `/tools/${t.slug}`, slug: t.slug })
       }
     }
     const categoryIds = ((post.categories ?? []) as any[]).map((c) => (typeof c === 'object' ? c.id : c))
     const room = Math.max(0, 4 - manual.length)
     const auto = room ? pickRelated(post, candidates, categoryIds, room).map((c) => byKey.get(`${c.type}:${c.id}`)!) : []
-    return [...(manual as PostProduct[]), ...auto]
+    const products = [...(manual as PostProduct[]), ...auto]
+    // Matchers for placing each product inside the article (hand-linked products are matched by name and kind too).
+    for (const m of manual) {
+      const c = productCandidate(m)
+      if (c) matchers.set(m.id, c)
+    }
+    for (const c of candidates) {
+      const key = byKey.get(`${c.type}:${c.id}`)
+      if (key) matchers.set(key.id, c)
+    }
+    return { products, candidates: matchers }
   } catch (error) {
     console.warn('Post products fetch error:', error)
-    return []
+    return { products: [], candidates: new Map() }
   }
 }

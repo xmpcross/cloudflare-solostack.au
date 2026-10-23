@@ -140,7 +140,7 @@ export function HomePageClient({
     {
       label: 'Hosting & domains',
       note: `${providerCount} providers`,
-      href: '/posts?category=websites-hosting',
+      href: '/posts/category/websites-hosting',
       show: providerCount > 0,
     },
   ].filter((l) => l.show)
@@ -148,13 +148,13 @@ export function HomePageClient({
   return (
     <main className="road min-h-screen">
       {/* 1. GANTRY: the first viewport is an overhead sign pointing to the site's real sections */}
-      <section className="relative overflow-hidden bg-[color:var(--road-green)] text-[color:var(--sign-white)]">
+      <section className="relative overflow-hidden bg-[color:var(--road-tint)] text-[color:var(--road-ink)]">
         <div className={`${WRAP} grid gap-10 pb-16 pt-12 lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-20`}>
           <div className="lg:col-span-6">
             <h1 className="sign-type text-balance text-[2.6rem] font-bold leading-[1.04] tracking-tight sm:text-6xl">
               Tools, gear and stacks for a business of one.
             </h1>
-            <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-white/85">
+            <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-[color:var(--road-muted)]">
               Guides, gear picks, software reviews and a worked-out stack for people running a business on their own in
               Australia.
             </p>
@@ -203,18 +203,18 @@ export function HomePageClient({
 
           <nav aria-label="Browse SoloStack" className="lg:col-span-6">
             <div className="panel p-3 sm:p-4">
-              <ul className="divide-y divide-white/25">
+              <ul className="divide-y divide-[color:var(--road-rule)]">
                 {lanes.map((lane, i) => (
                   <li key={lane.href} className="lane-in" style={{ ['--i' as any]: i }}>
                     <Link
                       href={lane.href}
-                      className="lane group flex items-center justify-between gap-4 rounded-lg px-4 py-5 hover:bg-white/10 sm:px-6"
+                      className="lane group flex items-center justify-between gap-4 rounded-lg px-4 py-5 hover:bg-[color:var(--road-green)]/10 sm:px-6"
                     >
                       <span>
                         <span className="sign-type block text-2xl font-bold leading-tight sm:text-3xl">{lane.label}</span>
-                        <span className="num mt-1 block text-sm text-white/75">{lane.note}</span>
+                        <span className="num mt-1 block text-sm text-[color:var(--road-muted)]">{lane.note}</span>
                       </span>
-                      <ArrowRight aria-hidden className="lane-arrow size-8 shrink-0 text-[color:var(--sign-yellow)] sm:size-10" />
+                      <ArrowRight aria-hidden className="lane-arrow size-8 shrink-0 text-[color:var(--road-green)] sm:size-10" />
                     </Link>
                   </li>
                 ))}
@@ -228,7 +228,7 @@ export function HomePageClient({
           className="h-2 w-full"
           style={{
             background:
-              'repeating-linear-gradient(90deg, var(--sign-yellow) 0 56px, transparent 56px 96px)',
+              'repeating-linear-gradient(90deg, var(--sign-yellow) 0 56px, var(--road-green) 56px 96px)',
           }}
         />
       </section>
@@ -285,27 +285,27 @@ export function HomePageClient({
 
       {/* 3. THE STACK: a priced route through the one published stack blueprint */}
       {stack ? (
-        <section className="bg-[color:var(--road-green-deep)] py-16 text-[color:var(--sign-white)] sm:py-24">
+        <section className="border-y border-[color:var(--road-rule)] bg-[color:var(--sign-white)] py-16 sm:py-24">
           <div className={`${WRAP} grid gap-12 lg:grid-cols-12 lg:gap-16`}>
             <div className="lg:col-span-5">
               <h2 className="sign-type text-balance text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
                 {stack.title}
               </h2>
               {stack.description ? (
-                <p className="mt-5 max-w-lg text-lg leading-relaxed text-white/80">{stack.description}</p>
+                <p className="mt-5 max-w-lg text-lg leading-relaxed text-[color:var(--road-muted)]">{stack.description}</p>
               ) : null}
               <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
                 {stack.monthlySoftwareCost ? (
                   <div>
-                    <dt className="text-sm text-white/70">Software</dt>
-                    <dd className="num sign-type text-3xl font-bold text-[color:var(--sign-yellow)]">
+                    <dt className="text-sm text-[color:var(--road-muted)]">Software</dt>
+                    <dd className="num sign-type text-3xl font-bold text-[color:var(--road-green)]">
                       {stack.monthlySoftwareCost}
                     </dd>
                   </div>
                 ) : null}
                 {stack.businessModel ? (
                   <div>
-                    <dt className="text-sm text-white/70">Built for</dt>
+                    <dt className="text-sm text-[color:var(--road-muted)]">Built for</dt>
                     <dd className="sign-type text-3xl font-bold capitalize">{stack.businessModel}s</dd>
                   </div>
                 ) : null}
@@ -321,7 +321,7 @@ export function HomePageClient({
 
             <div className="lg:col-span-7">
               <div className="panel p-3 sm:p-4">
-                <ol className="divide-y divide-white/25">
+                <ol className="divide-y divide-[color:var(--road-rule)]">
                   {(stack.tools || [])
                     .filter((t: any) => typeof t === 'object')
                     .map((tool: any) => (
@@ -332,7 +332,7 @@ export function HomePageClient({
                             {tool.name}
                           </Link>
                           {tool.tagline ? (
-                            <span className="mt-0.5 block text-sm leading-snug text-white/75">{tool.tagline}</span>
+                            <span className="mt-0.5 block text-sm leading-snug text-[color:var(--road-muted)]">{tool.tagline}</span>
                           ) : null}
                         </span>
                         <span className="leader hidden sm:block" aria-hidden />
@@ -349,7 +349,7 @@ export function HomePageClient({
                         <span className="min-w-0">
                           <span className="sign-type text-lg font-bold">{h.name}</span>
                           {h.manufacturer ? (
-                            <span className="mt-0.5 block text-sm leading-snug text-white/75">{h.manufacturer}</span>
+                            <span className="mt-0.5 block text-sm leading-snug text-[color:var(--road-muted)]">{h.manufacturer}</span>
                           ) : null}
                         </span>
                         <span className="leader hidden sm:block" aria-hidden />
@@ -560,11 +560,11 @@ export function HomePageClient({
               >
                 <span>
                   <span className="sign-type block text-2xl font-bold">{gearCount} more gear picks</span>
-                  <span className="block text-sm text-white/80">
+                  <span className="block text-sm text-[color:var(--road-muted)]">
                     Microphones, webcams, lights, desks, chairs and docks
                   </span>
                 </span>
-                <ArrowRight aria-hidden className="lane-arrow size-9 shrink-0 text-[color:var(--sign-yellow)]" />
+                <ArrowRight aria-hidden className="lane-arrow size-9 shrink-0 text-[color:var(--road-green)]" />
               </Link>
             ) : null}
           </div>
@@ -572,7 +572,7 @@ export function HomePageClient({
       </section>
 
       {/* 6. DISCLOSURE: how the site is paid, plainly */}
-      <section className="bg-[color:var(--sign-yellow)] py-12 text-[color:var(--road-green-deep)]">
+      <section className="border-y-4 border-[color:var(--sign-yellow)] bg-[color:var(--road-yellow-tint)] py-12 text-[color:var(--road-green-deep)]">
         <div className={`${WRAP} flex flex-col gap-5 md:flex-row md:items-center md:justify-between`}>
           <p className="sign-type max-w-3xl text-balance text-xl font-bold leading-snug sm:text-2xl">
             Some links earn SoloStack a commission at no extra cost to you. It never changes what we list or the order we

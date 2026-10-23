@@ -73,7 +73,7 @@ export function PostsArchive({ posts }: { posts: ArchivePost[] }) {
 
   useEffect(() => setVisible(PAGE_SIZE), [category, query, sort])
 
-  // Keep the URL shareable: /posts?category=<slug>
+  // Keep the URL shareable: /posts/category/<slug>
   const chooseCategory = (slug: string) => {
     setCategory(slug)
     const url = new URL(window.location.href)

@@ -104,7 +104,16 @@ def main() -> int:
 
     # Not-found page: Pages serves 404.html for unknown paths.
     r = s.get(base + '/__static-export-not-found__', timeout=60)
-    (out / '404.html').write_text(r.text, encoding='utf-8')
+    # The not-found page is Next's own error shell, which has no layout <head>: add the site-wide AdSense script to it.
+    not_found = r.text
+    head = re.search(r'<head.*?</head>', not_found, re.S)
+    if not (head and 'adsbygoogle.js?client=' in head.group(0)):
+        not_found = not_found.replace(
+            '<head>',
+            '<head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2867376862905050" crossorigin="anonymous"></script>',
+            1,
+        )
+    (out / '404.html').write_text(not_found, encoding='utf-8')
     assets.update(ASSET_RE.findall(r.text))
 
     # Copy the complete /_next/static build output (lazy-loaded chunks are not all referenced from HTML),

@@ -11,7 +11,7 @@ export type Candidate = {
 }
 
 // kind -> [regex on the product or tool name, regex on article text that signals the topic]
-const FAMILIES: Record<string, [RegExp, RegExp]> = {
+export const FAMILIES: Record<string, [RegExp, RegExp]> = {
   microphone: [/microphone|\bmic\b/, /\bmicrophones?\b|\bmics?\b|\bxlr\b|audio chain|dynamic mic/g],
   webcam: [/webcam|facecam|streamcam/, /\bwebcams?\b|video calls?|on camera|face ?cam/g],
   camera: [/gopro|osmo|powershot|action camera/, /\bcameras?\b|mirrorless|\bvlog|footage|filming|\b4k video/g],
@@ -52,7 +52,7 @@ const TOOL_NAMED: Record<string, RegExp> = {
 const NOT_MODEL = new Set(['4k', '1080p', '4th', '32"', '15.6"', 'm18', 'e7', 's8', 'be14000', 'be68', 'v10', 'vl49'])
 const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-const kindOf = (name: string): string | null => {
+export const kindOf = (name: string): string | null => {
   const n = name.toLowerCase()
   for (const [kind, [nameRe]] of Object.entries(FAMILIES)) if (nameRe.test(n)) return kind
   return null
@@ -62,6 +62,10 @@ const kindOf = (name: string): string | null => {
 export function productCandidate(p: { id: number; name: string; category?: any }): Candidate | null {
   const kind = kindOf(p.name)
   if (!kind) return null
+  return buildProductCandidate(p, kind)
+}
+
+function buildProductCandidate(p: { id: number; name: string; category?: any }, kind: string): Candidate {
   const lower = p.name.toLowerCase()
   let strong: RegExp | null = null
   if (kind === 'host' || kind === 'domain') strong = new RegExp(`\\b${escape(lower)}\\b`, 'g')
@@ -83,13 +87,13 @@ export function toolCandidate(t: { id: number; slug: string }): Candidate | null
   return kind ? { type: 'tool', id: t.id, kind, strong: TOOL_NAMED[kind], categoryId: null } : null
 }
 
-function textOf(node: any): string {
+export function textOf(node: any): string {
   if (!node) return ''
   if (typeof node.text === 'string') return node.text
   return Array.isArray(node.children) ? node.children.map(textOf).join(' ') : ''
 }
 
-const count = (re: RegExp, text: string) => (text.match(new RegExp(re.source, 'g')) ?? []).length
+export const count = (re: RegExp, text: string) => (text.match(new RegExp(re.source, 'g')) ?? []).length
 
 /**
  * Returns the best candidates for a post, best first (at most `limit`, two per kind for products and one per kind for

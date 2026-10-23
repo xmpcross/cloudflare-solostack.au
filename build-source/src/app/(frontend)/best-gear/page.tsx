@@ -288,16 +288,16 @@ export default async function BestGearPage() {
                 unoptimized
               />
             </div>
-            <ol className="mt-3 grid divide-y divide-white/25 sm:grid-cols-2 sm:divide-y-0">
+            <ol className="mt-3 grid divide-y divide-[color:var(--road-rule)] sm:grid-cols-2 sm:divide-y-0">
               {ORDER.map((item, i) => (
                 <li key={item.title}>
-                  <a href={item.href} className="lane group flex items-start gap-3 rounded-lg px-3 py-3 hover:bg-white/10">
+                  <a href={item.href} className="lane group flex items-start gap-3 rounded-lg px-3 py-3 hover:bg-[color:var(--road-green)]/10">
                     <span className="num sign-type grid size-8 shrink-0 place-items-center rounded-full bg-[color:var(--sign-yellow)] text-sm font-bold text-[color:var(--road-green-deep)]">
                       {i + 1}
                     </span>
                     <span>
                       <span className="sign-type block font-bold">{item.title}</span>
-                      <span className="block text-sm leading-snug text-white/75">{item.note}</span>
+                      <span className="block text-sm leading-snug text-[color:var(--road-muted)]">{item.note}</span>
                     </span>
                   </a>
                 </li>
@@ -347,8 +347,8 @@ export default async function BestGearPage() {
                   <p className="mt-3 leading-relaxed text-[color:var(--road-muted)]">{section.intro}</p>
 
                   <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-xl bg-[color:var(--road-green)] p-4 text-[color:var(--sign-white)]">
-                      <p className="sign-type flex items-center gap-1.5 text-sm font-bold text-[color:var(--sign-yellow)]">
+                    <div className="rounded-xl border-2 border-[color:var(--road-green)] bg-[color:var(--road-tint)] p-4">
+                      <p className="sign-type flex items-center gap-1.5 text-sm font-bold text-[color:var(--road-green)]">
                         <CheckCircle2 className="size-4" aria-hidden /> Buy this
                       </p>
                       <p className="mt-1.5 text-sm leading-relaxed">{section.buyThis}</p>
@@ -432,13 +432,13 @@ export default async function BestGearPage() {
         )
       })}
 
-      <section className="bg-[color:var(--road-green-deep)] py-14 text-[color:var(--sign-white)] sm:py-20">
+      <section className="bg-[color:var(--road-tint)] py-14 sm:py-20">
         <div className={`${WRAP} grid gap-8 md:grid-cols-[1.5fr_1fr] md:items-center`}>
           <div>
             <h2 className="sign-type text-balance text-3xl font-bold tracking-tight sm:text-4xl">
               Pair your gear with the right software
             </h2>
-            <p className="mt-3 max-w-2xl text-lg leading-relaxed text-white/80">
+            <p className="mt-3 max-w-2xl text-lg leading-relaxed text-[color:var(--road-muted)]">
               Good hardware is half the setup. See the tools we use to record, edit, invoice and automate a one-person
               business, and the stacks that put them together.
             </p>
@@ -447,7 +447,7 @@ export default async function BestGearPage() {
             <Link href="/tools" className="sign-type inline-flex items-center gap-2 rounded-xl bg-[color:var(--sign-yellow)] px-5 py-3.5 text-sm font-bold text-[color:var(--road-green-deep)] hover:brightness-95">
               Software directory <ArrowRight className="size-4" />
             </Link>
-            <Link href="/stacks" className="sign-type inline-flex items-center gap-2 rounded-xl border-2 border-white/70 px-5 py-3.5 text-sm font-bold hover:bg-white/10">
+            <Link href="/stacks" className="sign-type inline-flex items-center gap-2 rounded-xl border-2 border-[color:var(--road-green)] px-5 py-3.5 text-sm font-bold hover:bg-[color:var(--road-green)]/10">
               Stack blueprints <ArrowRight className="size-4" />
             </Link>
           </div>

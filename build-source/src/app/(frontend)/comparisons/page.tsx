@@ -228,7 +228,7 @@ export default async function ComparisonsDirectoryPage() {
               <span className="sign-type text-xl font-bold leading-snug sm:text-2xl">
                 Website Builder vs WordPress: which is right for a solo business?
               </span>
-              <ArrowRight aria-hidden className="size-8 shrink-0 text-[color:var(--sign-yellow)]" />
+              <ArrowRight aria-hidden className="size-8 shrink-0 text-[color:var(--road-green)]" />
             </div>
           </Link>
         }

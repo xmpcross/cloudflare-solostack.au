@@ -59,7 +59,7 @@ export const getTrails = cache(async (): Promise<TrailMap> => {
       const cat = Array.isArray(p.categories) && typeof p.categories[0] === 'object' ? p.categories[0] : null
       trails[`/posts/${p.slug}`] = [
         { name: 'Articles', href: '/posts' },
-        ...(cat?.title && cat?.slug ? [{ name: cat.title, href: `/posts?category=${cat.slug}` }] : []),
+        ...(cat?.title && cat?.slug ? [{ name: cat.title, href: `/posts/category/${cat.slug}` }] : []),
         { name: p.title },
       ]
     }

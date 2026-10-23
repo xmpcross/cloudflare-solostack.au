@@ -100,7 +100,7 @@ export default async function ToolsDirectoryPage() {
               </div>
               <div className="flex items-end justify-between gap-6 px-2 pb-2 pt-5 sm:px-3">
                 <span className="sign-type text-xl font-bold leading-snug sm:text-2xl">{featured.title}</span>
-                <ArrowRight aria-hidden className="size-8 shrink-0 text-[color:var(--sign-yellow)]" />
+                <ArrowRight aria-hidden className="size-8 shrink-0 text-[color:var(--road-green)]" />
               </div>
             </Link>
           ) : null
