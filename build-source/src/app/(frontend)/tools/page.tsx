@@ -14,7 +14,7 @@ export const revalidate = 600
 export async function generateMetadata(): Promise<Metadata> {
   return {
     alternates: { canonical: '/tools' },
-    title: 'Software & SaaS Tool Directory for Solo Operators | SoloStack',
+    title: 'Software Directory for Solo Operators | SoloStack',
     description:
       'Explore top-rated B2B software, automation tools, and productivity SaaS for 1-person businesses.',
   }

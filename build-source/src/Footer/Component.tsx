@@ -62,9 +62,9 @@ export async function Footer() {
 
           {/* Column 2: 15% Width - About & Resources */}
           <div className="w-full sm:w-1/3 lg:w-[15%]">
-            <h4 className="text-sm font-semibold tracking-wider uppercase text-neutral-900 dark:text-neutral-200 mb-4">
+            <h2 className="text-sm font-semibold tracking-wider uppercase text-neutral-900 dark:text-neutral-200 mb-4">
               About &amp; Resources
-            </h4>
+            </h2>
             <ul className="space-y-2.5 text-sm text-neutral-600 dark:text-neutral-400">
               <li>
                 <Link href="/about" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
@@ -101,9 +101,9 @@ export async function Footer() {
 
           {/* Column 3: 15% Width - Topics */}
           <div className="w-full sm:w-1/3 lg:w-[15%]">
-            <h4 className="text-sm font-semibold tracking-wider uppercase text-neutral-900 dark:text-neutral-200 mb-4">
+            <h2 className="text-sm font-semibold tracking-wider uppercase text-neutral-900 dark:text-neutral-200 mb-4">
               Topics
-            </h4>
+            </h2>
             <ul className="space-y-2.5 text-sm text-neutral-600 dark:text-neutral-400">
               {topics.map((topic) => (
                 <li key={topic.href}>
@@ -117,9 +117,9 @@ export async function Footer() {
 
           {/* Column 4: 15% Width - Useful Links */}
           <div className="w-full sm:w-1/3 lg:w-[15%]">
-            <h4 className="text-sm font-semibold tracking-wider uppercase text-neutral-900 dark:text-neutral-200 mb-4">
+            <h2 className="text-sm font-semibold tracking-wider uppercase text-neutral-900 dark:text-neutral-200 mb-4">
               Useful Links
-            </h4>
+            </h2>
             <ul className="space-y-2.5 text-sm text-neutral-600 dark:text-neutral-400">
               <li>
                 <Link href="/affiliate-disclosure" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
@@ -166,9 +166,6 @@ export async function Footer() {
             <ThemeSelector />
             <p className="max-w-md text-neutral-500 dark:text-neutral-400 md:text-right">
               SoloStack is reader-supported. We independently research and evaluate tools and gear. We may earn an affiliate commission on qualifying purchases at no extra cost to you.
-            </p>
-            <p className="max-w-md text-neutral-500 dark:text-neutral-400 md:text-right">
-              Prices are subject to change. Some prices are converted from other currencies, such as US dollars, to Australian dollars, so they may not be 100% accurate. Please confirm the price with the seller.
             </p>
           </div>
         </div>

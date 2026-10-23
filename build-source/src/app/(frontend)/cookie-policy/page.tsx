@@ -51,7 +51,17 @@ const sections: LegalSection[] = [
             30 to 90 days, depending on the merchant.
           </li>
           <li>
-            <strong>Google Analytics</strong>, for anonymised performance and engagement reporting.
+            <strong>Google AdSense and Google advertising technology</strong>, which show ads and may set advertising cookies (for example from
+            doubleclick.net) so ads can be personalised or limited. You can opt out at{' '}
+            <a href="https://adssettings.google.com" target="_blank" rel="noopener nofollow">Google Ads Settings</a> or{' '}
+            <a href="https://www.aboutads.info" target="_blank" rel="noopener nofollow">aboutads.info</a>. In the EEA, UK and Switzerland a consent
+            message appears first.
+          </li>
+          <li>
+            <strong>ConvertLink and Sovrn Commerce (VigLink)</strong>, which may rewrite outbound links to affiliate links and set their own cookies.
+          </li>
+          <li>
+            <strong>Ahrefs Web Analytics</strong>, for aggregated traffic reporting. It is designed to work without cookies.
           </li>
         </ul>
       </>

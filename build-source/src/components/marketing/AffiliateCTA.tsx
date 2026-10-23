@@ -36,7 +36,7 @@ export const AffiliateCTA: React.FC<AffiliateCTAProps> = ({
       <CardContent className="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="space-y-2 flex-1">
           <div className="flex items-center gap-3 flex-wrap">
-            <h3 className="text-2xl font-bold tracking-tight">{name}</h3>
+            <h2 className="text-2xl font-bold tracking-tight">{name}</h2>
             {pricingType && (
               <Badge variant="secondary" className="capitalize">
                 {pricingType}

@@ -16,9 +16,9 @@ const SITE = 'https://solostack.au'
 export async function generateMetadata(): Promise<Metadata> {
   return {
     alternates: { canonical: '/stacks' },
-    title: 'Tech Stack Blueprints for One-Person Businesses (2026) | SoloStack',
+    title: 'Tech Stack Blueprints for Solo Businesses (2026) | SoloStack',
     description:
-      'Eight priced tech stack blueprints for Australian solo operators: creators, consultants, newsletter writers, SaaS founders and freelancers. Software from A$47 a month, prices in A$.',
+      'Eight priced tech stack blueprints for Australian solo operators: creators, consultants, writers, SaaS founders and freelancers. Software from A$47 a month.',
   }
 }
 

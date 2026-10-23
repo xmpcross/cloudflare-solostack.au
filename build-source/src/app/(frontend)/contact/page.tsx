@@ -7,9 +7,9 @@ import { BUSINESS } from '@/utilities/business'
 import { CopyEmail } from './CopyEmail'
 
 export const metadata: Metadata = {
-  title: 'Contact | SoloStack',
+  title: 'Contact SoloStack: Questions and Corrections | SoloStack',
   description: `Email the SoloStack team. We reply within ${BUSINESS.replyTime}. Business details and postal address included.`,
-  openGraph: { title: 'Contact | SoloStack', description: 'Email the SoloStack team.', type: 'website', url: 'https://solostack.au/contact' },
+  openGraph: { images: [{ url: 'https://solostack.au/website-template-OG.webp', width: 1200, height: 630, alt: 'SoloStack' }], title: 'Contact SoloStack: Questions and Corrections | SoloStack', description: 'Email the SoloStack team.', type: 'website', url: 'https://solostack.au/contact' },
   alternates: { canonical: 'https://solostack.au/contact' },
 }
 

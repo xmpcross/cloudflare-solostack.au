@@ -12,12 +12,13 @@ import { BUSINESS } from '@/utilities/business'
 export const metadata: Metadata = {
   title: 'About SoloStack | Tools and setups for one-person businesses',
   description:
-    'SoloStack is a guide for solo creators and one-person businesses: honest write-ups of the tools, hardware and workflows that help one person do the work of a small team.',
+    'SoloStack is a guide for solo creators and one-person businesses: honest write-ups of the tools, hardware and workflows that help one person do more.',
   openGraph: {
     title: 'About SoloStack',
     description: 'Honest guides to the tools, hardware and workflows that help one person run a business.',
     type: 'website',
     url: 'https://solostack.au/about',
+    images: [{ url: 'https://solostack.au/website-template-OG.webp', width: 1200, height: 630, alt: 'SoloStack' }],
   },
   alternates: { canonical: 'https://solostack.au/about' },
 }

@@ -194,6 +194,7 @@ export default async function PostPage({ params: paramsPromise }: Args) {
       '@type': 'Organization',
       name: 'SoloStack',
       url: 'https://solostack.au',
+      logo: { '@type': 'ImageObject', url: 'https://solostack.au/icon-512.png', width: 512, height: 512 },
     },
   }
 

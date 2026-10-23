@@ -30,7 +30,7 @@ img = re.search(r'src="(/api/media/file/[^"?]+)', s.get(base + '/posts/how-to-ch
 if not img or s.get(base + img.group(1), timeout=60).status_code != 200:
     bad.append(('media image', 'missing'))
 
-checks = [('/hardware', 301, '/best-gear'), ('/deals', 301, '/'), ('/this-page-does-not-exist', 404, None)]
+checks = [('/hardware', 301, '/best-gear'), ('/this-page-does-not-exist', 404, None)]
 for path, code, loc in checks:
     r = s.get(base + path, allow_redirects=False, timeout=60)
     if r.status_code != code or (loc and not r.headers.get('location', '').endswith(loc)):

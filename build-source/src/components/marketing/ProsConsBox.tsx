@@ -17,12 +17,12 @@ export const ProsConsBox: React.FC<ProsConsBoxProps> = ({
 
   return (
     <div className="my-8 space-y-4">
-      {title && <h4 className="text-xl font-bold tracking-tight">{title}</h4>}
+      {title && <h2 className="text-xl font-bold tracking-tight">{title}</h2>}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Pros Card */}
         <Card className="border-emerald-500/20 bg-emerald-500/5 dark:bg-emerald-950/10">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+            <CardTitle className="text-base font-semibold text-emerald-700 dark:text-emerald-400 flex items-center gap-2">
               <Check className="h-5 w-5 rounded-full bg-emerald-500/20 p-1" />
               <span>Pros & Strengths</span>
             </CardTitle>
@@ -40,7 +40,7 @@ export const ProsConsBox: React.FC<ProsConsBoxProps> = ({
         {/* Cons Card */}
         <Card className="border-rose-500/20 bg-rose-500/5 dark:bg-rose-950/10">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base font-semibold text-rose-600 dark:text-rose-400 flex items-center gap-2">
+            <CardTitle className="text-base font-semibold text-rose-700 dark:text-rose-400 flex items-center gap-2">
               <X className="h-5 w-5 rounded-full bg-rose-500/20 p-1" />
               <span>Cons & Drawbacks</span>
             </CardTitle>

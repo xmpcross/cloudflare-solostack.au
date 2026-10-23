@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { AffiliateCTA } from '@/components/marketing/AffiliateCTA'
 import { ProsConsBox } from '@/components/marketing/ProsConsBox'
 import { generateSoftwareSchema } from '@/utilities/generateJsonLd'
+import toolCopyData from '@/data/tool-copy.json'
 import { ArrowLeft, Wrench, ShieldCheck, Tag, Star } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -34,6 +35,10 @@ export async function generateStaticParams() {
   }
 }
 
+type ToolSection = { heading: string; paragraphs?: string[]; bullets?: string[]; paragraphs_after?: string[] }
+type ToolCopy = { description: string; checked: string; sources: { label: string; url: string }[]; sections: ToolSection[] }
+const toolCopy = toolCopyData as Record<string, ToolCopy>
+
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { slug } = await paramsPromise
   const tool = await getToolBySlug(slug)
@@ -42,7 +47,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   return {
     alternates: { canonical: `/tools/${slug}` },
     title: `${tool.name} Review & Pricing Guide | SoloStack`,
-    description: tool.tagline || `In-depth review and features for ${tool.name}`,
+    description: toolCopy[slug]?.description || tool.tagline || `In-depth review and features for ${tool.name}`,
   }
 }
 
@@ -101,13 +106,13 @@ export default async function ToolDetailPage({ params: paramsPromise }: Args) {
             <span>Software Review & Pricing</span>
           </span>
           {tool.pricingType && (
-            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-semibold text-xs border border-emerald-500/20 capitalize">
+            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-semibold text-xs border border-emerald-500/20 capitalize">
               <Tag className="h-3.5 w-3.5" />
               <span>{tool.pricingType}</span>
             </span>
           )}
           {tool.rating && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-semibold text-xs border border-amber-500/20">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 font-semibold text-xs border border-amber-500/20">
               <Star className="h-3.5 w-3.5 fill-current" />
               <span>{Number(tool.rating).toFixed(1)} / 5.0</span>
             </span>
@@ -175,6 +180,36 @@ export default async function ToolDetailPage({ params: paramsPromise }: Args) {
             {tool.summary}
           </div>
         </section>
+      )}
+
+      {/* Longer guide copy (who it is for, plan limits, setup, alternatives, stack fit) from src/data/tool-copy.json */}
+      {toolCopy[slug] && (
+        <div className="space-y-10 my-10">
+          {toolCopy[slug].sections.map((sec) => (
+            <section key={sec.heading} className="space-y-4">
+              <h2 className="text-2xl sm:text-3xl tracking-tight text-neutral-900 dark:text-white">{sec.heading}</h2>
+              <div className="space-y-4 text-base sm:text-lg leading-relaxed text-neutral-700 dark:text-neutral-300 [&_a]:underline [&_a]:underline-offset-4">
+                {sec.paragraphs?.map((t, i) => <p key={`p${i}`} dangerouslySetInnerHTML={{ __html: t }} />)}
+                {sec.bullets && (
+                  <ul className="list-disc space-y-2 pl-6">
+                    {sec.bullets.map((t, i) => <li key={i} dangerouslySetInnerHTML={{ __html: t }} />)}
+                  </ul>
+                )}
+                {sec.paragraphs_after?.map((t, i) => <p key={`a${i}`} dangerouslySetInnerHTML={{ __html: t }} />)}
+              </div>
+            </section>
+          ))}
+          <p className="text-sm text-muted-foreground">
+            Figures checked on {toolCopy[slug].checked} from{' '}
+            {toolCopy[slug].sources.map((src, i) => (
+              <React.Fragment key={src.url}>
+                {i > 0 && ', '}
+                <a href={src.url} target="_blank" rel="noopener nofollow" className="underline underline-offset-4">{src.label}</a>
+              </React.Fragment>
+            ))}
+            . Plans and prices change, so confirm them with the maker before you buy.
+          </p>
+        </div>
       )}
 
       {/* Editorial Transparency Footer */}

@@ -17,13 +17,13 @@ const SITE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'https://solostack.au'
 const PAGE_URL = `${SITE_URL}/best-gear`
 const TITLE = 'Best Gear for Solo Creators and One-Person Businesses (2026)'
 const DESCRIPTION =
-  'What to buy, and in what order, to look and sound professional on your own: microphone, lighting, camera, headphones and a desk setup that will not wreck your back. No studio required.'
+  'What to buy, and in what order, to look and sound professional on your own: microphone, light, camera, headphones and a desk setup. No studio required.'
 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: PAGE_URL },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: PAGE_URL, type: 'article', siteName: 'SoloStack' },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: PAGE_URL, type: 'article', siteName: 'SoloStack', images: [{ url: 'https://solostack.au/website-template-OG.webp', width: 1200, height: 630, alt: 'SoloStack' }] },
   twitter: { card: 'summary_large_image', title: TITLE, description: DESCRIPTION },
 }
 

@@ -4,11 +4,11 @@ import { cn } from '@/utilities/ui'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import localFont from 'next/font/local'
-import Script from 'next/script'
 import React from 'react'
 
 import { Footer } from '@/Footer/Component'
 import { Header } from '@/Header/Component'
+import { DeferredLinkScripts } from '@/components/DeferredLinkScripts'
 import { SiteBreadcrumbs } from '@/components/SiteBreadcrumbs'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
@@ -49,12 +49,25 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
         <link href="/apple-touch-icon.png" rel="apple-touch-icon" />
         <meta name="mitgo-verification" content="28d34b81-9840-44ac-adb1-9ae7ef0ae384" />
+        <meta name="mitgo-verification" content="700ed40a-83fa-4da1-b27a-ca857393c2c2" />
         <meta name="impact-site-verification" content="fd59399a-96f0-482a-8eb3-e33a18a33668" />
         {/* Google AdSense */}
+        {/* Loaded after the window load event, once the browser is idle (or on first interaction), so error and navigation pages (404, /search) are skipped via their noindex robots meta. */}
         <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2867376862905050"
-          crossOrigin="anonymous"
+          dangerouslySetInnerHTML={{
+            __html: `window.addEventListener('load',function(){
+  if(document.querySelector('meta[name=robots][content*=noindex]'))return;
+  var done=false;
+  function go(){
+    if(done)return;done=true;
+    var s=document.createElement('script');s.async=true;s.crossOrigin='anonymous';
+    s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2867376862905050';
+    document.head.appendChild(s);
+  }
+  ['pointerdown','touchstart','keydown','scroll'].forEach(function(e){window.addEventListener(e,go,{once:true,passive:true});});
+  if('requestIdleCallback' in window)requestIdleCallback(function(){setTimeout(go,2000);},{timeout:4000});else setTimeout(go,4000);
+});`,
+          }}
         />
         {/* Ahrefs Web Analytics */}
         <script src="https://analytics.ahrefs.com/analytics.js" data-key="dY+Ra6F+l5JxpNXmSWr75g" async />
@@ -67,24 +80,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {children}
           <Footer />
         </Providers>
-        <Script
-          src="https://convertlink.com/script/ce8f3235-a4ab-4b5b-bde4-b86890fd281b/bundle.js"
-          strategy="lazyOnload"
-        />
-        {/* Sovrn Commerce (VigLink), added at the end of the body as Sovrn instructs. */}
-        <Script
-          id="vglnk-loader"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `var vglnk = {key: 'c8e0277878ff223506949e2999123ff0'};
-(function(d, t) {var s = d.createElement(t);
-  s.type = 'text/javascript';s.async = true;
-  s.src = '//cdn.viglink.com/api/vglnk.js';
-  var r = d.getElementsByTagName(t)[0];
-  r.parentNode.insertBefore(s, r);
-}(document, 'script'));`,
-          }}
-        />
+        <DeferredLinkScripts />
       </body>
     </html>
   )

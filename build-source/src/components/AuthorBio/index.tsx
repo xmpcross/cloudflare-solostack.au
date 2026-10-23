@@ -21,9 +21,9 @@ export const AuthorBio: React.FC<AuthorBioProps> = ({
         <p className="text-xs font-semibold tracking-wider text-emerald-700 dark:text-emerald-400 uppercase">
           Written by
         </p>
-        <h4 className="text-lg font-bold text-neutral-900 dark:text-white">
+        <h3 className="text-lg font-bold text-neutral-900 dark:text-white">
           {authorName}
-        </h4>
+        </h3>
         <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
           {bio}
         </p>

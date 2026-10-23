@@ -13,6 +13,8 @@ import { BUILT_FOR, EXCHANGE_NOTE, PRICES_CHECKED, STACK_GUIDE } from '@/utiliti
 export const revalidate = 600
 
 const SITE = 'https://solostack.au'
+// Add the brand suffix only while the title stays within what search results display.
+const fitTitle = (t: string) => (`${t} | SoloStack`.length <= 60 ? `${t} | SoloStack` : t)
 
 type Args = { params: Promise<{ slug: string }> }
 
@@ -34,7 +36,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   const cost = stack.monthlySoftwareCost ? ` Software about ${String(stack.monthlySoftwareCost).replace('≈', '')} a month.` : ''
   return {
     alternates: { canonical: `/stacks/${slug}` },
-    title: `${stack.title}: Tools, Gear and Cost | SoloStack`,
+    title: fitTitle(`${stack.title}: Tools and Cost`),
     description: `${stack.description || `Tech stack blueprint for ${stack.title}.`}${cost}`.slice(0, 200),
   }
 }

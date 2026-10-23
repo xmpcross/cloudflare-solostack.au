@@ -1,0 +1,1279 @@
+{
+ "notion": {
+  "description": "Notion for one-person businesses: what the free plan covers, how to set up a client wiki and content calendar, and when paying for Plus is worth it.",
+  "sources": [
+   {
+    "label": "Notion pricing",
+    "url": "https://www.notion.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Notion is for",
+    "paragraphs": [
+     "Notion suits a solo founder who wants notes, a client wiki, a content calendar and a task board in one place instead of four separate apps. It is a good fit if you like building your own system and you already keep a lot of loose notes. It is a poor fit if you want something that works with no setup, or if you mostly need a single fast notes app."
+    ]
+   },
+   {
+    "heading": "Free plan and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, the Free plan is listed with unlimited pages and blocks for an individual, limited for workspaces of two or more members. It allows file uploads up to 5 MB, up to 10 guests, 7 days of page history and a limited AI trial. Plus is listed at US$10 per member per month and Business at US$20. Our price above is converted to Australian dollars, so confirm it at checkout."
+    ],
+    "bullets": [
+     "Free: fine for a one-person workspace with mostly text and databases.",
+     "Pay for Plus when you hit the 5 MB upload limit, need more than the Free plan's 7 days of page history, or share the workspace with clients."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Create a workspace and add one top-level page called Business, so everything has a home.",
+     "Build three databases first: Clients, Tasks and Content. Link Tasks and Content to Clients with a relation.",
+     "Add a board view for Tasks and a calendar view for Content, then a table view for Clients.",
+     "Start from a template rather than a blank page, and delete what you do not use."
+    ],
+    "paragraphs": [
+     "Resist adding more databases until the first three feel useful. Most solo setups get slower and harder to trust when they grow too early."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Large databases can feel slow, offline use is limited, and relations and formulas take time to learn. If you work from patchy internet or need a notes app that opens instantly, test it on your slowest connection before you move everything across."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Obsidian keeps notes as local files and works offline, but has less built-in database and sharing. Google Docs and Drive, part of <a href=\"/tools/google-workspace\">Google Workspace</a>, are simpler if you only need documents. Coda is a closer match for database-style work."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "We use Notion as the planning layer in the <a href=\"/stacks/lead-capture-follow-up-automation\">Lead Capture and Follow-up Automation</a> stack and the <a href=\"/stacks/paid-newsletter\">Paid Newsletter</a> stack, where it holds the content calendar and the client or subscriber notes."
+    ]
+   }
+  ],
+  "checked": "23 October 2026"
+ },
+ "kit": {
+  "description": "Kit (formerly ConvertKit) for solo creators: what the free plan includes, how to build a first sequence, plus paid pricing, limits and alternatives.",
+  "sources": [
+   {
+    "label": "Kit pricing",
+    "url": "https://kit.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Kit is for",
+    "paragraphs": [
+     "Kit is email marketing built around creators: people who sell a course, a newsletter, a template pack or a service and want to grow a list of their own. It suits you if you will send regular emails and want simple automations. It is less suited to online shops that need product-based email flows."
+    ]
+   },
+   {
+    "heading": "Free plan and pricing",
+    "paragraphs": [
+     "The free plan on the maker's pricing page lets you send unlimited broadcasts, build unlimited landing pages and opt-in forms, and sell digital products and subscriptions. The page also states a subscriber cap for the free plan, and it changes, so read the figure there before you plan around it. The paid Creator plan is listed at US$33 a month, or US$390 billed yearly, for 1,000 subscribers, and the price rises as your list grows."
+    ],
+    "bullets": [
+     "Start free to collect subscribers and send broadcasts.",
+     "Pay when your list passes the free cap or you need features that sit on the paid plans. Check which plan includes the automations you want before you build them."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Create an account and a landing page with a single promise, such as a free checklist.",
+     "Add an opt-in form to your site and connect it to a tag, so you know where each subscriber came from.",
+     "Write a three-email welcome sequence: a delivery email, a useful second email and a soft offer.",
+     "Send your first broadcast within a week, so the list stays warm."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Paid plans cost more as your subscriber count grows, and you pay for every subscriber on the list. Clean out people who never open your emails before a price tier changes."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "MailerLite and beehiiv are common alternatives with their own free tiers. Mailchimp is widely used but better for general marketing. If you want email and paid memberships in one tool, <a href=\"/tools/ghost\">Ghost</a> is the closer match."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Kit is the email layer in our <a href=\"/stacks/online-course-creator\">Online Course Creator</a> stack and the <a href=\"/stacks/lead-capture-follow-up-automation\">Lead Capture and Follow-up Automation</a> stack."
+    ]
+   }
+  ],
+  "checked": "23 October 2026"
+ },
+ "ghost": {
+  "description": "Ghost for paid newsletters: memberships and email in one tool, what each plan changes, setup steps, limits and alternatives such as Substack.",
+  "sources": [
+   {
+    "label": "Ghost(Pro) pricing",
+    "url": "https://ghost.org/pricing/"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Ghost is for",
+    "paragraphs": [
+     "Ghost is a publishing platform with newsletters and paid memberships built in. It suits a solo writer, teacher or expert who wants to charge for content and own the site, the list and the brand. It is more than you need if you only want a free newsletter, and it asks for more setup than a simple blog host."
+    ]
+   },
+   {
+    "heading": "Plans and pricing",
+    "paragraphs": [
+     "Ghost(Pro) is the official managed hosting. On the maker's pricing page, paid subscriptions and tips are listed on the Publisher and Business plans and are not listed on Starter. Ghost lists a 0% transaction fee on those plans, so Ghost does not take a cut of your subscriptions, although your payment processor still charges its own fees. Prices on the page are in US dollars and quoted for yearly billing, so the monthly cost is higher than the headline figure. A free trial is offered, but the length is not stated on the pricing page, so check it before you sign up."
+    ],
+    "bullets": [
+     "Starter: a publication without paid subscriptions.",
+     "Publisher: paid memberships, more integrations and custom themes.",
+     "Business: more staff users and a higher member limit."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Start a trial, pick a theme and connect your own domain.",
+     "Connect Stripe so members can pay, then create a free tier and one paid tier.",
+     "Write three posts before you launch: one free sample, one members-only post and a welcome page.",
+     "Import any existing list as a CSV and send a first newsletter."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "The advertised price is for yearly billing. Member limits apply on each plan, and moving to a higher plan is the usual way past them. Ghost is also open source, so you can self-host it, but that means you run the server and the updates yourself."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Substack is the simplest start but takes a share of paid revenue and gives you less control. beehiiv focuses on newsletter growth. WordPress with a membership plugin is flexible but more to maintain. For email alone, see <a href=\"/tools/kit\">Kit</a>."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Ghost is the publishing layer in our <a href=\"/stacks/paid-newsletter\">Paid Newsletter</a> stack, paired with <a href=\"/tools/stripe\">Stripe</a> for payments and <a href=\"/tools/notion\">Notion</a> for planning."
+    ]
+   }
+  ],
+  "checked": "23 October 2026"
+ },
+ "riverside-fm": {
+  "description": "Riverside.fm for remote podcasts and video interviews: free plan limits, local recording, transcripts, setup tips and alternatives for solo podcasters.",
+  "sources": [
+   {
+    "label": "Riverside pricing",
+    "url": "https://riverside.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Riverside is for",
+    "paragraphs": [
+     "Riverside is for solo podcasters and video interviewers who record with remote guests. It records each person on their own device, so a poor internet connection does not ruin the final audio or video. It suits you if you publish interviews. If you only record yourself, a microphone and a simple editor may be all you need."
+    ]
+   },
+   {
+    "heading": "Free plan and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, the Free plan gives a one-off 2 hours of multi-track recording, video up to 720p, and a Riverside watermark on your exports. You can keep recording single-track and editing without a time cap. Pro is listed at US$24 a month when billed annually, with 15 hours of separate track downloads, unlimited transcription, text-based editing and AI editing tools. Grow and Webinar sit above it."
+    ],
+    "bullets": [
+     "Use Free to test a real interview and see the quality.",
+     "Move to Pro once you publish regularly, need a clean export without the watermark, or want transcripts."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Create a studio and run a test session with a friend before a real guest joins.",
+     "Send guests a link and ask them to use Chrome, headphones and a quiet room.",
+     "Record separate audio and video tracks, then download them after the upload finishes.",
+     "Use the transcript to cut mistakes and create short clips for social media."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Local recording needs spare storage space on each guest's device, and the recording finishes uploading after the call, so ask guests to keep the tab open until it completes. Free plan recording time is limited."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Zencastr and SquadCast offer similar remote recording. <a href=\"/tools/descript\">Descript</a> is stronger for editing than recording. For a solo recording with no guests, a local recorder and a USB microphone cost less."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Riverside is the recording layer in our <a href=\"/stacks/solo-podcast\">Solo Podcast</a> stack, with editing and hosting handled by other tools."
+    ]
+   }
+  ],
+  "checked": "23 October 2026"
+ },
+ "stripe": {
+  "description": "Stripe for Australian solo businesses: card fees (1.65% + A$0.30), payment links, invoices, disputes and payouts, plus setup steps and alternatives.",
+  "sources": [
+   {
+    "label": "Stripe Australia pricing",
+    "url": "https://stripe.com/au/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Stripe is for",
+    "paragraphs": [
+     "Stripe takes card payments, subscriptions and invoices online. It suits a solo consultant, creator or software founder who wants to get paid without a monthly fee. It is overkill for a business that takes cash or bank transfers only."
+    ]
+   },
+   {
+    "heading": "Fees in Australia",
+    "paragraphs": [
+     "There is no monthly fee on standard pricing. Stripe's Australian pricing page lists these fees:"
+    ],
+    "bullets": [
+     "Domestic cards: 1.65% plus A$0.30 per transaction.",
+     "International cards: 3.5% plus A$0.30, and 2% more if currency conversion is needed.",
+     "Disputes (chargebacks): A$25 for each dispute received.",
+     "Invoices: 0.4% per paid invoice on the invoicing product.",
+     "Subscriptions with Stripe Billing: 0.7% of billing volume on pay-as-you-go.",
+     "Instant payouts: 1.5% (minimum A$0.50). Standard payouts are free."
+    ],
+    "paragraphs_after": [
+     "Refunds are free on standard pricing, but the original processing fees are not returned. Check the pricing page for current figures, as Stripe changes them."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Create an account and complete the business verification with your ABN and bank account.",
+     "Turn on a payment link for your first product, so you can charge before you build a checkout.",
+     "Add invoices if you bill clients, and turn on receipts and your branding.",
+     "Connect Stripe to your site, newsletter or course tool, then run a small test payment."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Fees are charged on every payment, and international cards cost more. GST still needs to be handled in your bookkeeping, and Stripe Tax is a separate paid product. Keep the fee in your pricing so it does not come out of your margin."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "PayPal and Square are common alternatives, and each has its own fee schedule. For recurring bank debits in Australia, look at a direct debit provider. <a href=\"/tools/ghost\">Ghost</a> and many course tools connect to Stripe directly."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Stripe is the payment layer in the <a href=\"/stacks/paid-newsletter\">Paid Newsletter</a>, <a href=\"/stacks/lean-saas-founder\">Lean SaaS Founder</a> and <a href=\"/stacks/solo-consultant-client\">Solo Consultant Client</a> stacks."
+    ]
+   }
+  ],
+  "checked": "23 October 2026"
+ },
+ "calendly": {
+  "description": "Calendly for solo consultants: what the free plan allows, how to set up a booking page, paid plan prices, limits and alternatives to compare.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Calendly pricing",
+    "url": "https://calendly.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Calendly is for",
+    "paragraphs": [
+     "Calendly lets clients book a call from your availability, so you stop trading emails to find a time. It suits a consultant, coach or freelancer who takes regular calls. If you only meet a client once in a while, a simple link to your calendar may be enough."
+    ]
+   },
+   {
+    "heading": "Free plan and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, the Free plan gives you one event type and one calendar connection, with one-on-one scheduling. Standard is listed at US$10 per seat per month and Teams at US$16, both when billed annually. Our price above is converted to Australian dollars, so confirm it at checkout."
+    ],
+    "bullets": [
+     "Free: enough for a single type of call, such as a 30-minute intro.",
+     "Paid: needed when you offer several call types, want reminders or payments, or connect more than one calendar. Check which plan includes each feature before you upgrade."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Connect the calendar you actually use, so busy times block bookings.",
+     "Create one event type with a clear name, a length and a short description of what the call covers.",
+     "Set your working hours, a buffer between calls and a minimum notice, so people cannot book you at the last minute.",
+     "Add the booking link to your email signature, your site and your proposals."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "The free plan covers a single event type, so a business with intro calls and paid sessions will outgrow it. Reminders and payments sit on paid plans. Seat-based pricing matters only if you add people to the account."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Cal.com is an open-source option with a free tier. Google Calendar has built-in appointment schedules with <a href=\"/tools/google-workspace\">Google Workspace</a>. Tally can also collect details before a call: see <a href=\"/tools/tally\">Tally</a>."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Calendly handles booking in the <a href=\"/stacks/solo-consultant-client\">Solo Consultant Client</a> stack, alongside invoicing and payments."
+    ]
+   }
+  ]
+ },
+ "canva-pro": {
+  "description": "Canva Pro for solo creators: free versus Pro, what Magic Resize and the background remover add, setup tips, limits and alternatives for design work.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Canva pricing",
+    "url": "https://www.canva.com/pricing/"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Canva Pro is for",
+    "paragraphs": [
+     "Canva is a design tool for people who are not designers: thumbnails, social posts, presentations and simple brand assets. It suits a solo creator who produces graphics every week and wants them to look consistent. It is not the right tool for detailed vector illustration or print production."
+    ]
+   },
+   {
+    "heading": "Free plan versus Pro",
+    "paragraphs": [
+     "On the maker's pricing page, Free includes one Brand Kit with three colours, 5 GB of storage, a large library of templates and stock content, and up to 20 AI uses. Pro is listed at US$144 a year for one person, and adds five Brand Kits, 100 GB of storage, Magic Resize, the background remover and a social content planner. Our price above is converted to Australian dollars, so confirm it at checkout."
+    ],
+    "bullets": [
+     "Stay on Free if you make a few graphics a month and do not need resizing or background removal.",
+     "Upgrade when you reuse designs across many formats, want brand fonts and colours locked in, or remove backgrounds often."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Set up your Brand Kit first: logo, colours and fonts.",
+     "Create one template for each thing you make repeatedly, such as a YouTube thumbnail or a quote post.",
+     "Duplicate the template for each new piece instead of starting from a blank page.",
+     "Use Magic Resize to turn one design into the other sizes you need."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Advanced vector editing is limited compared with Adobe Illustrator. Popular templates are also used by many other people, so change fonts, colours and layout if you want your work to stand out."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "<a href=\"/tools/figma\">Figma</a> gives more control over layout and is better for interface work. Adobe Express and Affinity are other options for graphics. For video, see <a href=\"/tools/descript\">Descript</a>."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Canva is the graphics layer in the <a href=\"/stacks/1-person-youtube-studio\">1-Person YouTube Studio</a>, <a href=\"/stacks/online-course-creator\">Online Course Creator</a>, <a href=\"/stacks/paid-newsletter\">Paid Newsletter</a> and <a href=\"/stacks/solo-podcast\">Solo Podcast</a> stacks."
+    ]
+   }
+  ]
+ },
+ "chatgpt-plus": {
+  "description": "ChatGPT Plus for solo business owners: free versus Plus limits, practical uses for emails and notes, setup tips, risks and alternatives.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "ChatGPT pricing",
+    "url": "https://chatgpt.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who ChatGPT Plus is for",
+    "paragraphs": [
+     "ChatGPT is an AI assistant for drafting, summarising and planning. It suits a solo owner who writes a lot of emails, notes and outlines and is happy to edit what it produces. It does not replace your judgement, and it is not a reliable source of facts you have not checked."
+    ]
+   },
+   {
+    "heading": "Free plan versus Plus",
+    "paragraphs": [
+     "On the maker's pricing page, the Free plan allows text chats with limited messages, uploads, image creation, voice chats and deep research. Scheduled tasks are not included. Plus is listed at US$20 a month and expands those limits, adds scheduled tasks and early access to new features. There is also a lower-priced Go plan at US$8 a month and a Pro plan from US$100 a month. Both Free and Plus list an option to opt out of having your content used for training."
+    ],
+    "bullets": [
+     "Try Free first on real work, such as a client email or a meeting summary.",
+     "Pay for Plus when you hit the usage limits regularly or need larger uploads and deep research."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Create a Project for each client or area of the business, so related chats and files stay together.",
+     "Write a short standing brief: who you are, your tone and what you never say.",
+     "Start with low-risk jobs: first drafts, summaries and checklists.",
+     "Turn on the data-control setting that suits you before pasting in anything about clients."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Output needs checking before you send it. It can state wrong figures with confidence, so verify prices, dates and legal points. Do not paste confidential client information unless you are comfortable with the data settings."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Claude and Gemini are the main alternatives, and each has a free tier. If you want automation rather than chat, look at <a href=\"/tools/make-com\">Make</a>. For documents and email, see <a href=\"/tools/google-workspace\">Google Workspace</a>."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "We use it for drafting follow-up emails in the <a href=\"/stacks/lead-capture-follow-up-automation\">Lead Capture and Follow-up Automation</a> stack."
+    ]
+   }
+  ]
+ },
+ "descript": {
+  "description": "Descript for podcasts and video: edit by editing the transcript. Free plan limits, paid prices, setup steps, limits and alternatives for solo creators.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Descript pricing",
+    "url": "https://www.descript.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Descript is for",
+    "paragraphs": [
+     "Descript turns audio and video into a transcript you edit like a document. Cutting a sentence from the text cuts it from the recording. It suits a solo podcaster or video creator who edits their own work and does not want to learn a traditional timeline editor. Detailed colour grading and sound design are better done elsewhere."
+    ]
+   },
+   {
+    "heading": "Free plan and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, the Free plan includes 1 hour of transcription a month, exports at 720p and 100 one-time AI credits. Hobbyist is listed at US$16 a month billed annually (US$24 monthly), Creator at US$24 annually (US$35 monthly) and Business at US$50 annually (US$65 monthly). Our price above is converted to Australian dollars, so confirm it at checkout."
+    ],
+    "bullets": [
+     "Free: enough to test one episode or video.",
+     "Paid: needed for more transcription time, higher export quality and the full set of AI tools."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Upload a recording and let it transcribe.",
+     "Remove filler words and long silences, then read through the text and cut what you do not need.",
+     "Apply Studio Sound to clean up the audio.",
+     "Export, and keep your project file so you can re-edit later."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Export rendering can lag on complex timelines. Transcription is not perfect, especially with strong accents and technical terms, so skim it as you edit."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "CapCut and DaVinci Resolve are strong video editors with free versions. Audacity is a free audio editor. If you record remote guests, see <a href=\"/tools/riverside-fm\">Riverside</a>, which records and also includes text-based editing."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Descript is the editing layer in the <a href=\"/stacks/1-person-youtube-studio\">1-Person YouTube Studio</a> and <a href=\"/stacks/online-course-creator\">Online Course Creator</a> stacks."
+    ]
+   }
+  ]
+ },
+ "figma": {
+  "description": "Figma for solo designers and founders: free Starter plan, Professional seat prices, how to set up a client-ready file, limits and alternatives.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Figma pricing",
+    "url": "https://www.figma.com/pricing/"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Figma is for",
+    "paragraphs": [
+     "Figma is a browser-based design tool for layouts and prototypes. Clients can open a link and comment directly on the design. It suits a freelance designer, a developer who designs their own screens, or a founder who needs mockups. It is not aimed at illustration or print."
+    ]
+   },
+   {
+    "heading": "Plans and pricing",
+    "paragraphs": [
+     "The Starter plan is free. On the maker's pricing page, Professional seats are listed at US$16 per month for a Full seat, US$12 for a Dev seat and US$3 for a Collab seat, with higher prices on Organization and Enterprise. The page did not list the free plan's file or history limits clearly, so read them there before you commit. Our price above is converted to Australian dollars, and the billing period is not confirmed, so check it at checkout."
+    ],
+    "bullets": [
+     "Starter: enough to learn Figma and design your own projects.",
+     "Professional: for working with clients, with more files and team features."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Create a file for each client project.",
+     "Set up shared styles for colours and type before you draw screens.",
+     "Build a small component library for buttons, forms and cards.",
+     "Share a view link and ask the client to comment, rather than sending exported images."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Paid seats add up if you bring in help, and the seat type matters: Full, Dev and Collab seats are priced differently. There is a learning curve if you have only used simple graphics tools."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "<a href=\"/tools/canva-pro\">Canva</a> is easier for graphics and social posts. Sketch is Mac-only. Penpot is an open-source option. If you want to build the finished site, see <a href=\"/tools/framer\">Framer</a>."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Figma is the design layer in the <a href=\"/stacks/freelance-web-design-studio\">Freelance Web Design Studio</a> stack."
+    ]
+   }
+  ]
+ },
+ "framer": {
+  "description": "Framer for solo business sites: free plan, Basic and Pro prices, how to publish a first site, limits and alternatives such as Webflow and WordPress.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Framer pricing",
+    "url": "https://www.framer.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Framer is for",
+    "paragraphs": [
+     "Framer is a visual editor that designs and hosts websites without code. It suits a freelancer, consultant or small studio that wants a polished marketing site and is comfortable with a design-style editor. It is less suited to large shops, complex memberships or sites that need a lot of custom back-end logic."
+    ]
+   },
+   {
+    "heading": "Free plan and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, the Free plan gives you a free Framer domain and a bandwidth allowance, and the page notes that you must upgrade to a paid plan to connect a custom domain. Basic is listed at US$10 a month and Pro at US$30 a month. Our price above is converted to Australian dollars, so confirm it at checkout."
+    ],
+    "bullets": [
+     "Free: build and preview a site on a Framer address.",
+     "Basic: for a live site on your own domain.",
+     "Pro: for larger sites with more traffic or content."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Pick a template close to what you need and replace the text and images.",
+     "Build the home, services, about and contact pages first.",
+     "Set page titles and descriptions for each page.",
+     "Upgrade to a paid plan, connect your domain and publish."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Larger sites move to the Pro plan. Site plans are billed per site, so several sites add up. Check bandwidth and page limits against your expected traffic before you launch."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Webflow is similar but has a steeper learning curve. WordPress is more flexible and needs more maintenance. For a blog or paid newsletter, see <a href=\"/tools/ghost\">Ghost</a>."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Framer is the website layer in the <a href=\"/stacks/freelance-web-design-studio\">Freelance Web Design Studio</a> stack, paired with <a href=\"/tools/figma\">Figma</a> for design."
+    ]
+   }
+  ]
+ },
+ "bonsai": {
+  "description": "Bonsai for freelancers: contracts, proposals, invoices and payment reminders in one tool. Who it suits, setup steps, limits and alternatives.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Bonsai pricing",
+    "url": "https://www.hellobonsai.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Bonsai is for",
+    "paragraphs": [
+     "Bonsai is business-management software for freelancers and small agencies. It brings proposals, contracts, invoices and client records into one place, so you are not stitching together several apps. It suits a freelancer or consultant who sends proposals and invoices every month. If you invoice a few times a year, a simple invoice template and a spreadsheet may be enough."
+    ]
+   },
+   {
+    "heading": "Pricing",
+    "paragraphs": [
+     "Bonsai is a paid product with no free tier. We list it from A$36 a month, converted from the maker's US dollar price. The maker's pricing page did not load plan details when we checked, so we have not quoted plan names or limits here. Read the current plans on the pricing page, and confirm whether a trial is offered, before you sign up."
+    ],
+    "bullets": [
+     "Compare the plans on how many clients and projects they allow.",
+     "Check whether payments, time tracking and accounting features are on the plan you need."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Add your business details, logo and payment details.",
+     "Create a proposal template for your most common service, then a matching contract.",
+     "Set up invoice templates and turn on automatic payment reminders.",
+     "Move your current clients in and send the next proposal from Bonsai."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "There is no free tier, so you pay from the first month. Moving client history in takes some effort. In Australia, check that invoices show the details you need, such as your ABN and GST where it applies, and that your accounting tool can import the data."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "<a href=\"/tools/stripe\">Stripe</a> sends invoices and takes payments with no monthly fee. Xero and QuickBooks cover invoicing alongside bookkeeping. HoneyBook and Dubsado are other client-management tools."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Bonsai runs the paperwork in the <a href=\"/stacks/solo-consultant-client\">Solo Consultant Client</a> and <a href=\"/stacks/freelance-web-design-studio\">Freelance Web Design Studio</a> stacks."
+    ]
+   }
+  ]
+ },
+ "github": {
+  "description": "GitHub for solo founders: what the free plan covers, how to store and back up a project, Team plan price, limits and alternatives like GitLab.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "GitHub pricing",
+    "url": "https://github.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who GitHub is for",
+    "paragraphs": [
+     "GitHub stores your code, tracks changes and issues, and runs automated checks. It suits a solo founder or freelancer who writes or edits code, even occasionally, such as a website or a small app. If you never touch code, you can skip it."
+    ]
+   },
+   {
+    "heading": "Free plan and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, the Free plan costs nothing and lists unlimited private repositories and unlimited collaborators, plus 2,000 Actions minutes a month. GitHub Pages is listed for public repositories on Free. Team is listed at US$4 per user per month and adds more controls for working with others. Our price above is converted to Australian dollars, so confirm it at checkout."
+    ],
+    "bullets": [
+     "Stay on Free while you work alone.",
+     "Move to Team when you add collaborators and want branch protection or more build minutes."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Create an account and a private repository for your project.",
+     "Commit your work often, with short messages that say what changed.",
+     "Turn on two-factor authentication.",
+     "Connect the repository to your hosting tool so it deploys when you push."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Paid features matter mainly once you have collaborators. Build minutes are capped on the free plan. Keep secrets such as API keys out of the repository, and use your host's settings for them instead."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "GitLab and Bitbucket also host code. Most deployment tools, such as <a href=\"/tools/vercel\">Vercel</a>, connect to GitHub first, which is why it is the usual choice."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "GitHub holds the code in the <a href=\"/stacks/lean-saas-founder\">Lean SaaS Founder</a> stack."
+    ]
+   }
+  ]
+ },
+ "google-workspace": {
+  "description": "Google Workspace for a solo business: custom-domain email, Drive and Meet. Plan prices, storage, setup steps, limits and alternatives to compare.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Google Workspace pricing",
+    "url": "https://workspace.google.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Google Workspace is for",
+    "paragraphs": [
+     "Google Workspace gives you a business email address on your own domain, along with calendar, Meet video calls, Docs and shared storage. It suits any solo business that wants to look professional and keep client files in one place. If you are happy with a free Gmail address for now, you can wait."
+    ]
+   },
+   {
+    "heading": "Plans and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, Business Starter lists 30 GB of storage per user and Meet calls of up to 100 participants. Business Standard lists 2 TB and 150 participants, and Business Plus lists 5 TB and 500 participants. The page lists them at US$7, US$14 and US$22 per user per month on an annual commitment, billed monthly, and shows an introductory discount. Gemini AI features are listed on all three. Our price above is converted to Australian dollars, and the Australian-dollar price may only appear when you sign up, so confirm it there."
+    ],
+    "bullets": [
+     "Starter is enough for email, calendar, Drive and Meet for one person.",
+     "Standard adds much more storage, which matters if you handle large video or design files."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Use a domain you own, and verify it with Google.",
+     "Create your account and add the email aliases you need, such as hello@ and invoices@.",
+     "Set up the mail records, including SPF and DKIM, so your emails are not marked as spam.",
+     "Move your calendar and contacts across, then switch your phone and laptop to the new account."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "You pay per user, so even a one-person business pays every month. Setting up the mail records takes care, and a mistake can send your emails to spam. Keep a backup of important files outside the account."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Microsoft 365 is the main alternative. Zoho Mail and Proton Mail are cheaper or more private for email only. For documents, <a href=\"/tools/notion\">Notion</a> can cover notes and wikis."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Google Workspace covers email and files in the <a href=\"/stacks/solo-consultant-client\">Solo Consultant Client</a> and <a href=\"/stacks/freelance-web-design-studio\">Freelance Web Design Studio</a> stacks."
+    ]
+   }
+  ]
+ },
+ "make-com": {
+  "description": "Make for solo automation: free plan limits, paid prices, how to build a first scenario, limits to expect and alternatives such as Zapier.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Make pricing",
+    "url": "https://www.make.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Make is for",
+    "paragraphs": [
+     "Make connects apps and moves information between them without code, using a visual builder. It suits a solo owner who repeats the same steps: saving form replies to a spreadsheet, sending a welcome email or posting new content. It rewards people who like to see the steps laid out as a diagram."
+    ]
+   },
+   {
+    "heading": "Free plan and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, the Free plan lists 1,000 credits a month, two active scenarios, a 15-minute minimum interval between runs, a 5-minute maximum run time and 5 MB maximum file size. Execution logs are kept for 7 days. Paid plans are listed monthly at US$9 for Core, US$16 for Pro and US$29 for Teams, with unlimited active scenarios and a 1-minute interval. Our price above is converted to Australian dollars, so confirm it at checkout."
+    ],
+    "bullets": [
+     "Free: fine for two simple workflows that can wait up to 15 minutes.",
+     "Core: when you need more than two live scenarios or faster runs."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Pick one repetitive job and write down its steps.",
+     "Create a scenario with a trigger, such as a new form submission, then add the actions.",
+     "Run it once with test data and check each step.",
+     "Turn on notifications for failed runs, then switch the scenario on."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "It has a steeper learning curve than simpler automation tools. Credits are used by each step, so a long workflow uses more. Check the run history regularly, because a broken connection can stop a workflow without you noticing."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Zapier is simpler to start with. n8n is open source and can be self-hosted. For one-off tasks, <a href=\"/tools/tally\">Tally</a> already sends form data to Google Sheets and Notion directly."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Make links the other tools in the <a href=\"/stacks/lead-capture-follow-up-automation\">Lead Capture and Follow-up Automation</a> stack."
+    ]
+   }
+  ]
+ },
+ "tally": {
+  "description": "Tally forms for solo businesses: unlimited forms and submissions free, what Pro adds, setup steps, limits and alternatives like Typeform.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Tally pricing",
+    "url": "https://tally.so/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Tally is for",
+    "paragraphs": [
+     "Tally is a form builder. It suits a solo business that needs enquiry forms, client intake, feedback or simple order forms and does not want to pay per response. It builds forms in a document-style editor, so it is quick to learn."
+    ]
+   },
+   {
+    "heading": "Free plan and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, the Free plan includes unlimited forms and submissions, payments, file uploads and email notifications to yourself, along with integrations such as Google Sheets, Notion, Airtable, Zapier, Make and webhooks. Pro is listed at US$24 a month and Business at US$74. The page did not clearly show whether branding removal or a custom domain are on Free, so check before you rely on them. Our price above is converted to Australian dollars."
+    ],
+    "bullets": [
+     "Free: enough for most solo forms.",
+     "Pro: look at it if you need custom branding or extra automations."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Create a form for your most common enquiry, with only the questions you need.",
+     "Add conditional logic so people see only the questions that apply.",
+     "Connect it to a spreadsheet or Notion database to collect the replies.",
+     "Embed the form on your site or share the link."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Custom branding and some automations need the Pro plan. For large or complex surveys, a dedicated survey tool may offer more analysis. Mind privacy: if you collect personal details, say how you use them and keep them secure."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Typeform and Google Forms are the best-known alternatives. Google Forms is free and plain, and Typeform is more polished but costs more per response volume. For automations after a form is sent, see <a href=\"/tools/make-com\">Make</a>."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Tally captures leads and enquiries in the <a href=\"/stacks/lead-capture-follow-up-automation\">Lead Capture and Follow-up Automation</a> stack."
+    ]
+   }
+  ]
+ },
+ "teachable": {
+  "description": "Teachable for course creators: plan prices, transaction fees, trial, setup steps, limits and alternatives to compare before you sell a course.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Teachable pricing",
+    "url": "https://teachable.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Teachable is for",
+    "paragraphs": [
+     "Teachable hosts your course, takes payment and delivers the lessons. It suits an expert who wants to sell a course or coaching without building a site. If you want to keep all the revenue and control every page, a self-built site may suit you better."
+    ]
+   },
+   {
+    "heading": "Plans and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, the plans are Starter at US$39 a month (US$29 on annual billing), Builder at US$89 (US$69 annually) and Growth at US$189 (US$139 annually). Starter carries a 7.5% transaction fee, and the higher plans list 0% fees, with a note that payment-processor fees still apply. Product limits are 5 on Starter, 10 on Builder and 50 on Growth, and each plan lists a 7-day free trial. We did not find a free plan. Our price above is converted to Australian dollars."
+    ],
+    "bullets": [
+     "Starter: a cheap way to launch, but the fee takes a share of every sale.",
+     "Builder or Growth: worth it once your sales make the fee more than the price gap."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Start the free trial and create your first course with an outline of the lessons.",
+     "Upload a free preview lesson so buyers can see what they get.",
+     "Set your price and connect your payment details.",
+     "Write the sales page and test the checkout yourself."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "There is no free plan, and the Starter fee reduces your earnings on each sale. Work out your break-even point between the plans before you launch. Check what you own: keep copies of your lesson files and your student email list."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Kajabi, Thinkific and Podia are similar. Simple courses can be built on <a href=\"/tools/ghost\">Ghost</a> with paid memberships, or sold with <a href=\"/tools/kit\">Kit</a>, which can sell digital products."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Teachable delivers the course in the <a href=\"/stacks/online-course-creator\">Online Course Creator</a> stack."
+    ]
+   }
+  ]
+ },
+ "posthog": {
+  "description": "PostHog for solo product builders: analytics, session replay and feature flags with a monthly free allowance. Pricing model, setup, limits, alternatives.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "PostHog pricing",
+    "url": "https://posthog.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who PostHog is for",
+    "paragraphs": [
+     "PostHog measures what people do inside your product or site: which pages they visit, where they drop off and what they click. It also offers session replay, feature flags and surveys. It suits a solo founder with a web app or product site who wants to learn from real usage. If you run a simple brochure site, a lighter analytics tool will do."
+    ]
+   },
+   {
+    "heading": "Pricing and the free allowance",
+    "paragraphs": [
+     "PostHog uses usage-based pricing for each product, with no minimum spend. On the maker's pricing page, the monthly free allowance is 1 million analytics events, 5,000 session recordings, 1 million feature flag requests and 1,500 survey responses, and 1 million data warehouse rows. No credit card is needed to start. You can set billing limits on most products so you do not get a surprise bill."
+    ],
+    "bullets": [
+     "Start free and watch your usage for a month.",
+     "Set a billing limit before you add a card, then raise it only when the data justifies it."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Create a project and add the tracking snippet or SDK to your site or app.",
+     "Define the three or four events that matter, such as sign-up, first action and payment.",
+     "Build one funnel from visit to payment and check where people leave.",
+     "Watch a handful of session replays each week to see what confuses people."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Usage-based bills need watching as traffic grows. The tool has many features, which can overwhelm a beginner, so use only what answers a question you have. Tell visitors what you track in your privacy policy, and respect consent rules that apply to your audience."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Plausible and Fathom are simple, privacy-focused website analytics. Google Analytics is free but heavier. For error tracking rather than behaviour, see <a href=\"/tools/sentry\">Sentry</a>."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "PostHog covers product analytics in the <a href=\"/stacks/lean-saas-founder\">Lean SaaS Founder</a> stack."
+    ]
+   }
+  ]
+ },
+ "resend": {
+  "description": "Resend for app email: 3,000 free emails a month, 100 a day, Pro price, setup with your domain, limits and alternatives for transactional email.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Resend pricing",
+    "url": "https://resend.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Resend is for",
+    "paragraphs": [
+     "Resend sends the automatic emails your product produces, such as sign-in links, receipts and password resets. It suits a solo founder with a web app who needs those emails to arrive reliably. It is not a tool for newsletters or marketing campaigns."
+    ]
+   },
+   {
+    "heading": "Free plan and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, the Free plan includes 3,000 emails a month, with a limit of 100 emails a day, 3 domains and 30-day data retention. Pro is listed at US$20 a month for 50,000 emails with no daily limit and 10 domains, and Scale at US$90 for 100,000. Our price above is converted to Australian dollars, so confirm it at checkout."
+    ],
+    "bullets": [
+     "Free: fine while you have a handful of users.",
+     "Pro: when you hit the daily cap or send more than 3,000 emails a month."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Add your domain and publish the DNS records Resend gives you, including SPF and DKIM.",
+     "Create an API key and store it as a secret in your hosting tool, not in your code.",
+     "Send a test email to yourself and to a second inbox from another provider.",
+     "Check that your sign-in and receipt emails reach the inbox, not spam."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "The daily cap on the free plan can block a sudden burst of sign-ups. Data is kept for 30 days. Transactional email still needs good practice: send only what a user expects, and keep the sending address consistent."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Postmark, Amazon SES and SendGrid are other ways to send app email. For newsletters and sequences, use an email tool such as <a href=\"/tools/kit\">Kit</a> instead."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Resend sends the product emails in the <a href=\"/stacks/lean-saas-founder\">Lean SaaS Founder</a> stack."
+    ]
+   }
+  ]
+ },
+ "sentry": {
+  "description": "Sentry for solo app builders: free Developer plan, Team price, what the quotas cover, setup steps, limits and alternatives for error tracking.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Sentry pricing",
+    "url": "https://sentry.io/pricing/"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Sentry is for",
+    "paragraphs": [
+     "Sentry catches errors in your app and shows where they happened, so you find out before a customer writes in. It suits a solo founder who ships a web or mobile product. If you run only a static site, you do not need it."
+    ]
+   },
+   {
+    "heading": "Free plan and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, the free Developer plan is for one user and lists 5,000 errors, 5 million tracing spans, 50 session replays, 5 GB of logs and one cron monitor a month. Team is listed at US$26 a month with unlimited users and 50,000 errors, and Business at US$80. Our price above is converted to Australian dollars, so confirm it at checkout."
+    ],
+    "bullets": [
+     "Developer: enough for one person on an early product.",
+     "Team: when your error volume passes the free quota or you add collaborators."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Create a project for your app and add the SDK for your framework.",
+     "Deploy, then trigger a test error to see it appear.",
+     "Set an alert so new errors email you, and ignore known noise.",
+     "Upload source maps so you see the real line of code."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Paid plans are priced by event volume, so a bug that fires thousands of times can use up your quota quickly. Set rate limits and filter out errors you cannot act on."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Rollbar and Bugsnag are similar. <a href=\"/tools/posthog\">PostHog</a> shows what users do rather than what broke. Many hosting tools have basic logs that may be enough at the start."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Sentry watches for errors in the <a href=\"/stacks/lean-saas-founder\">Lean SaaS Founder</a> stack."
+    ]
+   }
+  ]
+ },
+ "supabase": {
+  "description": "Supabase for solo founders: Postgres database, sign-in and storage. Free plan limits, the project pause rule, Pro price, setup and alternatives.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Supabase pricing",
+    "url": "https://supabase.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Supabase is for",
+    "paragraphs": [
+     "Supabase is a hosted Postgres database with sign-in and file storage, so you can build a product without running servers. It suits a solo founder who can write some code, or work with a developer, and wants a standard database. It is more than you need for a simple site."
+    ]
+   },
+   {
+    "heading": "Free plan and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, the Free plan allows two active projects, with 500 MB of database per project, 1 GB of file storage and 50,000 monthly active users. Free projects are paused after a week of inactivity, and backups are not included. Pro is listed from US$25 a month and adds 100,000 monthly active users, 8 GB of disk per project, daily backups kept for 7 days and email support. Our price above is converted to Australian dollars, so confirm it at checkout."
+    ],
+    "bullets": [
+     "Free: good for building and testing.",
+     "Pro: before you launch to real customers, so the project is not paused and you have backups."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Create a project and choose the region closest to your users.",
+     "Design your tables, and turn on row-level security before you store any user data.",
+     "Add sign-in with email or a social provider.",
+     "Connect your app with the project URL and the public key, and keep the service key secret."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "A free project that goes quiet is paused, which is risky for anything live. Security rules need care, because a mistake can expose data. Usage beyond the plan is billed, so watch bandwidth and storage as you grow."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Firebase is the best-known alternative, with a different data model. PlanetScale and Neon offer hosted databases. For a no-code start, Airtable or <a href=\"/tools/notion\">Notion</a> databases can be enough."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Supabase is the data and sign-in layer in the <a href=\"/stacks/lean-saas-founder\">Lean SaaS Founder</a> stack."
+    ]
+   }
+  ]
+ },
+ "transistor": {
+  "description": "Transistor for podcast hosting: plans by monthly downloads, 14-day trial, unlimited shows, setup steps, limits and alternatives for solo podcasters.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Transistor pricing",
+    "url": "https://transistor.fm/pricing/"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Transistor is for",
+    "paragraphs": [
+     "Transistor hosts your podcast audio, sends it to Apple Podcasts, Spotify and other apps, and gives you a website and download stats. It suits a solo podcaster who wants simple, reliable hosting, or who runs more than one show. If you only want to test an idea, a free host may do for a while."
+    ]
+   },
+   {
+    "heading": "Plans and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, Starter is listed at US$19 a month with 20,000 monthly downloads, Professional at US$49 with 100,000, and Business at US$99 with 250,000. All list unlimited shows, unlimited team members, advanced analytics and a 14-day free trial. Private podcast subscriber limits are 50, 500 and 3,000. There is no permanent free plan. Our price above is converted to Australian dollars, so confirm it at checkout."
+    ],
+    "bullets": [
+     "Starter: enough for most new shows.",
+     "Move up when your downloads in a month pass the plan limit."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Start the trial and create a show with artwork and a clear description.",
+     "Upload your first three episodes, with titles and show notes.",
+     "Submit the RSS feed to Apple Podcasts and Spotify.",
+     "Add the player to your website and check your first week of stats."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "There is no permanent free plan. Plans are set by monthly downloads, so a hit episode can push you up a tier. Keep copies of your original audio files outside the host."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Buzzsprout, Captivate and Spotify for Creators are the main options. Record guests with <a href=\"/tools/riverside-fm\">Riverside</a> and edit with <a href=\"/tools/descript\">Descript</a> before you upload."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Transistor hosts the show in the <a href=\"/stacks/solo-podcast\">Solo Podcast</a> stack."
+    ]
+   }
+  ]
+ },
+ "vercel": {
+  "description": "Vercel for solo founders: free Hobby plan is personal-use only, Pro adds commercial use. What each includes, setup, limits and alternatives.",
+  "checked": "23 October 2026",
+  "sources": [
+   {
+    "label": "Vercel pricing",
+    "url": "https://vercel.com/pricing"
+   }
+  ],
+  "sections": [
+   {
+    "heading": "Who Vercel is for",
+    "paragraphs": [
+     "Vercel deploys a web app or site from a Git repository and gives you a preview link for every change. It suits a solo founder or freelancer building with a modern web framework. If you use a visual website builder, you do not need it."
+    ]
+   },
+   {
+    "heading": "Free plan and pricing",
+    "paragraphs": [
+     "On the maker's pricing page, the Hobby plan is free but restricted to personal, non-commercial use. It lists 100 GB of fast data transfer a month and unlimited deployments. Pro is listed at US$20 a month, includes US$20 of usage credit and one developer seat, and is the plan designed for professional developers, freelancers and businesses. Our price above is converted to Australian dollars, so confirm it at checkout."
+    ],
+    "bullets": [
+     "Hobby: for side projects and learning only.",
+     "Pro: for any site that earns money or serves clients, which includes most businesses."
+    ]
+   },
+   {
+    "heading": "Getting set up",
+    "bullets": [
+     "Push your code to <a href=\"/tools/github\">GitHub</a> and import the repository into Vercel.",
+     "Add environment variables, such as API keys, in the project settings.",
+     "Connect your domain and check the HTTPS certificate.",
+     "Use preview links to review changes before they go live."
+    ]
+   },
+   {
+    "heading": "Limits to know about",
+    "paragraphs": [
+     "Commercial projects need the paid Pro plan, so do not run a business on Hobby. Usage beyond the included amount is billed, so check the usage page after a traffic spike."
+    ]
+   },
+   {
+    "heading": "Alternatives",
+    "paragraphs": [
+     "Cloudflare Pages and Netlify are close alternatives, and Cloudflare Pages is what hosts this site. Static sites can live on simple hosting. For a no-code site, see <a href=\"/tools/framer\">Framer</a>."
+    ]
+   },
+   {
+    "heading": "Where it fits in a stack",
+    "paragraphs": [
+     "Vercel hosts the app in the <a href=\"/stacks/lean-saas-founder\">Lean SaaS Founder</a> stack."
+    ]
+   }
+  ]
+ }
+}

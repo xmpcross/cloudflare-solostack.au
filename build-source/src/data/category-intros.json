@@ -1,0 +1,214 @@
+{
+ "creator-media-lab": {
+  "heading": "Making podcasts and video as a one-person studio",
+  "paragraphs": [
+   "Good audio and clear video do more for a solo creator than expensive gear. These guides start with the basics, such as recording clean audio at home and setting up a workflow you can repeat, then move on to editing, thumbnails and getting more from each recording session.",
+   "The aim is a small, reliable setup you can run alone: record in batches, edit by editing the transcript where that suits you, and publish on a schedule you can keep. We also say where a simpler option is enough, so you do not buy a studio before you have an audience.",
+   "If you record with guests, test your setup with a friend before the first real interview, and keep copies of your original files."
+  ],
+  "start": [
+   "record-clean-audio-home",
+   "solo-podcast-recording-workflow",
+   "batch-content-recording",
+   "solo-creator-4k-video-editing-pipeline",
+   "youtube-thumbnails-titles-guide"
+  ],
+  "related": [
+   {
+    "href": "/tools/riverside-fm",
+    "label": "Riverside (remote recording)"
+   },
+   {
+    "href": "/tools/descript",
+    "label": "Descript (editing)"
+   },
+   {
+    "href": "/tools/transistor",
+    "label": "Transistor (podcast hosting)"
+   },
+   {
+    "href": "/stacks/solo-podcast",
+    "label": "Solo Podcast stack"
+   },
+   {
+    "href": "/stacks/1-person-youtube-studio",
+    "label": "1-Person YouTube Studio stack"
+   }
+  ]
+ },
+ "solopreneur-operations": {
+  "heading": "Running the work behind the work",
+  "paragraphs": [
+   "Most solo businesses are held back by operations, not ideas: unclear prices, messy onboarding, late invoices and a desk that wears you out. These guides cover the routines that keep client work moving, from pricing and discovery calls to onboarding, project tracking and a simple system for money.",
+   "Each guide is written for one person with no assistant. We favour a few well-chosen tools over a large stack, and we say what you can leave until later. Start with pricing and the discovery call, because they decide how much work you take on and on what terms.",
+   "Tax and legal rules differ by situation, so treat the money guides as a starting point and check details with an accountant."
+  ],
+  "start": [
+   "pricing-services-solopreneur",
+   "run-discovery-call-client",
+   "client-onboarding-system",
+   "solo-business-money-system",
+   "best-project-management-freelancer",
+   "ergonomic-minimalist-remote-workstation-setup"
+  ],
+  "related": [
+   {
+    "href": "/tools/bonsai",
+    "label": "Bonsai (proposals and invoices)"
+   },
+   {
+    "href": "/tools/calendly",
+    "label": "Calendly (booking)"
+   },
+   {
+    "href": "/tools/stripe",
+    "label": "Stripe (payments)"
+   },
+   {
+    "href": "/tools/google-workspace",
+    "label": "Google Workspace"
+   },
+   {
+    "href": "/stacks/solo-consultant-client",
+    "label": "Solo Consultant Client stack"
+   }
+  ]
+ },
+ "websites-hosting": {
+  "heading": "Getting your site online without the jargon",
+  "paragraphs": [
+   "A solo business site needs a name, a place to live and email that looks professional. These guides explain domains, the main types of hosting, the choice between a website builder and WordPress, and the basic checks for speed and security, in plain language.",
+   "The right choice depends on how much you want to manage. A builder is quicker and needs less upkeep, while WordPress and a host give more control and more to maintain. We lay out the trade-offs so you can match the choice to your time and skills.",
+   "Whatever you pick, register your domain in your own name, keep login details safe and set up backups."
+  ],
+  "start": [
+   "how-to-choose-domain-name",
+   "how-to-choose-web-hosting",
+   "hosting-types-explained",
+   "website-builder-vs-wordpress",
+   "email-on-custom-domain",
+   "website-speed-security-checklist",
+   "what-is-cdn"
+  ],
+  "related": [
+   {
+    "href": "/tools/framer",
+    "label": "Framer (site builder)"
+   },
+   {
+    "href": "/tools/google-workspace",
+    "label": "Google Workspace (email)"
+   },
+   {
+    "href": "/tools/vercel",
+    "label": "Vercel (hosting)"
+   },
+   {
+    "href": "/stacks/freelance-web-design-studio",
+    "label": "Freelance Web Design Studio stack"
+   }
+  ]
+ },
+ "marketing-growth": {
+  "heading": "Finding and keeping customers with a small team of one",
+  "paragraphs": [
+   "Marketing for a solo business works best as a few habits you can keep up: an email list you own, content that answers real questions and a page that turns visitors into enquiries. These guides cover email, search, social media, landing pages and ways to reuse what you already make.",
+   "We focus on methods that take hours a week, not a full-time team. Start with the email and search guides, since both build assets you keep, then add social and repurposing once the basics are running.",
+   "Results take time. Measure a few simple numbers, such as sign-ups and enquiries, and adjust slowly."
+  ],
+  "start": [
+   "solo-founder-email-marketing-engine",
+   "write-newsletter-people-read",
+   "seo-for-one-person-businesses",
+   "google-search-console-setup",
+   "landing-page-basics-visitors-to-leads",
+   "social-media-system-solo-founders",
+   "simple-content-calendar-solo",
+   "content-repurposing-flywheel"
+  ],
+  "related": [
+   {
+    "href": "/tools/kit",
+    "label": "Kit (email)"
+   },
+   {
+    "href": "/tools/ghost",
+    "label": "Ghost (newsletters and memberships)"
+   },
+   {
+    "href": "/tools/tally",
+    "label": "Tally (forms)"
+   },
+   {
+    "href": "/tools/canva-pro",
+    "label": "Canva (graphics)"
+   },
+   {
+    "href": "/stacks/paid-newsletter",
+    "label": "Paid Newsletter stack"
+   }
+  ]
+ },
+ "ai-automation": {
+  "heading": "Letting software handle the repeat jobs",
+  "paragraphs": [
+   "Automation helps a solo owner most with small, repeated tasks: saving an enquiry, sending a follow-up or drafting a first reply. These guides show how to connect apps without code and how to use AI for drafts without losing your own voice.",
+   "Start with one job, build it end to end and watch it run for a week before adding another. Keep a person in the loop for anything a client will read, and check results regularly, because a quiet failure can cost you leads.",
+   "Be careful with personal data. Know what you send to each service, and read its data settings first."
+  ],
+  "start": [
+   "lead-capture-automation",
+   "ai-email-drafting-guide",
+   "zero-code-ai-orchestration-solopreneurs"
+  ],
+  "related": [
+   {
+    "href": "/tools/make-com",
+    "label": "Make (automation)"
+   },
+   {
+    "href": "/tools/chatgpt-plus",
+    "label": "ChatGPT Plus (drafting)"
+   },
+   {
+    "href": "/tools/tally",
+    "label": "Tally (forms)"
+   },
+   {
+    "href": "/stacks/lead-capture-follow-up-automation",
+    "label": "Lead Capture and Follow-up Automation stack"
+   }
+  ]
+ },
+ "stacks": {
+  "heading": "Choosing a whole setup, not a pile of tools",
+  "paragraphs": [
+   "A stack is the small set of tools that runs one kind of business. These guides explain how to choose tools without overbuilding, which free options are enough to start, and what a complete setup looks like for a podcaster, a consultant, a newsletter writer or a course creator.",
+   "Begin with the guide on choosing tools, then pick the stack closest to your business. Most can start on free plans, and you pay only when you hit a limit you actually missed.",
+   "Each stack names the tools in the order we would add them. You can also browse every blueprint on the stacks page."
+  ],
+  "start": [
+   "choose-tools-solo-stack",
+   "free-tools-solopreneurs",
+   "ultimate-solopreneur-tech-stack-blueprint-2026",
+   "solo-consultant-tech-stack",
+   "solo-podcaster-stack",
+   "newsletter-business-stack",
+   "course-creator-stack"
+  ],
+  "related": [
+   {
+    "href": "/stacks",
+    "label": "All stack blueprints"
+   },
+   {
+    "href": "/tools",
+    "label": "Software directory"
+   },
+   {
+    "href": "/best-gear",
+    "label": "Best gear for creators"
+   }
+  ]
+ }
+}

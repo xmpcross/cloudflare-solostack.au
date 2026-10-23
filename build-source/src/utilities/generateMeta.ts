@@ -20,7 +20,14 @@ const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
 }
 
 const SITE_NAME = 'SoloStack'
-const MAX_TITLE_LENGTH = 65
+const MAX_TITLE_LENGTH = 60
+const MAX_DESCRIPTION_LENGTH = 160
+// Cut at a word boundary so the search snippet is not clipped mid-word
+const fitDescription = (d?: string | null) => {
+  if (!d || d.length <= MAX_DESCRIPTION_LENGTH) return d ?? undefined
+  const cut = d.slice(0, MAX_DESCRIPTION_LENGTH - 1)
+  return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:.\- ]+$/, '') + '…'
+}
 
 export const generateMeta = async (args: {
   doc: Partial<Page> | Partial<Post> | null
@@ -40,7 +47,7 @@ export const generateMeta = async (args: {
 
   return {
     alternates: canonical ? { canonical } : undefined,
-    description: doc?.meta?.description,
+    description: fitDescription(doc?.meta?.description),
     openGraph: mergeOpenGraph({
       type: path?.startsWith('posts/') ? 'article' : 'website',
       description: doc?.meta?.description || '',

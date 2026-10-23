@@ -76,7 +76,7 @@ export function CouponCard({
               <span className="font-bold text-sm text-slate-900 dark:text-white truncate">
                 {storeName}
               </span>
-              <span className="inline-flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">
+              <span className="inline-flex items-center gap-1 text-[11px] text-emerald-700 dark:text-emerald-400 font-medium">
                 <CheckCircle2 className="w-3.5 h-3.5" /> Tested Today
               </span>
               <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded border border-slate-200 dark:border-neutral-800 text-slate-500 dark:text-neutral-400 hidden sm:inline-block">
@@ -101,7 +101,7 @@ export function CouponCard({
 
             {/* Stats Row */}
             <div className="flex flex-wrap items-center gap-3 text-[11px] font-mono text-slate-500 dark:text-neutral-400 pt-1">
-              <span className="text-emerald-600 dark:text-emerald-400 font-semibold">100% Success</span>
+              <span className="text-emerald-700 dark:text-emerald-400 font-semibold">100% Success</span>
               <span>• Used {clicks > 0 ? clicks : 16} times today</span>
               {expiryDate && <span>• Expires {new Date(expiryDate).toLocaleDateString()}</span>}
               <button

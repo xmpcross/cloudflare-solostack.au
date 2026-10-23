@@ -14,7 +14,7 @@ export const Logo: React.FC<Props> = (props) => {
   if (mode === 'light') {
     return (
       <div className={clsx('inline-flex items-center', className)}>
-        <img src="/solostack-logo-light.svg" alt="SoloStack" className="h-8 sm:h-9 w-auto" />
+        <img src="/solostack-logo-light.svg" alt="SoloStack" width={240} height={42} className="h-8 sm:h-9 w-auto" />
       </div>
     )
   }
@@ -22,7 +22,7 @@ export const Logo: React.FC<Props> = (props) => {
   if (mode === 'dark') {
     return (
       <div className={clsx('inline-flex items-center', className)}>
-        <img src="/solostack-logo-dark.svg" alt="SoloStack" className="h-8 sm:h-9 w-auto" />
+        <img src="/solostack-logo-dark.svg" alt="SoloStack" width={240} height={42} className="h-8 sm:h-9 w-auto" />
       </div>
     )
   }
@@ -33,12 +33,16 @@ export const Logo: React.FC<Props> = (props) => {
       <img
         src="/solostack-logo-light.svg"
         alt="SoloStack"
+        width={240}
+        height={42}
         className="dark:hidden h-8 sm:h-9 w-auto"
       />
       {/* Dark Mode SVG Logo */}
       <img
         src="/solostack-logo-dark.svg"
         alt="SoloStack"
+        width={240}
+        height={42}
         className="hidden dark:block h-8 sm:h-9 w-auto"
       />
     </div>

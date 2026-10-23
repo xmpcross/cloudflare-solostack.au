@@ -6,9 +6,9 @@ import { Accordion } from '@/components/Accordion'
 import { BUSINESS } from '@/utilities/business'
 
 export const metadata: Metadata = {
-  title: 'FAQs | SoloStack',
+  title: 'FAQs: Pricing, Affiliate Links and How We Choose | SoloStack',
   description: 'Answers about SoloStack: who runs it, how we choose products, how affiliate links work, and how to reach us.',
-  openGraph: { title: 'FAQs | SoloStack', description: 'Answers about SoloStack, our recommendations and affiliate links.', type: 'website', url: 'https://solostack.au/faqs' },
+  openGraph: { images: [{ url: 'https://solostack.au/website-template-OG.webp', width: 1200, height: 630, alt: 'SoloStack' }], title: 'FAQs: Pricing, Affiliate Links and How We Choose | SoloStack', description: 'Answers about SoloStack, our recommendations and affiliate links.', type: 'website', url: 'https://solostack.au/faqs' },
   alternates: { canonical: 'https://solostack.au/faqs' },
 }
 

@@ -38,7 +38,7 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: 'Search | SoloStack',
+    title: 'Search SoloStack Guides, Tools and Gear | SoloStack',
     robots: { index: false, follow: true },
   }
 }

@@ -71,6 +71,33 @@ const sections: LegalSection[] = [
     ),
   },
   {
+    id: 'advertising',
+    title: 'Advertising and third-party vendors',
+    body: (
+      <>
+        <p>
+          SoloStack shows advertising served by Google AdSense. Third-party vendors, including Google, use cookies to serve ads based on a user’s prior
+          visits to this website or other websites. Google’s use of advertising cookies enables it and its partners to serve ads to you based on your
+          visit to this site and other sites on the internet.
+        </p>
+        <p>
+          You can opt out of personalised advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener nofollow">Google Ads Settings</a>, or opt out of
+          some third-party vendors’ use of cookies for personalised advertising at <a href="https://www.aboutads.info" target="_blank" rel="noopener nofollow">aboutads.info</a>. You
+          can read how Google uses data from sites that use its services at{' '}
+          <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener nofollow">policies.google.com/technologies/partner-sites</a>.
+        </p>
+        <p>
+          Where the law requires it, for example for visitors in the European Economic Area, the United Kingdom and Switzerland, a consent message from
+          Google asks for your choice before personalised ads or non-essential cookies are used.
+        </p>
+        <p>
+          We also use Ahrefs Web Analytics to measure traffic in aggregate, and link tools from ConvertLink and Sovrn Commerce (VigLink) that may turn
+          an outbound link into an affiliate link. See our <a href="/cookie-policy">Cookie Policy</a> for the cookies involved.
+        </p>
+      </>
+    ),
+  },
+  {
     id: 'how-we-use-it',
     title: 'How we use information',
     body: (

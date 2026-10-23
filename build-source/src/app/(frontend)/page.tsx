@@ -7,7 +7,7 @@ import { HomePageClient } from './HomePageClient'
 export const revalidate = 60 // Revalidate every 60 seconds
 
 export const metadata: Metadata = {
-  title: 'SoloStack | Tech Stacks, AI Automation & Gear for Solo Operators',
+  title: 'SoloStack: Tech Stacks, Tools and Gear for Solo Operators',
   description:
     'Curated blueprints, software tools, hardware reviews, and AI automation guides engineered for 1-person creators, solopreneurs, and remote founders.',
   keywords: [

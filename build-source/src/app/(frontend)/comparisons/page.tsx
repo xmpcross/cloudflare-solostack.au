@@ -14,7 +14,7 @@ export const revalidate = 600
 export async function generateMetadata(): Promise<Metadata> {
   return {
     alternates: { canonical: '/comparisons' },
-    title: 'Head-to-Head Software & Hardware Battles | SoloStack Comparisons',
+    title: 'Software and Hardware Comparisons | SoloStack',
     description:
       'Direct comparisons between top B2B tools and hardware equipment to help you decide what to buy.',
   }

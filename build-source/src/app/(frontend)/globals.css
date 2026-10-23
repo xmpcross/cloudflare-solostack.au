@@ -247,9 +247,23 @@ html[data-theme='light'] {
   opacity: initial;
 }
 
-/* Bold (700) is the heaviest weight on the site. The typography plugin sets article H1s to 800, so pin them. */
-.prose :where(h1, h2, h3, h4, strong, b, th):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+/* Headings (h1 to h6, card titles and the .sign-type headline class) are 800, the heaviest weight Manrope ships.
+   This sits outside @layer so it wins over the font-bold / font-semibold utilities on individual headings. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.sign-type {
+  font-weight: 800;
+}
+/* Inside articles, bold text and table headers stay at 700. */
+.prose :where(strong, b, th):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   font-weight: 700;
+}
+.prose :where(h1, h2, h3, h4):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  font-weight: 800;
 }
 
 /* Home and directory pages: road-sign wayfinding in the SoloStack logo colours. Indigo (--road-green), deep navy-indigo, emerald (--sign-yellow, the accent) and sign white. The variable names are historical. */

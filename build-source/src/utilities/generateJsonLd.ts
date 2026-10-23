@@ -15,9 +15,9 @@ export function generateSoftwareSchema(tool: {
     operatingSystem: 'Web, macOS, Windows',
     offers: {
       '@type': 'Offer',
-      priceCurrency: 'USD',
-      price: tool.startingPrice ? tool.startingPrice.match(/\d+/)?.[0] || '0' : '0',
-      priceValidationUntil: '2026-12-31',
+      priceCurrency: tool.startingPrice && /\$/.test(tool.startingPrice) && !/A\$|AU\$|AUD/i.test(tool.startingPrice) ? 'USD' : 'AUD',
+      price: tool.pricingType === 'free' ? '0' : tool.startingPrice?.match(/\d+(?:\.\d+)?/)?.[0] || '0',
+      priceValidUntil: '2026-12-31',
       url: tool.affiliateUrl || 'https://solostack.au',
     },
     ...(tool.rating

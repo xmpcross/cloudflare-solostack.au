@@ -1,0 +1,12 @@
+{
+  "name": "solostack-www-redirect",
+  "main": "www-redirect.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "www.solostack.au/*",
+      "zone_name": "solostack.au"
+    }
+  ]
+}

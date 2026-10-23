@@ -13,7 +13,7 @@ export const revalidate = 600
 export async function generateMetadata(): Promise<Metadata> {
   return {
     alternates: { canonical: '/deals' },
-    title: 'Deals: Free Plans and Low-Cost Tools for Solo Businesses | SoloStack',
+    title: 'Deals and Coupons for Solo Business Tools | SoloStack',
     description:
       'Software with a free plan or a low starting price for one-person businesses, and where to find hardware prices. Only offers we can check are listed.',
   }

@@ -116,6 +116,6 @@ export function LegalLayout({
 export const legalMetadata = (title: string, description: string, path: string) => ({
   title: `${title} | SoloStack`,
   description,
-  openGraph: { title: `${title} | SoloStack`, description, type: 'website' as const, url: `https://solostack.au${path}` },
+  openGraph: { title: `${title} | SoloStack`, description, type: 'website' as const, url: `https://solostack.au${path}`, images: [{ url: 'https://solostack.au/website-template-OG.webp', width: 1200, height: 630, alt: 'SoloStack' }] },
   alternates: { canonical: `https://solostack.au${path}` },
 })
