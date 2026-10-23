@@ -33,7 +33,7 @@ python3 scripts/smoke.py https://solostack-au.pages.dev
 ```
 
 `build.sh` builds `build-source/` as the `solostack` user with the live app's database
-credentials (read from `/kspellman/sites/payload-backup/solostack.au/app/.env` at run time, never copied),
+credentials (read from `/kspellman/sites/cloudflare/solostack.au/.env` at run time, never copied),
 serves it on 127.0.0.1:3099, and `scripts/export.py` crawls every page into `dist/`.
 It needs the SoloStack PostgreSQL cluster running. That service is disabled and its systemd
 unit still points at the old path, so to rebuild you must first start PostgreSQL from

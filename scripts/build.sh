@@ -8,7 +8,7 @@ set -euo pipefail
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 SRC="$HERE/build-source"
 NODE_BIN=/kspellman/sites/payload-backup/solostack.au/runtime/node-v22.23.2/bin
-ENV_FILE=/kspellman/sites/payload-backup/solostack.au/app/.env
+ENV_FILE=/kspellman/sites/cloudflare/solostack.au/.env
 PORT=3099
 
 run_as_app() {
