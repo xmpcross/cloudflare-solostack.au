@@ -46,13 +46,23 @@ export function RoadHero({
   )
 }
 
-export function DisclosureBand({ text }: { text?: string }) {
+export const PRICE_NOTE =
+  'Prices are subject to change and may be out of date. Some prices are converted from other currencies, such as US dollars, to Australian dollars, so they may not be 100% accurate. Always confirm the final price with the seller before you buy.'
+
+export function DisclosureBand({ text, priceNote = true }: { text?: string; priceNote?: boolean }) {
   return (
     <section className="bg-[color:var(--sign-yellow)] py-12 text-[color:var(--road-green-deep)]">
       <div className={`${WRAP} flex flex-col gap-5 md:flex-row md:items-center md:justify-between`}>
-        <p className="sign-type max-w-3xl text-balance text-xl font-bold leading-snug sm:text-2xl">
-          {text ?? 'Some links on this page are affiliate links. SoloStack may earn a commission at no extra cost to you.'}
-        </p>
+        <div className="max-w-3xl">
+          <p className="sign-type text-balance text-xl font-bold leading-snug sm:text-2xl">
+            {text ?? 'Some links on this page are affiliate links. SoloStack may earn a commission at no extra cost to you.'}
+          </p>
+          {priceNote ? (
+            <p className="mt-4 border-t border-[color:var(--road-green-deep)]/30 pt-4 text-sm leading-relaxed">
+              <strong>Price note:</strong> {PRICE_NOTE}
+            </p>
+          ) : null}
+        </div>
         <Link
           href="/affiliate-disclosure"
           className="sign-type group inline-flex shrink-0 items-center gap-3 rounded-xl bg-[color:var(--road-green-deep)] px-6 py-3.5 text-base font-bold text-[color:var(--sign-white)] hover:brightness-125"

@@ -56,7 +56,7 @@ export default async function Page() {
       <Suspense fallback={null}>
         <PostsArchiveView guides={guides} categories={categories} activeSlug="all" total={guides.length} />
       </Suspense>
-      <DisclosureBand />
+      <DisclosureBand priceNote={false} />
     </div>
   )
 }

@@ -22,6 +22,10 @@ SITES = {
     # tools (keyed by tool slug)
     'riverside-fm': 'riverside.fm', 'descript': 'descript.com', 'bonsai': 'hellobonsai.com', 'make-com': 'make.com',
     'canva-pro': 'canva.com',
+    'notion': 'notion.com', 'tally': 'tally.so', 'kit': 'kit.com', 'chatgpt-plus': 'chatgpt.com', 'transistor': 'transistor.fm',
+    'ghost': 'ghost.org', 'stripe': 'stripe.com', 'github': 'github.com', 'vercel': 'vercel.com', 'supabase': 'supabase.com',
+    'resend': 'resend.com', 'posthog': 'posthog.com', 'sentry': 'sentry.io', 'google-workspace': 'google.com',
+    'calendly': 'calendly.com', 'figma': 'figma.com', 'framer': 'framer.com', 'teachable': 'teachable.com',
     # retailers and sellers (products_offers.merchant)
     'amazon-au': 'amazon.com.au', 'bing-lee': 'binglee.com.au', 'jb-hi-fi': 'jbhifi.com.au', 'bunnings': 'bunnings.com.au',
     'pb-tech': 'pbtech.com', 'harvey-norman': 'harveynorman.com.au', 'woolworths': 'woolworths.com.au',

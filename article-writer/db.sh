@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Start or stop the SoloStack PostgreSQL (port 5434) for article runs. The Payload app is retired and its service is disabled;
-# the database lives in /kspellman/sites/payload-backup/solostack.au/database. Usage: bash db.sh start|stop|status
+# the database lives in /kspellman/sites/cloudflare/solostack.au/payload/database. Usage: bash db.sh start|stop|status
 set -euo pipefail
 PGBIN=/usr/lib/postgresql/18/bin
-DATA=/kspellman/sites/payload-backup/solostack.au/database
+DATA=/kspellman/sites/cloudflare/solostack.au/payload/database
 LOG=/var/log/solostack-pg.log
 case "${1:-status}" in
   start)

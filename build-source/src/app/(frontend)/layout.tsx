@@ -56,6 +56,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2867376862905050"
           crossOrigin="anonymous"
         />
+        {/* Ahrefs Web Analytics */}
+        <script src="https://analytics.ahrefs.com/analytics.js" data-key="dY+Ra6F+l5JxpNXmSWr75g" async />
       </head>
       <body>
         <Providers>

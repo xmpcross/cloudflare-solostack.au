@@ -78,7 +78,7 @@ export default async function CategoryPage({ params }: Args) {
         }
       />
       <PostsArchiveView guides={inCategory} categories={categories} activeSlug={slug} total={guides.length} />
-      <DisclosureBand />
+      <DisclosureBand priceNote={false} />
     </div>
   )
 }

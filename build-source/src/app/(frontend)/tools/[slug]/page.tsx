@@ -123,6 +123,9 @@ export default async function ToolDetailPage({ params: paramsPromise }: Args) {
             {tool.tagline}
           </p>
         )}
+        <p className="text-sm text-muted-foreground">
+          Price note: prices are subject to change and may be converted from other currencies, such as US dollars, to Australian dollars, so they may not be 100% accurate. Confirm the price with the seller.
+        </p>
       </div>
 
       {/* Featured Image - Displayed Full Width */}

@@ -32,7 +32,7 @@ import { callAI, callJson, checkConfigured, modelName, provider } from './lib/ai
 import { SYSTEM, brainstormPrompt, repairPrompt, researchPrompt, writePrompt } from './lib/prompt.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const APP = '/kspellman/sites/payload-backup/solostack.au/app'
+const APP = '/kspellman/sites/cloudflare/solostack.au/payload/app'
 const DRAFTS = path.join(HERE, 'drafts')
 
 // ---- arguments ----------------------------------------------------------------------------------------------------

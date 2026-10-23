@@ -498,6 +498,62 @@ export function HomePageClient({
         </div>
       </section>
 
+      {/* 4b. THE RULES OF THIS ROAD: how SoloStack decides what to publish, as kilometre markers on a centre line */}
+      <section className="relative overflow-hidden bg-[color:var(--road-green-deep)] py-20 text-[color:var(--sign-white)] sm:py-28">
+        <div className={`${WRAP} grid gap-14 lg:grid-cols-12 lg:gap-20`}>
+          <div className="lg:col-span-5">
+            <div className="lg:sticky lg:top-24">
+              <span className="sign-type inline-block -rotate-2 rounded-md bg-[color:var(--sign-yellow)] px-4 py-1.5 text-sm font-bold uppercase tracking-widest text-[color:var(--road-green-deep)]">
+                The rules of this road
+              </span>
+              <p className="sign-type mt-8 text-balance text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
+                Fewer tools, bought in the{' '}
+                <span className="text-[color:var(--sign-yellow)]">right order.</span>
+              </p>
+              <p className="mt-8 max-w-md text-lg leading-relaxed opacity-85">
+                A one-person business has no IT department and no spare weekend. So we write for one person: what to buy
+                first, what it really costs in Australian dollars, and what you can safely skip until later.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
+                <Link
+                  href="/stacks"
+                  className="sign-type group inline-flex items-center gap-2 rounded-xl bg-[color:var(--sign-yellow)] px-5 py-3 text-sm font-bold text-[color:var(--road-green-deep)] hover:brightness-105"
+                >
+                  See the stack blueprints
+                  <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link href="/faqs" className="sign-type self-center text-sm font-bold underline underline-offset-4 hover:opacity-80">
+                  How we choose
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <ol className="relative lg:col-span-7">
+            {/* the road's centre line, running down the markers */}
+            <span
+              aria-hidden
+              className="absolute bottom-3 left-[1.375rem] top-3 w-0 border-l-[3px] border-dashed border-[color:var(--road-green-line)] sm:left-[1.625rem]"
+            />
+            {[
+              { km: '1', title: 'Written for one person', body: 'Every guide assumes you are the founder, the marketer and the bookkeeper. If a tool needs a team to run it, it does not make the list.' },
+              { km: '2', title: 'Free first, paid when it hurts', body: 'Start on the free plan, run real work through it, and pay only when you hit a limit you actually missed. Most of our blueprints can start for nothing.' },
+              { km: '3', title: 'Priced in Australian dollars', body: 'Software billed in US dollars is converted to Australian dollars so you can budget in one currency. Conversions are estimates, and GST and exchange rates still move the final bill.' },
+              { km: '4', title: 'Not for sale', body: 'Brands cannot pay for a review or a better spot. Some links earn us a commission, and it never changes what we list or the order we list it in.' },
+              { km: '5', title: 'Prices drift, so check the sign', body: 'Makers change plans without warning. We update a page when we learn something has moved, and we tell you to confirm the price at checkout.' },
+            ].map((rule) => (
+              <li key={rule.km} className="relative pb-12 pl-[4.25rem] last:pb-0 sm:pl-24">
+                <span className="num sign-type absolute left-0 top-0 grid size-11 place-items-center rounded-lg border-2 border-[color:var(--sign-white)] bg-[color:var(--road-green)] text-xl font-bold shadow-[0_0_0_4px_var(--road-green-deep)] sm:size-[3.25rem] sm:text-2xl">
+                  {rule.km}
+                </span>
+                <h3 className="sign-type text-2xl font-bold leading-snug sm:text-3xl">{rule.title}</h3>
+                <p className="mt-3 max-w-xl text-lg leading-relaxed opacity-80">{rule.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       {/* 5. DISTANCE BOARD: software by monthly price, gear by price range */}
       <section className="border-y border-[color:var(--road-rule)] bg-[color:var(--sign-white)] py-16 sm:py-24">
         <div className={`${WRAP} grid gap-14 lg:grid-cols-2 lg:gap-20`}>
@@ -574,10 +630,17 @@ export function HomePageClient({
       {/* 6. DISCLOSURE: how the site is paid, plainly */}
       <section className="bg-[color:var(--sign-yellow)] py-12 text-[color:var(--road-green-deep)]">
         <div className={`${WRAP} flex flex-col gap-5 md:flex-row md:items-center md:justify-between`}>
-          <p className="sign-type max-w-3xl text-balance text-xl font-bold leading-snug sm:text-2xl">
-            Some links earn SoloStack a commission at no extra cost to you. It never changes what we list or the order we
-            list it in.
-          </p>
+          <div className="max-w-3xl">
+            <p className="sign-type text-balance text-xl font-bold leading-snug sm:text-2xl">
+              Some links earn SoloStack a commission at no extra cost to you. It never changes what we list or the order we
+              list it in.
+            </p>
+            <p className="mt-4 border-t border-[color:var(--road-green-deep)]/30 pt-4 text-sm leading-relaxed">
+              <strong>Price note:</strong> Prices are subject to change and may be out of date. Some prices are converted from
+              other currencies, such as US dollars, to Australian dollars, so they may not be 100% accurate. Always confirm
+              the final price with the seller before you buy.
+            </p>
+          </div>
           <Link
             href="/affiliate-disclosure"
             className="sign-type group inline-flex shrink-0 items-center gap-3 rounded-xl bg-[color:var(--road-green-deep)] px-6 py-3.5 text-base font-bold text-[color:var(--sign-white)] hover:brightness-125"

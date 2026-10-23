@@ -1,0 +1,66 @@
+{
+ "generatedAt": "2026-10-23T11:17:51+00:00",
+ "source": "FXN Affiliate Hub",
+ "groups": [
+  {
+   "store": "Fiverr",
+   "blurb": "Freelance services marketplace",
+   "offers": [
+    {
+     "title": "10% Off Your First Order on Fiverr!",
+     "code": "AWINFVRR26",
+     "description": "10% Off Your First Order on Fiverr!",
+     "endsAt": "2027-01-01",
+     "url": "https://www.awin1.com/cread.php?awinmid=6288&awinaffid=2918909&ued=https%3A%2F%2Fwww.fiverr.com%2F"
+    }
+   ]
+  },
+  {
+   "store": "TP-Link AU",
+   "blurb": "Home-office networking",
+   "offers": [
+    {
+     "title": "AMY10OFF - 10% Off Storewide",
+     "code": "AMY10OFF",
+     "description": "Get 10% off storewide with code AMY10OFF.",
+     "endsAt": null,
+     "url": "https://tplinkau.pxf.io/c/5441170/4039609/57460"
+    }
+   ]
+  },
+  {
+   "store": "EarFun",
+   "blurb": "Earbuds and headphones for calls and audio",
+   "offers": [
+    {
+     "title": "[Autumn Sale] EarFun Air Pro 4i",
+     "code": "DLAP4I",
+     "description": "EarFun Air Pro 4i is 17% off on EarFun Global site, 15% off on the DE/EU site, and 30% off on the UK site.",
+     "endsAt": "2026-12-31",
+     "url": "https://www.awin1.com/cread.php?awinmid=61233&awinaffid=2918909&ued=https%3A%2F%2Fwww.myearfun.com%2Fheadphones%2Fearfun-air-pro-4i-anc-true-wireless-earbuds-black"
+    },
+    {
+     "title": "[Autumn Sale] EarFun Air Pro 4",
+     "code": "AMAP4",
+     "description": "EarFun Air Pro 4 is 36% off on EarFun Global site, 25% off on the DE/EU site, and 38% off on the UK site.",
+     "endsAt": "2026-12-31",
+     "url": "https://www.awin1.com/cread.php?awinmid=61233&awinaffid=2918909&ued=https%3A%2F%2Fwww.myearfun.com%2Fheadphones%2Fearfun-air-pro-4-adaptive-anc-true-wireless-earbuds-black"
+    },
+    {
+     "title": "[Autumn Sale] EarFun Air Pro 4+",
+     "code": "AMAP4P",
+     "description": "EarFun Air Pro 4+ is 24% off on EarFun Global site, 25% off on the DE/EU site, and 25% off on the UK site.",
+     "endsAt": "2026-12-31",
+     "url": "https://www.awin1.com/cread.php?awinmid=61233&awinaffid=2918909&ued=https%3A%2F%2Fwww.myearfun.com%2Fheadphones%2Fearfun-air-pro-4-plus-hi-res-adaptive-anc-true-wireless-earbuds-black"
+    },
+    {
+     "title": "[Autumn Sale] EarFun Clip",
+     "code": "LSEC",
+     "description": "EarFun Clip is 23% off on EarFun Global site, 20% off on the DE/EU site, and 20% off on the UK site.",
+     "endsAt": "2026-12-31",
+     "url": "https://www.awin1.com/cread.php?awinmid=61233&awinaffid=2918909&ued=https%3A%2F%2Fwww.myearfun.com%2Fheadphones%2Fearfun-clip-hi-res-open-ear-wireless-earbuds-silver-grey"
+    }
+   ]
+  }
+ ]
+}

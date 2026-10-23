@@ -4,19 +4,21 @@ import Link from 'next/link'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
-import { ArrowRight, BookOpen, Check } from 'lucide-react'
+import { ArrowRight, BookOpen } from 'lucide-react'
 import { BrandMark } from '@/components/marketing/BrandMark'
+import { DisclosureBand, RoadHero, WRAP } from '@/components/marketing/RoadChrome'
+import { BUILD_ORDER, BUILT_FOR, EXCHANGE_NOTE, FAQ, PRICES_CHECKED, STACK_GUIDE, costNumber } from '@/utilities/stackContent'
 
 export const revalidate = 600
 
-const WRAP = 'mx-auto w-full max-w-[1366px] px-4 sm:px-8'
+const SITE = 'https://solostack.au'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
     alternates: { canonical: '/stacks' },
-    title: 'Solopreneur Stack Directory & Operational Blueprints | SoloStack',
+    title: 'Tech Stack Blueprints for One-Person Businesses (2026) | SoloStack',
     description:
-      'Curated software and hardware toolchains for 1-person businesses, creators, and remote agency operators.',
+      'Eight priced tech stack blueprints for Australian solo operators: creators, consultants, newsletter writers, SaaS founders and freelancers. Software from A$47 a month, prices in A$.',
   }
 }
 
@@ -29,21 +31,6 @@ const imageUrl = (img: any): string | null => {
 const formatDate = (iso?: string) =>
   iso ? new Date(iso).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' }) : ''
 
-const POINTS = [
-  {
-    title: 'Built around an outcome',
-    body: 'Every blueprint starts from the result a solo operator wants, then works back to the minimum set of tools and equipment needed to reach it.',
-  },
-  {
-    title: 'Software and hardware together',
-    body: 'Workflows are limited as much by the microphone, camera or desk as by the apps. Blueprints list both, with price ranges so you can budget the whole setup.',
-  },
-  {
-    title: 'Adapt, do not copy',
-    body: 'Treat a blueprint as a starting point. Swap in tools you already own, and add the pieces you are missing one at a time rather than buying everything at once.',
-  },
-]
-
 export default async function StacksPage() {
   let stacks: any[] = []
   let guides: any[] = []
@@ -51,7 +38,8 @@ export default async function StacksPage() {
   try {
     const payload = await getPayload({ config: configPromise })
     const result = await payload.find({ collection: 'stacks', depth: 2, limit: 100 })
-    stacks = result.docs
+    // Cheapest software first, so the page leads with the easiest stack to start.
+    stacks = result.docs.sort((a: any, b: any) => (costNumber(a.monthlySoftwareCost) ?? 1e9) - (costNumber(b.monthlySoftwareCost) ?? 1e9))
     const posts = await payload.find({
       collection: 'posts',
       draft: false,
@@ -67,168 +55,134 @@ export default async function StacksPage() {
     console.warn('Database connection error in /stacks:', error)
   }
 
-  const stack = stacks[0]
-  const tools: any[] = (stack?.tools || []).filter((t: any) => typeof t === 'object')
-  const hardware: any[] = (stack?.hardware || []).filter((h: any) => typeof h === 'object')
-  const stackImage = imageUrl(hardware[0]?.image)
+  const costs = stacks.map((s) => costNumber(s.monthlySoftwareCost)).filter((n): n is number => n !== null)
+  const cheapest = costs.length ? Math.min(...costs) : null
+  const featured = stacks.find((s) => s.slug === '1-person-youtube-studio') ?? stacks[0]
+  const featuredHw: any[] = (featured?.hardware || []).filter((h: any) => typeof h === 'object')
+  const featuredImage = imageUrl(featuredHw.find((h) => imageUrl(h.image))?.image)
   const lead = guides[0]
   const rest = guides.slice(1)
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${SITE}/stacks#page`,
+        url: `${SITE}/stacks`,
+        name: 'Tech Stack Blueprints for One-Person Businesses',
+        description: 'Priced software and gear blueprints for Australian solo operators.',
+        isPartOf: { '@type': 'WebSite', name: 'SoloStack', url: SITE },
+      },
+      {
+        '@type': 'ItemList',
+        name: 'Stack blueprints',
+        itemListElement: stacks.map((s, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: s.title,
+          url: `${SITE}/stacks/${s.slug}`,
+        })),
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: FAQ.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+      },
+    ],
+  }
+
   return (
     <div className="road">
-      {/* 1. HERO: what a blueprint is, beside the one fully priced stack */}
-      <section className="relative overflow-hidden bg-[color:var(--road-tint)] text-[color:var(--road-ink)]">
-        <div className={`${WRAP} grid gap-10 pb-16 pt-12 lg:grid-cols-12 lg:items-center lg:gap-14 lg:pb-24 lg:pt-16`}>
-          <div className="lg:col-span-6">
-            <h1 className="sign-type text-balance text-[2.6rem] font-bold leading-[1.04] tracking-tight sm:text-6xl">
-              Stack blueprints for one-person businesses.
-            </h1>
-            <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-[color:var(--road-muted)]">
-              A complete, ordered set of software and hardware for one outcome, such as running a video channel or a
-              consulting practice. Instead of reviewing tools one at a time, each blueprint shows how the pieces fit
-              together.
-            </p>
-            <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
-              <div>
-                <dt className="text-sm text-[color:var(--road-muted)]">Priced stacks</dt>
-                <dd className="num sign-type text-3xl font-bold text-[color:var(--road-green)]">{stacks.length}</dd>
-              </div>
-              <div>
-                <dt className="text-sm text-[color:var(--road-muted)]">Stack guides</dt>
-                <dd className="num sign-type text-3xl font-bold text-[color:var(--road-green)]">{guides.length}</dd>
-              </div>
-            </dl>
-          </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-          {stack ? (
-            <div className="lg:col-span-6">
-              <Link
-                href={`/stacks/${stack.slug}`}
-                className="panel group block overflow-hidden p-3 sm:p-4"
-                aria-label={`Open ${stack.title}`}
-              >
-                {stackImage ? (
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-lg">
-                    <Image
-                      src={stackImage}
-                      alt={hardware[0]?.image?.alt || stack.title}
-                      fill
-                      priority
-                      sizes="(min-width: 1024px) 640px, 100vw"
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                      unoptimized
-                    />
-                  </div>
-                ) : null}
-                <div className="flex items-end justify-between gap-6 px-2 pb-2 pt-5 sm:px-3">
-                  <div className="min-w-0">
-                    <span className="sign-type block text-2xl font-bold leading-tight sm:text-3xl">{stack.title}</span>
-                    {stack.businessModel ? (
-                      <span className="mt-1 block text-sm text-[color:var(--road-muted)]">Built for {String(stack.businessModel).toLowerCase()}s</span>
-                    ) : null}
-                  </div>
-                  <div className="flex shrink-0 items-center gap-4">
-                    {stack.monthlySoftwareCost ? (
-                      <span className="text-right">
-                        <span className="num sign-type block text-2xl font-bold text-[color:var(--road-green)]">
-                          {stack.monthlySoftwareCost}
-                        </span>
-                        <span className="block text-xs text-[color:var(--road-muted)]">software</span>
-                      </span>
-                    ) : null}
-                    <ArrowRight aria-hidden className="lane-arrow size-8 text-[color:var(--road-green)]" />
-                  </div>
+      {/* 1. HERO: what a blueprint is, beside one fully priced stack */}
+      <RoadHero
+        title="Stack blueprints for one-person businesses."
+        intro="A complete, ordered set of software and gear for one outcome, such as running a video channel or a consulting practice, with every price in Australian dollars. Each blueprint shows how the pieces fit together instead of reviewing tools one at a time."
+        facts={[
+          { label: 'Priced stacks', value: String(stacks.length) },
+          ...(cheapest !== null ? [{ label: 'Software from', value: `A$${cheapest}/mo` }] : []),
+          { label: 'Stack guides', value: String(guides.length) },
+        ]}
+        aside={
+          featured ? (
+            <Link href={`/stacks/${featured.slug}`} className="panel group block overflow-hidden p-3 sm:p-4" aria-label={`Open ${featured.title}`}>
+              {featuredImage ? (
+                <div className="relative aspect-[16/10] overflow-hidden rounded-lg">
+                  <Image
+                    src={featuredImage}
+                    alt={featured.title}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 640px, 100vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    unoptimized
+                  />
                 </div>
-              </Link>
-            </div>
-          ) : null}
-        </div>
-        <div
-          aria-hidden
-          className="h-2 w-full"
-          style={{ background: 'repeating-linear-gradient(90deg, var(--sign-yellow) 0 56px, var(--road-green) 56px 96px)' }}
-        />
-      </section>
-
-      {/* 2. THE STACK: every tool and piece of gear with what it does and what it costs */}
-      {stack ? (
-        <section className="py-16 sm:py-24">
-          <div className={`${WRAP} grid gap-12 lg:grid-cols-12 lg:gap-16`}>
-            <div className="lg:col-span-4">
-              <h2 className="sign-type text-balance text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
-                What is in {stack.title}
-              </h2>
-              {stack.description ? (
-                <p className="mt-5 text-lg leading-relaxed text-[color:var(--road-muted)]">{stack.description}</p>
               ) : null}
-              <Link
-                href={`/stacks/${stack.slug}`}
-                className="sign-type group mt-8 inline-flex items-center gap-3 rounded-xl bg-[color:var(--road-green)] px-6 py-4 text-base font-bold text-[color:var(--sign-white)] hover:brightness-110"
-              >
-                Open the full stack
-                <ArrowRight aria-hidden className="size-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
+              <div className="flex items-end justify-between gap-6 px-2 pb-2 pt-5 sm:px-3">
+                <div className="min-w-0">
+                  <span className="sign-type block text-2xl font-bold leading-tight sm:text-3xl">{featured.title}</span>
+                  <span className="mt-1 block text-sm text-[color:var(--road-muted)]">Built for {(BUILT_FOR[featured.slug] || featured.businessModel || '').toLowerCase()}s</span>
+                </div>
+                <div className="flex shrink-0 items-center gap-4">
+                  {featured.monthlySoftwareCost ? (
+                    <span className="text-right">
+                      <span className="num sign-type block text-2xl font-bold text-[color:var(--road-green)]">{featured.monthlySoftwareCost}</span>
+                      <span className="block text-xs text-[color:var(--road-muted)]">software a month</span>
+                    </span>
+                  ) : null}
+                  <ArrowRight aria-hidden className="lane-arrow size-8 text-[color:var(--road-green)]" />
+                </div>
+              </div>
+            </Link>
+          ) : undefined
+        }
+      />
 
-            <ol className="divide-y divide-[color:var(--road-rule)] border-y-2 border-[color:var(--road-green)] lg:col-span-8">
-              {tools.map((tool) => (
-                <li key={tool.id} className="grid gap-4 py-7 sm:grid-cols-[auto_1fr_auto] sm:gap-6">
-                  <BrandMark slug={tool.slug} name={tool.name} className="size-14" />
-                  <div className="min-w-0">
-                    <Link href={`/tools/${tool.slug}`} className="sign-type text-xl font-bold hover:underline">
-                      {tool.name}
-                    </Link>
-                    {tool.summary ? (
-                      <p className="mt-1 max-w-2xl leading-relaxed text-[color:var(--road-muted)]">{tool.summary}</p>
-                    ) : tool.tagline ? (
-                      <p className="mt-1 text-[color:var(--road-muted)]">{tool.tagline}</p>
-                    ) : null}
-                    {tool.pros?.length ? (
-                      <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-1.5 text-sm">
-                        {tool.pros.slice(0, 2).map((p: any, i: number) => (
-                          <li key={i} className="flex items-center gap-2">
-                            <Check aria-hidden className="size-4 shrink-0 text-[color:var(--road-green)]" />
-                            {p.pro}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </div>
-                  <div className="sm:text-right">
-                    <span className="num sign-type block text-xl font-bold">{tool.startingPrice}</span>
-                    <span className="num block text-xs text-[color:var(--road-muted)]">
-                      {tool.pricingType}
-                      {tool.rating ? ` · ${tool.rating}/5` : ''}
+      {/* 2. DIRECTORY: one card per stack */}
+      <section className="py-16 sm:py-24">
+        <div className={WRAP}>
+          <h2 className="sign-type max-w-3xl text-balance text-3xl font-bold tracking-tight sm:text-4xl">
+            Pick the stack for the business you run
+          </h2>
+          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {stacks.map((s) => {
+              const tools: any[] = (s.tools || []).filter((t: any) => typeof t === 'object')
+              const hw: any[] = (s.hardware || []).filter((h: any) => typeof h === 'object')
+              return (
+                <li key={s.id}>
+                  <Link href={`/stacks/${s.slug}`} className="panel group flex h-full flex-col p-5">
+                    <span className="num text-xs font-bold uppercase tracking-wide text-[color:var(--road-green)]">
+                      {BUILT_FOR[s.slug] || s.businessModel}
                     </span>
-                  </div>
+                    <span className="sign-type mt-2 text-xl font-bold leading-snug group-hover:underline">{s.title}</span>
+                    {s.description ? (
+                      <span className="mt-2 text-sm leading-relaxed text-[color:var(--road-muted)]">{s.description}</span>
+                    ) : null}
+                    <span className="mt-4 flex flex-wrap gap-1.5">
+                      {tools.slice(0, 5).map((t) => (
+                        <BrandMark key={t.id} slug={t.slug} name={t.name} className="size-9" />
+                      ))}
+                    </span>
+                    <span className="mt-auto flex items-end justify-between gap-3 pt-5">
+                      <span className="num text-xs text-[color:var(--road-muted)]">
+                        {tools.length} tool{tools.length === 1 ? '' : 's'}
+                        {hw.length ? ` · ${hw.length} gear` : ''}
+                      </span>
+                      <span className="text-right">
+                        <span className="num sign-type block text-xl font-bold text-[color:var(--road-green)]">{s.monthlySoftwareCost}</span>
+                        <span className="block text-xs text-[color:var(--road-muted)]">software a month</span>
+                      </span>
+                    </span>
+                  </Link>
                 </li>
-              ))}
-              {hardware.map((item) => {
-                const thumb = imageUrl(item.image)
-                return (
-                  <li key={`hw-${item.id}`} className="grid gap-4 py-7 sm:grid-cols-[auto_1fr_auto] sm:gap-6">
-                    <span className="relative block size-14 shrink-0 overflow-hidden rounded-lg bg-[color:var(--road-rule)] ring-1 ring-black/10">
-                      {thumb ? (
-                        <Image src={thumb} alt="" fill sizes="56px" className="object-cover" unoptimized />
-                      ) : null}
-                    </span>
-                    <div className="min-w-0">
-                      <span className="sign-type text-xl font-bold">{item.name}</span>
-                      {item.verdict ? (
-                        <p className="mt-1 max-w-2xl leading-relaxed text-[color:var(--road-muted)]">{item.verdict}</p>
-                      ) : null}
-                    </div>
-                    <div className="sm:text-right">
-                      <span className="num sign-type block text-xl font-bold">{item.priceRange}</span>
-                      <span className="block text-xs text-[color:var(--road-muted)]">hardware</span>
-                    </div>
-                  </li>
-                )
-              })}
-            </ol>
-          </div>
-        </section>
-      ) : null}
+              )
+            })}
+          </ul>
+          <p className="mt-6 max-w-3xl text-sm leading-relaxed text-[color:var(--road-muted)]">{EXCHANGE_NOTE}</p>
+        </div>
+      </section>
 
       {/* 3. STACK GUIDES: one lead and four more, each with its own image */}
       {lead ? (
@@ -310,38 +264,48 @@ export default async function StacksPage() {
         </section>
       ) : null}
 
-      {/* 4. HOW TO USE A BLUEPRINT */}
-      <section className="py-16 sm:py-24">
+      {/* 4. BUILD ORDER */}
+      <section className="border-t border-[color:var(--road-rule)] py-16 sm:py-24">
         <div className={WRAP}>
           <h2 className="sign-type max-w-2xl text-balance text-3xl font-bold tracking-tight sm:text-4xl">
-            What is a stack blueprint?
+            Build your stack in this order
           </h2>
-          <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-3">
-            {POINTS.map((point) => (
-              <div key={point.title} className="border-t-2 border-[color:var(--road-green)] pt-5">
-                <h3 className="sign-type text-xl font-bold">{point.title}</h3>
-                <p className="mt-2 leading-relaxed text-[color:var(--road-muted)]">{point.body}</p>
-              </div>
+          <ol className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
+            {BUILD_ORDER.map((step, i) => (
+              <li key={step.title} className="border-t-2 border-[color:var(--road-green)] pt-5">
+                <span className="num sign-type text-3xl font-bold text-[color:var(--road-green)]">{i + 1}</span>
+                <h3 className="sign-type mt-2 text-xl font-bold">{step.title}</h3>
+                <p className="mt-2 leading-relaxed text-[color:var(--road-muted)]">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* 5. PRICING NOTE AND FAQ (native details elements keep the answers in the HTML) */}
+      <section className="border-t border-[color:var(--road-rule)] bg-[color:var(--sign-white)] py-16 sm:py-24">
+        <div className={`${WRAP} grid gap-10 lg:grid-cols-12 lg:gap-16`}>
+          <div className="lg:col-span-4">
+            <h2 className="sign-type text-balance text-3xl font-bold tracking-tight sm:text-4xl">Questions about stacks and prices</h2>
+            <p className="mt-5 leading-relaxed text-[color:var(--road-muted)]">
+              Prices checked {PRICES_CHECKED}. Confirm the final price on the vendor&apos;s site before you buy.
+            </p>
+          </div>
+          <div className="divide-y divide-[color:var(--road-rule)] border-y-2 border-[color:var(--road-green)] lg:col-span-8">
+            {FAQ.map((f) => (
+              <details key={f.q} className="group py-5">
+                <summary className="sign-type flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
+                  {f.q}
+                  <span aria-hidden className="num text-2xl text-[color:var(--road-green)] group-open:rotate-45">+</span>
+                </summary>
+                <p className="mt-3 max-w-3xl leading-relaxed text-[color:var(--road-muted)]">{f.a}</p>
+              </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 5. DISCLOSURE */}
-      <section className="bg-[color:var(--sign-yellow)] py-12 text-[color:var(--road-green-deep)]">
-        <div className={`${WRAP} flex flex-col gap-5 md:flex-row md:items-center md:justify-between`}>
-          <p className="sign-type max-w-3xl text-balance text-xl font-bold leading-snug sm:text-2xl">
-            Some links on this page are affiliate links. SoloStack may earn a commission at no extra cost to you.
-          </p>
-          <Link
-            href="/affiliate-disclosure"
-            className="sign-type group inline-flex shrink-0 items-center gap-3 rounded-xl bg-[color:var(--road-green-deep)] px-6 py-3.5 text-base font-bold text-[color:var(--sign-white)] hover:brightness-125"
-          >
-            Affiliate disclosure
-            <ArrowRight aria-hidden className="size-5 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-      </section>
+      <DisclosureBand />
     </div>
   )
 }

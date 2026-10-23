@@ -125,12 +125,12 @@ def main() -> int:
             failures.append((a, 'missing'))
 
     # Redirects found while crawling, plus the app's permanent redirects.
-    lines = ['/hardware /best-gear 301', '/hardware/* /best-gear 301', '/deals / 301']
+    lines = ['/hardware /best-gear 301', '/hardware/* /best-gear 301']
     for src, target, code in redirects:
         t = urlparse(target)
         target = t.path + (('?' + t.query) if t.query else '') if t.hostname in (None, *SITE_HOSTS) else target
         line = f'{src} {target} {code}'
-        if line not in lines and not src.startswith('/hardware') and src != '/deals':
+        if line not in lines and not src.startswith('/hardware'):
             lines.append(line)
     (out / '_redirects').write_text('\n'.join(lines) + '\n')
     shutil.copy2(HERE / 'public' / '_headers', out / '_headers')

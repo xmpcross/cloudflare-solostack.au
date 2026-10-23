@@ -7,15 +7,19 @@
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 SRC="$HERE/build-source"
-NODE_BIN=/kspellman/sites/payload-backup/solostack.au/runtime/node-v22.23.2/bin
+NODE_BIN=/kspellman/sites/cloudflare/solostack.au/payload/runtime/node-v22.23.2/bin
 ENV_FILE=/kspellman/sites/cloudflare/solostack.au/.env
 PORT=3099
 
 run_as_app() {
-  sudo -u solostack bash -c "set -a; . '$ENV_FILE'; set +a; export PATH='$NODE_BIN':\$PATH HOME=/kspellman/sites/payload-backup/solostack.au/home; cd '$SRC' && $1"
+  sudo -u solostack bash -c "set -a; . '$ENV_FILE'; set +a; export PATH='$NODE_BIN':\$PATH HOME=/kspellman/sites/cloudflare/solostack.au/payload/home; cd '$SRC' && $1"
 }
 
 if ss -ltn | grep -q ":$PORT "; then echo "Port $PORT is busy; stop the previous export server first." >&2; exit 1; fi
+# Uploads (incl. images the article writer generates) live in the app's public/media; the export copies them from build-source.
+cp -a --update=none "/kspellman/sites/cloudflare/solostack.au/payload/app/public/media/." "$SRC/public/media/"
+# Next keeps unstable_cache results (sitemaps, header/footer globals) in .next/cache between builds, which hides new tools and nav changes.
+rm -rf "$SRC/.next/cache/fetch-cache"
 chown -R solostack:solostack "$SRC"
 run_as_app "NODE_OPTIONS='--no-deprecation --max-old-space-size=3584' node node_modules/next/dist/bin/next build > build.log 2>&1" \
   || { echo "Build failed; see $SRC/build.log" >&2; exit 1; }

@@ -64,6 +64,13 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         <div className="md:hidden border-t border-slate-200/90 dark:border-slate-800 bg-white/98 dark:bg-slate-950 px-4 pt-3 pb-6 space-y-2 shadow-xl animate-in slide-in-from-top duration-200 text-slate-900 dark:text-slate-100">
           <div className="grid grid-cols-2 gap-2 pt-1">
             <Link
+              href="/deals"
+              className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200/80 text-xs font-bold text-slate-900 dark:text-slate-100"
+            >
+              <Tag className="w-4 h-4 text-emerald-600" />
+              <span>Deals</span>
+            </Link>
+            <Link
               href="/stacks"
               className="flex items-center gap-2 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200/80 text-xs font-bold text-slate-900 dark:text-slate-100"
             >

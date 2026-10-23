@@ -7,10 +7,10 @@
 #   bash run.sh --mock --count=1        no AI, no network: pipeline test
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-APP=/kspellman/sites/payload-backup/solostack.au/app
+APP=/kspellman/sites/cloudflare/solostack.au/payload/app
 ENV_FILE=/kspellman/sites/cloudflare/solostack.au/.env
-NODE_BIN=/kspellman/sites/payload-backup/solostack.au/runtime/node-v22.23.2/bin
+NODE_BIN=/kspellman/sites/cloudflare/solostack.au/payload/runtime/node-v22.23.2/bin
 mkdir -p "$SCRIPT_DIR/drafts"
 chown -R solostack:solostack "$SCRIPT_DIR/drafts" "$SCRIPT_DIR/topics.txt" 2>/dev/null || true
 printf -v ARGS ' %q' "$@"
-exec sudo -u solostack bash -c "set -a; . '$ENV_FILE'; set +a; export PATH='$NODE_BIN':\$PATH HOME=/kspellman/sites/payload-backup/solostack.au/home NODE_OPTIONS=--no-deprecation; cd '$APP' && exec node_modules/.bin/tsx '$SCRIPT_DIR/generate-article.mjs'$ARGS"
+exec sudo -u solostack bash -c "set -a; . '$ENV_FILE'; set +a; export PATH='$NODE_BIN':\$PATH HOME=/kspellman/sites/cloudflare/solostack.au/payload/home NODE_OPTIONS=--no-deprecation; cd '$APP' && exec node_modules/.bin/tsx '$SCRIPT_DIR/generate-article.mjs'$ARGS"

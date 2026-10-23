@@ -82,7 +82,7 @@ export default async function ToolsDirectoryPage() {
         intro="A solo operator pays for every tool twice: once in the subscription and again in the time it takes to learn and maintain it. The tools here are listed because they suit small teams and solo founders, not enterprise rollouts."
         facts={[
           { label: 'Tools listed', value: String(tools.length) },
-          ...(cheapest !== null ? [{ label: 'Cheapest from', value: `$${cheapest}/mo` }] : []),
+          ...(cheapest !== null ? [{ label: 'Cheapest from', value: `A$${cheapest}/mo` }] : []),
         ]}
         aside={
           featured && featuredImg ? (

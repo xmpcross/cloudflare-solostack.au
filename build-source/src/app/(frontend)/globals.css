@@ -112,76 +112,76 @@
 
 :root {
   --background: oklch(100% 0 0deg);
-  --foreground: oklch(14.5% 0 0deg);
-  --card: oklch(96.5% 0.005 265deg);
-  --card-foreground: oklch(14.5% 0 0deg);
+  --foreground: oklch(21% 0.045 270deg);
+  --card: oklch(97% 0.01 277deg);
+  --card-foreground: oklch(21% 0.045 270deg);
   --popover: oklch(100% 0 0deg);
-  --popover-foreground: oklch(14.5% 0 0deg);
-  --primary: oklch(20.5% 0 0deg);
-  --primary-foreground: oklch(98.5% 0 0deg);
-  --secondary: oklch(97% 0 0deg);
-  --secondary-foreground: oklch(20.5% 0 0deg);
-  --muted: oklch(97% 0 0deg);
-  --muted-foreground: oklch(55.6% 0 0deg);
-  --accent: oklch(97% 0 0deg);
-  --accent-foreground: oklch(20.5% 0 0deg);
+  --popover-foreground: oklch(21% 0.045 270deg);
+  --primary: oklch(50% 0.22 277deg);
+  --primary-foreground: oklch(99% 0.004 277deg);
+  --secondary: oklch(96% 0.015 277deg);
+  --secondary-foreground: oklch(26% 0.1 280deg);
+  --muted: oklch(96% 0.012 277deg);
+  --muted-foreground: oklch(48% 0.035 272deg);
+  --accent: oklch(94.5% 0.04 277deg);
+  --accent-foreground: oklch(26% 0.1 280deg);
   --destructive: oklch(57.7% 0.245 27.325deg);
   --destructive-foreground: oklch(57.7% 0.245 27.325deg);
-  --border: oklch(92.2% 0 0deg);
-  --input: oklch(92.2% 0 0deg);
-  --ring: oklch(70.8% 0 0deg);
-  --chart-1: oklch(64.6% 0.222 41.116deg);
-  --chart-2: oklch(60% 0.118 184.704deg);
-  --chart-3: oklch(39.8% 0.07 227.392deg);
-  --chart-4: oklch(82.8% 0.189 84.429deg);
-  --chart-5: oklch(76.9% 0.188 70.08deg);
+  --border: oklch(91% 0.018 277deg);
+  --input: oklch(91% 0.018 277deg);
+  --ring: oklch(60% 0.19 277deg);
+  --chart-1: oklch(50% 0.22 277deg);
+  --chart-2: oklch(69.6% 0.17 162.5deg);
+  --chart-3: oklch(54% 0.25 293deg);
+  --chart-4: oklch(60% 0.19 277deg);
+  --chart-5: oklch(26% 0.1 280deg);
   --radius: 0.625rem;
   --sidebar: oklch(98.5% 0 0deg);
   --sidebar-foreground: oklch(14.5% 0 0deg);
-  --sidebar-primary: oklch(20.5% 0 0deg);
-  --sidebar-primary-foreground: oklch(98.5% 0 0deg);
-  --sidebar-accent: oklch(97% 0 0deg);
-  --sidebar-accent-foreground: oklch(20.5% 0 0deg);
-  --sidebar-border: oklch(92.2% 0 0deg);
-  --sidebar-ring: oklch(70.8% 0 0deg);
-  --success: oklch(78% 0.08 200deg);
+  --sidebar-primary: oklch(50% 0.22 277deg);
+  --sidebar-primary-foreground: oklch(99% 0.004 277deg);
+  --sidebar-accent: oklch(94.5% 0.04 277deg);
+  --sidebar-accent-foreground: oklch(26% 0.1 280deg);
+  --sidebar-border: oklch(91% 0.018 277deg);
+  --sidebar-ring: oklch(60% 0.19 277deg);
+  --success: oklch(78% 0.13 162deg);
   --warning: oklch(89% 0.1 75deg);
   --error: oklch(75% 0.15 25deg);
 }
 
 [data-theme='dark'] {
-  --background: oklch(14.5% 0 0deg);
-  --foreground: oklch(98.5% 0 0deg);
-  --card: oklch(17% 0 0deg);
-  --card-foreground: oklch(98.5% 0 0deg);
-  --popover: oklch(14.5% 0 0deg);
-  --popover-foreground: oklch(98.5% 0 0deg);
-  --primary: oklch(98.5% 0 0deg);
-  --primary-foreground: oklch(20.5% 0 0deg);
-  --secondary: oklch(26.9% 0 0deg);
-  --secondary-foreground: oklch(98.5% 0 0deg);
-  --muted: oklch(26.9% 0 0deg);
-  --muted-foreground: oklch(70.8% 0 0deg);
-  --accent: oklch(26.9% 0 0deg);
-  --accent-foreground: oklch(98.5% 0 0deg);
+  --background: oklch(17% 0.04 270deg);
+  --foreground: oklch(97% 0.008 277deg);
+  --card: oklch(21% 0.05 272deg);
+  --card-foreground: oklch(97% 0.008 277deg);
+  --popover: oklch(17% 0.04 270deg);
+  --popover-foreground: oklch(97% 0.008 277deg);
+  --primary: oklch(72% 0.15 277deg);
+  --primary-foreground: oklch(19% 0.06 275deg);
+  --secondary: oklch(28% 0.06 275deg);
+  --secondary-foreground: oklch(97% 0.008 277deg);
+  --muted: oklch(28% 0.05 275deg);
+  --muted-foreground: oklch(72% 0.03 277deg);
+  --accent: oklch(30% 0.08 277deg);
+  --accent-foreground: oklch(97% 0.008 277deg);
   --destructive: oklch(39.6% 0.141 25.723deg);
   --destructive-foreground: oklch(63.7% 0.237 25.331deg);
-  --border: oklch(26.9% 0 0deg);
-  --input: oklch(26.9% 0 0deg);
-  --ring: oklch(43.9% 0 0deg);
+  --border: oklch(30% 0.05 275deg);
+  --input: oklch(30% 0.05 275deg);
+  --ring: oklch(58% 0.19 277deg);
   --chart-1: oklch(48.8% 0.243 264.376deg);
   --chart-2: oklch(69.6% 0.17 162.48deg);
   --chart-3: oklch(76.9% 0.188 70.08deg);
   --chart-4: oklch(62.7% 0.265 303.9deg);
   --chart-5: oklch(64.5% 0.246 16.439deg);
-  --sidebar: oklch(20.5% 0 0deg);
-  --sidebar-foreground: oklch(98.5% 0 0deg);
-  --sidebar-primary: oklch(48.8% 0.243 264.376deg);
-  --sidebar-primary-foreground: oklch(98.5% 0 0deg);
-  --sidebar-accent: oklch(26.9% 0 0deg);
-  --sidebar-accent-foreground: oklch(98.5% 0 0deg);
-  --sidebar-border: oklch(26.9% 0 0deg);
-  --sidebar-ring: oklch(43.9% 0 0deg);
+  --sidebar: oklch(21% 0.05 272deg);
+  --sidebar-foreground: oklch(97% 0.008 277deg);
+  --sidebar-primary: oklch(60% 0.19 277deg);
+  --sidebar-primary-foreground: oklch(99% 0.004 277deg);
+  --sidebar-accent: oklch(28% 0.06 275deg);
+  --sidebar-accent-foreground: oklch(97% 0.008 277deg);
+  --sidebar-border: oklch(30% 0.05 275deg);
+  --sidebar-ring: oklch(58% 0.19 277deg);
   --success: oklch(28% 0.1 200deg);
   --warning: oklch(35% 0.08 70deg);
   --error: oklch(45% 0.1 25deg);
@@ -252,19 +252,19 @@ html[data-theme='light'] {
   font-weight: 700;
 }
 
-/* Home page: Australian road-sign wayfinding. Gantry green, sign white, warning yellow. */
+/* Home and directory pages: road-sign wayfinding in the SoloStack logo colours. Indigo (--road-green), deep navy-indigo, emerald (--sign-yellow, the accent) and sign white. The variable names are historical. */
 .road {
-  --road-green: oklch(36% 0.085 160deg);
-  --road-green-deep: oklch(28% 0.07 160deg);
-  --road-green-line: oklch(46% 0.09 160deg);
-  --road-tint: oklch(94.5% 0.035 150deg);
-  --road-yellow-tint: oklch(95.5% 0.07 95deg);
-  --sign-white: oklch(98.5% 0.006 105deg);
-  --sign-yellow: oklch(87% 0.17 92deg);
-  --road-ink: oklch(21% 0.025 160deg);
-  --road-muted: oklch(42% 0.03 160deg);
-  --road-ground: oklch(95.5% 0.01 140deg);
-  --road-rule: oklch(86% 0.02 150deg);
+  --road-green: oklch(50% 0.22 277deg);
+  --road-green-deep: oklch(26% 0.1 280deg);
+  --road-green-line: oklch(58% 0.19 277deg);
+  --road-tint: oklch(95.5% 0.025 277deg);
+  --road-yellow-tint: oklch(96% 0.04 165deg);
+  --sign-white: oklch(99% 0.004 277deg);
+  --sign-yellow: oklch(69.6% 0.17 162.5deg);
+  --road-ink: oklch(21% 0.045 270deg);
+  --road-muted: oklch(44% 0.035 272deg);
+  --road-ground: oklch(97.2% 0.008 277deg);
+  --road-rule: oklch(88% 0.02 277deg);
   background: var(--road-ground);
   color: var(--road-ink);
   font-family: var(--font-mulish), 'Segoe UI', sans-serif;
@@ -294,7 +294,7 @@ html[data-theme='light'] {
   box-shadow:
     inset 0 0 0 3px var(--sign-white),
     inset 0 0 0 6px var(--road-green),
-    0 18px 30px -20px oklch(30% 0.05 160deg / 0.35);
+    0 18px 30px -20px oklch(30% 0.1 277deg / 0.35);
 }
 .road .lane {
   transition:

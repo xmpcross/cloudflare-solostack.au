@@ -20,8 +20,6 @@ export const redirects: NextConfig['redirects'] = async () => {
     { source: '/hardware/:slug', destination: '/best-gear', permanent: true },
   ]
 
-  // The deals page was removed (owner request, 23 Oct 2026); send old links to the home page.
-  const dealsRedirects = [{ source: '/deals', destination: '/', permanent: true }]
-
-  return [internetExplorerRedirect, ...hardwareRedirects, ...dealsRedirects]
+  // /deals was redirected to the home page on 23 Oct 2026 while the page was removed; the Deals page is back, so no redirect.
+  return [internetExplorerRedirect, ...hardwareRedirects]
 }

@@ -87,6 +87,11 @@ export async function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/deals" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
+                  Deals
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
                   Contact Us
                 </Link>
@@ -161,6 +166,9 @@ export async function Footer() {
             <ThemeSelector />
             <p className="max-w-md text-neutral-500 dark:text-neutral-400 md:text-right">
               SoloStack is reader-supported. We independently research and evaluate tools and gear. We may earn an affiliate commission on qualifying purchases at no extra cost to you.
+            </p>
+            <p className="max-w-md text-neutral-500 dark:text-neutral-400 md:text-right">
+              Prices are subject to change. Some prices are converted from other currencies, such as US dollars, to Australian dollars, so they may not be 100% accurate. Please confirm the price with the seller.
             </p>
           </div>
         </div>

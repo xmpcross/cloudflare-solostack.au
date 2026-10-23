@@ -7,7 +7,7 @@ https://solostack.au and www are served by the `solostack-au` Cloudflare Pages p
 The Payload/Next.js app was retired on 23 October 2026: its services
 (`solostack`, `solostack-postgres`, `solostack-backup.timer`) are disabled, its nginx vhost is
 disabled, `cms.solostack.au` has no DNS record, and the project folder was moved to
-`/kspellman/sites/payload-backup/solostack.au`. Final database dump:
+`/kspellman/sites/cloudflare/solostack.au/payload`. Final database dump:
 `backups/payload_cms-final-20261023-1155.dump` in that folder.
 
 | Item | Value |
@@ -37,7 +37,7 @@ credentials (read from `/kspellman/sites/cloudflare/solostack.au/.env` at run ti
 serves it on 127.0.0.1:3099, and `scripts/export.py` crawls every page into `dist/`.
 It needs the SoloStack PostgreSQL cluster running. That service is disabled and its systemd
 unit still points at the old path, so to rebuild you must first start PostgreSQL from
-`/kspellman/sites/payload-backup/solostack.au/database` on port 5434 (or restore the final dump).
+`/kspellman/sites/cloudflare/solostack.au/payload/database` on port 5434 (or restore the final dump).
 Rebuild and redeploy after editing content in the Payload admin; Pages does not
 update by itself.
 
@@ -46,7 +46,7 @@ update by itself.
 - `npm ci` here (for Wrangler); `node_modules/` and `.wrangler/` are not kept.
 - `build-source/` needs its own `node_modules` (`pnpm install --frozen-lockfile` with the pinned Node 22 runtime) and the
   uploaded media in `build-source/public/media/`, which is git-ignored. The originals are in
-  `/kspellman/sites/payload-backup/solostack.au/app/public/media`.
+  `/kspellman/sites/cloudflare/solostack.au/payload/app/public/media`.
 - `build-source/.next/` is rebuilt by `scripts/build.sh`.
 
 ## Directory layout

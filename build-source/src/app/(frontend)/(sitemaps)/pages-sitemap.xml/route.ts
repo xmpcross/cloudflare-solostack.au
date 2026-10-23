@@ -42,6 +42,7 @@ const getPagesSitemap = unstable_cache(
       { loc: `${SITE_URL}/stacks`, lastmod: dateFallback },
       { loc: `${SITE_URL}/comparisons`, lastmod: dateFallback },
       { loc: `${SITE_URL}/best-gear`, lastmod: dateFallback },
+      { loc: `${SITE_URL}/deals`, lastmod: dateFallback },
       { loc: `${SITE_URL}/cookie-policy`, lastmod: dateFallback },
     ]
 
