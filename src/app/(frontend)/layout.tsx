@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { cn } from '@/utilities/ui'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
+import { Outfit, Urbanist } from 'next/font/google'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
@@ -16,12 +17,17 @@ import { draftMode } from 'next/headers'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
+// Google fonts, self-hosted by next/font at build time (owner, 23 Oct 2026): Urbanist for headings and titles,
+// Outfit for body text.
+const urbanist = Urbanist({ subsets: ['latin'], variable: '--font-urbanist', display: 'swap' })
+const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit', display: 'swap' })
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
 
   return (
     <html
-      className={cn(GeistSans.variable, GeistMono.variable)}
+      className={cn(outfit.variable, urbanist.variable, GeistSans.variable, GeistMono.variable)}
       data-theme="light"
       lang="en-AU"
       suppressHydrationWarning
