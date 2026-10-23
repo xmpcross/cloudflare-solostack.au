@@ -358,6 +358,12 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware, gea
               <figcaption className="fg-cap mt-4 text-[color:var(--fg-salt)] sm:pl-1">
                 Plate 1. {stack.title}, {stackTools.length} tools, priced in Australian dollars.
               </figcaption>
+              <p className="fg-t-small mt-3 max-w-md sm:pl-1">
+                Some links earn us a commission. It never changes what we list or the order.
+                <Link href="/faqs" className="flex min-h-11 items-center font-bold underline underline-offset-4 hover:text-[color:var(--fg-coral)]">
+                  How we choose
+                </Link>
+              </p>
             </figure>
           ) : null}
         </div>

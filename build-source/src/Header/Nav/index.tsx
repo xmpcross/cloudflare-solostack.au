@@ -5,16 +5,15 @@ import type { Header as HeaderType } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Search, Tag, Layers, Wrench, Cpu, BookOpen, Scale } from 'lucide-react'
+import { Search } from 'lucide-react'
 
-// Default auto-inserted top navigation links
+// Default auto-inserted top navigation links. Deals is not listed: /deals redirects to the homepage.
 const DEFAULT_TOP_NAV_LINKS = [
-  { label: 'Deals', url: '/deals', icon: <Tag className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> },
-  { label: 'Stacks', url: '/stacks', icon: <Layers className="w-4 h-4 text-sky-600 dark:text-sky-400" /> },
-  { label: 'Tools', url: '/tools', icon: <Wrench className="w-4 h-4 text-indigo-600 dark:text-indigo-400" /> },
-  { label: 'Best Gear', url: '/best-gear', icon: <Cpu className="w-4 h-4 text-amber-600 dark:text-amber-400" /> },
-  { label: 'Comparisons', url: '/comparisons', icon: <Scale className="w-4 h-4 text-purple-600 dark:text-purple-400" /> },
-  { label: 'All Posts', url: '/posts', icon: <BookOpen className="w-4 h-4 text-slate-600 dark:text-slate-400" /> },
+  { label: 'Stacks', url: '/stacks' },
+  { label: 'Tools', url: '/tools' },
+  { label: 'Best Gear', url: '/best-gear' },
+  { label: 'Comparisons', url: '/comparisons' },
+  { label: 'Guides', url: '/posts' },
 ]
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
@@ -31,7 +30,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const autoInsertedLinks = DEFAULT_TOP_NAV_LINKS.filter((item) => !cmsUrls.has(item.url))
 
   return (
-    <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+    <nav aria-label="Main" className="hidden items-center gap-1 md:flex lg:gap-2">
       {/* Auto-Inserted Core Top Nav Links */}
       {autoInsertedLinks.map((item) => {
         const isActive = pathname === item.url || (item.url !== '/' && pathname?.startsWith(item.url))
@@ -39,14 +38,14 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
           <Link
             key={item.url}
             href={item.url}
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs lg:text-sm font-bold transition-all duration-200 ${
+            aria-current={isActive ? 'page' : undefined}
+            className={`inline-flex min-h-11 items-center px-3 text-[0.9375rem] transition-colors ${
               isActive
-                ? 'bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 font-bold shadow-2xs'
-                : 'text-slate-800 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100/90 dark:hover:bg-slate-900/80'
+                ? 'font-bold text-foreground underline decoration-emerald-500 decoration-[3px] underline-offset-[10px]'
+                : 'font-semibold text-foreground/85 hover:text-indigo-700 hover:underline hover:decoration-emerald-500 hover:decoration-2 hover:underline-offset-[10px]'
             }`}
           >
-            {item.icon}
-            <span className="text-slate-800 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400">{item.label}</span>
+            {item.label}
           </Link>
         )
       })}
@@ -54,8 +53,8 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       {/* CMS Custom Links */}
       {cmsNavItems.map(({ link }, i) => {
         return (
-          <div key={i} className="px-1.5 text-xs lg:text-sm font-bold text-slate-800 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-            <CMSLink {...link} appearance="link" className="text-slate-800 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 font-bold" />
+          <div key={i} className="px-1.5 text-[0.9375rem] font-semibold text-foreground/85 transition-colors hover:text-indigo-700">
+            <CMSLink {...link} appearance="link" className="font-semibold text-foreground/85 hover:text-indigo-700" />
           </div>
         )
       })}
@@ -63,11 +62,11 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       {/* Search Button Link */}
       <Link
         href="/search"
-        className="ml-1 p-2 rounded-lg text-slate-800 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors"
+        className="ml-1 grid size-11 place-items-center rounded-full text-foreground transition-colors hover:bg-secondary"
         title="Search SoloStack"
       >
         <span className="sr-only">Search</span>
-        <Search className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+        <Search aria-hidden className="size-[1.15rem]" />
       </Link>
     </nav>
   )

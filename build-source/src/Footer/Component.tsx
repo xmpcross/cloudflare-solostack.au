@@ -39,19 +39,19 @@ export async function Footer() {
   const topics = await getTopics()
 
   return (
-    <footer className="mt-auto border-t border-border bg-neutral-50 dark:bg-card text-neutral-900 dark:text-white transition-colors">
+    <footer className="mt-auto bg-slate-900 text-slate-100">
       {/* 4-Column Main Footer Area */}
       <div className="container py-12">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-8 justify-between">
           {/* Column 1: 55% Width */}
           <div className="w-full lg:w-[55%] lg:pr-10">
             <Link className="inline-flex items-center mb-4 group" href="/">
-              <Logo />
+              <Logo mode="dark" />
             </Link>
-            <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed max-w-xl mb-5">
+            <p className="mb-5 max-w-xl text-[0.9375rem] leading-relaxed text-slate-300">
               SoloStack curates production-tested software, ergonomic hardware workstations, and automated zero-headcount blueprints for solopreneurs, indie hackers, and creators scaling 1-person businesses.
             </p>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-neutral-500 dark:text-neutral-400">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-300">
               <span>Operated by FXN Holdings</span>
               <span>&bull;</span>
               <span>ABN 53 274 423 748</span>
@@ -62,37 +62,32 @@ export async function Footer() {
 
           {/* Column 2: 15% Width - About & Resources */}
           <div className="w-full sm:w-1/3 lg:w-[15%]">
-            <h2 className="text-sm font-semibold tracking-wider uppercase text-neutral-900 dark:text-neutral-200 mb-4">
+            <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.1em] text-slate-300">
               About &amp; Resources
             </h2>
-            <ul className="space-y-2.5 text-sm text-neutral-600 dark:text-neutral-400">
+            <ul className="space-y-0.5 text-[0.9375rem] text-slate-100">
               <li>
-                <Link href="/about" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
+                <Link href="/about" className="inline-block py-1.5 transition-colors hover:text-emerald-400 hover:underline hover:underline-offset-4">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/faqs" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
+                <Link href="/faqs" className="inline-block py-1.5 transition-colors hover:text-emerald-400 hover:underline hover:underline-offset-4">
                   FAQs
                 </Link>
               </li>
               <li>
-                <Link href="/tools" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
+                <Link href="/tools" className="inline-block py-1.5 transition-colors hover:text-emerald-400 hover:underline hover:underline-offset-4">
                   Software Directory
                 </Link>
               </li>
               <li>
-                <Link href="/best-gear" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
+                <Link href="/best-gear" className="inline-block py-1.5 transition-colors hover:text-emerald-400 hover:underline hover:underline-offset-4">
                   Best Gear for Creators
                 </Link>
               </li>
               <li>
-                <Link href="/deals" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
-                  Deals
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
+                <Link href="/contact" className="inline-block py-1.5 transition-colors hover:text-emerald-400 hover:underline hover:underline-offset-4">
                   Contact Us
                 </Link>
               </li>
@@ -101,13 +96,13 @@ export async function Footer() {
 
           {/* Column 3: 15% Width - Topics */}
           <div className="w-full sm:w-1/3 lg:w-[15%]">
-            <h2 className="text-sm font-semibold tracking-wider uppercase text-neutral-900 dark:text-neutral-200 mb-4">
+            <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.1em] text-slate-300">
               Topics
             </h2>
-            <ul className="space-y-2.5 text-sm text-neutral-600 dark:text-neutral-400">
+            <ul className="space-y-0.5 text-[0.9375rem] text-slate-100">
               {topics.map((topic) => (
                 <li key={topic.href}>
-                  <Link href={topic.href} className="hover:text-emerald-600 dark:hover:text-white transition-colors">
+                  <Link href={topic.href} className="inline-block py-1.5 transition-colors hover:text-emerald-400 hover:underline hover:underline-offset-4">
                     {topic.title}
                   </Link>
                 </li>
@@ -117,32 +112,32 @@ export async function Footer() {
 
           {/* Column 4: 15% Width - Useful Links */}
           <div className="w-full sm:w-1/3 lg:w-[15%]">
-            <h2 className="text-sm font-semibold tracking-wider uppercase text-neutral-900 dark:text-neutral-200 mb-4">
+            <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.1em] text-slate-300">
               Useful Links
             </h2>
-            <ul className="space-y-2.5 text-sm text-neutral-600 dark:text-neutral-400">
+            <ul className="space-y-0.5 text-[0.9375rem] text-slate-100">
               <li>
-                <Link href="/affiliate-disclosure" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
+                <Link href="/affiliate-disclosure" className="inline-block py-1.5 transition-colors hover:text-emerald-400 hover:underline hover:underline-offset-4">
                   Affiliate Disclosure
                 </Link>
               </li>
               <li>
-                <Link href="/privacy-policy" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
+                <Link href="/privacy-policy" className="inline-block py-1.5 transition-colors hover:text-emerald-400 hover:underline hover:underline-offset-4">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/cookie-policy" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
+                <Link href="/cookie-policy" className="inline-block py-1.5 transition-colors hover:text-emerald-400 hover:underline hover:underline-offset-4">
                   Cookie Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
+                <Link href="/terms" className="inline-block py-1.5 transition-colors hover:text-emerald-400 hover:underline hover:underline-offset-4">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/faqs" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
+                <Link href="/faqs" className="inline-block py-1.5 transition-colors hover:text-emerald-400 hover:underline hover:underline-offset-4">
                   Editorial Policy
                 </Link>
               </li>
@@ -152,19 +147,19 @@ export async function Footer() {
       </div>
 
       {/* Sub-Footer Legal & Compliance Bar */}
-      <div className="border-t border-neutral-200 dark:border-white/10">
-        <div className="container py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-neutral-600 dark:text-neutral-400">
+      <div className="border-t border-white/15">
+        <div className="container py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-slate-300">
           <div className="flex flex-col gap-1">
             <p>
               &copy; {new Date().getFullYear()} SoloStack. This website is operated by FXN Holdings (ABN: 53 274 423 748). solostack.au is a subsidiary business under FXN Holdings.
             </p>
-            <p className="text-neutral-500 dark:text-neutral-400">
-              Mailing Address: PO Box 500, WEST PERTH, WA 6872, Australia &bull; Contact: <a href="mailto:contact@solostack.au" className="underline hover:text-neutral-900 dark:hover:text-white">contact@solostack.au</a>
+            <p className="text-slate-300">
+              Mailing Address: PO Box 500, WEST PERTH, WA 6872, Australia &bull; Contact: <a href="mailto:contact@solostack.au" className="underline underline-offset-4 hover:text-white">contact@solostack.au</a>
             </p>
           </div>
           <div className="flex flex-col md:items-end gap-2">
             <ThemeSelector />
-            <p className="max-w-md text-neutral-500 dark:text-neutral-400 md:text-right">
+            <p className="max-w-md text-slate-300 md:text-right">
               SoloStack is reader-supported. We independently research and evaluate tools and gear. We may earn an affiliate commission on qualifying purchases at no extra cost to you.
             </p>
           </div>
