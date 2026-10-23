@@ -46,6 +46,8 @@ export interface ToolData {
   startingPrice?: string
   pricingType?: string
   rating?: number
+  pros?: { pro?: string | null }[] | null
+  cons?: { con?: string | null }[] | null
 }
 
 export interface HardwareData {
@@ -515,6 +517,20 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware, gea
                       {tool.name}
                     </span>
                     {tool.tagline ? <span className="fg-muted mt-1 block fg-t-small">{tool.tagline}</span> : null}
+                    {tool.pros?.[0]?.pro || tool.cons?.[0]?.con ? (
+                      <span className="mt-2 line-clamp-3 block fg-t-small">
+                        {tool.pros?.[0]?.pro ? (
+                          <>
+                            <strong className="text-[color:var(--fg-coral)]">Good:</strong> {tool.pros[0].pro}.{' '}
+                          </>
+                        ) : null}
+                        {tool.cons?.[0]?.con ? (
+                          <>
+                            <strong className="text-[color:var(--fg-coral)]">Watch:</strong> {tool.cons[0].con}.
+                          </>
+                        ) : null}
+                      </span>
+                    ) : null}
                   </span>
                   <span className="max-w-[9rem] shrink-0 text-right [overflow-wrap:anywhere] sm:max-w-[13rem]">
                     <span className="fg-t-title-lg num block">{tool.startingPrice || 'Free'}</span>
