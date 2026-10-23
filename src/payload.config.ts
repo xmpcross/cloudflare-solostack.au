@@ -11,6 +11,7 @@ import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
 import { Tools } from './collections/Tools'
 import { Hardware } from './collections/Hardware'
+import { Products } from './collections/Products'
 import { Stacks } from './collections/Stacks'
 import { Comparisons } from './collections/Comparisons'
 import { Footer } from './Footer/config'
@@ -68,6 +69,7 @@ export default buildConfig({
     Posts,
     Tools,
     Hardware,
+    Products,
     Stacks,
     Comparisons,
     Media,
