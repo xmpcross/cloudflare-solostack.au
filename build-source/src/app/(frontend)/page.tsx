@@ -53,6 +53,8 @@ export default async function HomePage() {
   let stacks: any[] = []
   let tools: any[] = []
   let hardware: any[] = []
+  let gearCount = 0
+  let providerCount = 0
 
   try {
     const payload = await getPayload({ config: configPromise })
@@ -107,6 +109,20 @@ export default async function HomePage() {
       overrideAccess: true,
     })
     hardware = hardwareRes.docs || []
+
+    // Counts of the researched gear picks and hosting/domain providers shown in the wayfinding panel
+    const gear = await payload.count({
+      collection: 'products' as any,
+      overrideAccess: true,
+      where: { and: [{ productType: { equals: 'hardware' } }, { status: { equals: 'approved' } }] },
+    })
+    gearCount = gear.totalDocs
+    const services = await payload.count({
+      collection: 'products' as any,
+      overrideAccess: true,
+      where: { and: [{ productType: { equals: 'service' } }, { status: { equals: 'approved' } }] },
+    })
+    providerCount = services.totalDocs
   } catch (err) {
     console.warn('Error fetching homepage payload data:', err)
   }
@@ -169,6 +185,8 @@ export default async function HomePage() {
         stacks={stacks}
         tools={tools}
         hardware={hardware}
+        gearCount={gearCount}
+        providerCount={providerCount}
       />
     </>
   )

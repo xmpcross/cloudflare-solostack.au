@@ -236,3 +236,96 @@ html[data-theme='light'] {
 .prose :where(h1, h2, h3, h4, strong, b, th):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   font-weight: 700;
 }
+
+/* Home page: Australian road-sign wayfinding. Gantry green, sign white, warning yellow. */
+.road {
+  --road-green: oklch(36% 0.085 160deg);
+  --road-green-deep: oklch(28% 0.07 160deg);
+  --road-green-line: oklch(46% 0.09 160deg);
+  --sign-white: oklch(98.5% 0.006 105deg);
+  --sign-yellow: oklch(87% 0.17 92deg);
+  --road-ink: oklch(21% 0.025 160deg);
+  --road-muted: oklch(42% 0.03 160deg);
+  --road-ground: oklch(95.5% 0.01 140deg);
+  --road-rule: oklch(86% 0.02 150deg);
+  background: var(--road-ground);
+  color: var(--road-ink);
+  font-family: var(--font-be-vietnam-pro), 'Segoe UI', sans-serif;
+}
+.road ::selection {
+  background: var(--sign-yellow);
+  color: var(--road-green-deep);
+}
+.road a:focus-visible,
+.road button:focus-visible,
+.road input:focus-visible {
+  outline: 3px solid var(--sign-yellow);
+  outline-offset: 3px;
+}
+.road .on-light a:focus-visible,
+.road .on-light button:focus-visible,
+.road .on-light input:focus-visible {
+  outline-color: var(--road-green);
+}
+.road .sign-type {
+  font-family: var(--font-inter), var(--font-heading);
+  letter-spacing: 0.02em;
+}
+.road .num {
+  font-variant-numeric: tabular-nums;
+}
+/* A sign panel: reflective white border inset from the edge, like sheeting on an overhead gantry. */
+.road .panel {
+  background: var(--road-green);
+  color: var(--sign-white);
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 3px var(--road-green),
+    inset 0 0 0 6px var(--sign-white),
+    0 18px 30px -18px oklch(20% 0.05 160deg / 0.55);
+}
+.road .lane {
+  transition:
+    background-color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.road .lane .lane-arrow {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.road .lane:hover .lane-arrow,
+.road .lane:focus-visible .lane-arrow {
+  transform: translateX(6px);
+}
+@keyframes lane-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.road .lane-in {
+  animation: lane-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 120ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .road .lane-in {
+    animation: none;
+  }
+  .road .lane:hover .lane-arrow {
+    transform: none;
+  }
+}
+/* Dotted leader between a destination and its price, as on a distance board. */
+.road .leader {
+  flex: 1;
+  min-width: 1rem;
+  border-bottom: 2px dotted currentColor;
+  opacity: 0.35;
+  transform: translateY(-0.3em);
+}
+.road input[type='search']::-webkit-search-cancel-button {
+  display: none;
+}
