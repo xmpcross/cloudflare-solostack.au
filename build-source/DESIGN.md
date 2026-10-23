@@ -115,7 +115,7 @@ components:
 
 # Design System: SoloStack
 
-> Scope: this system is built and shipped on the homepage only (`.fg` scope in `src/app/(frontend)/globals.css`, markup in `HomePageClient.tsx`). Inner pages, the header and the footer still use the old Manrope / Mulish / indigo look until the rollout. Do not assume a token here is wired outside `.fg`. The `.fg` block sets `--road-green` to ink so the old shared pieces that read it sit acceptably inside the homepage; that is a bridge, not part of the system.
+> Scope: this system is built on the homepage (`.fg` scope in `src/app/(frontend)/globals.css`, markup in `HomePageClient.tsx`) and applied site-wide through the shared tokens: Urbanist and Figtree, the remapped Tailwind ramps (indigo is sea-green, emerald is coral, slate is marine), the semantic colour tokens, the `.road` directory-page tokens, the header and the footer. Inner-page layouts are still the earlier templates recoloured, not rebuilt as specimen plates.
 
 ## Overview
 
@@ -130,7 +130,7 @@ The page is dense with real data (prices, verdicts, ratings) and calm in its chr
 **Key Characteristics:**
 - Full-bleed field colour per section; content centred at 1366px.
 - Salt plates with a fine double frame as the only container language for specimens.
-- Serif display, grotesk text, uppercase tracked captions for catalogue data.
+- Geometric sans display (Urbanist), friendly sans text (Figtree), uppercase tracked captions for catalogue data.
 - One action colour (coral); its text-safe variant for coral type on light fields.
 - Dotted leaders and hairline-ruled rows, as in a printed catalogue.
 
@@ -216,8 +216,11 @@ A salt pill on the sea field with a leading icon, a clear control and an embedde
 ### Catalogue rows
 Hairline-ruled rows with figure number, mark, display name, tagline and a right-aligned price block. Hover underlines the name and moves the arrow 6px right; the layout does not shift. Gear rows use a dotted leader between name and price.
 
-### Filter chips
-Pill, 44px minimum height, 2px inset ink ring, bold 0.875rem. The selected chip (aria-pressed) inverts to ink fill with salt text; hover on an unselected chip fills salt-2.
+### Guides list
+Field notes shows a lead guide on a framed photo plate and a ruled list beside it, newest first, capped at six guides. Row titles use the title role limited to two lines with a 10px bottom margin. Filtering is by the hero search only; topic browsing lives on the guides page.
+
+### Software verdict line
+Each software row adds a small "Good:" and "Watch:" line in coral labels, using the tool's first recorded pro and con. No new claims are written for it.
 
 ### Motion
 Cover only: figures "develop" (0.9s, rise 18px, de-blur, staggered 120ms) and the sprig draws its stem (1.6s). Easing is `cubic-bezier(0.22, 1, 0.36, 1)`. Both are disabled under `prefers-reduced-motion`.
@@ -235,5 +238,5 @@ Cover only: figures "develop" (0.9s, rise 18px, de-blur, staggered 120ms) and th
 - **Don't** add a second action colour or a gradient field.
 - **Don't** lift anything but plates with a shadow.
 - **Don't** return to identical card grids with a pill-row header; use plates and ruled catalogue rows.
-- **Don't** use the old Manrope, Mulish or indigo values inside `.fg` surfaces.
+- **Don't** bring back the old Manrope, Mulish, Young Serif or indigo values; the shared tokens now carry the sea-green and coral palette.
 - **Don't** claim anything the data does not back (see PRODUCT.md).

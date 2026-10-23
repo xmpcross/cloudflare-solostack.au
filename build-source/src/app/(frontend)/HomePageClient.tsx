@@ -198,31 +198,16 @@ function GearGlyph({ name }: { name: string }) {
   )
 }
 
-export function HomePageClient({ categories, posts, stacks, tools, hardware, gearCount = 0 }: HomePageClientProps) {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all')
+export function HomePageClient({ posts, stacks, tools, hardware, gearCount = 0 }: HomePageClientProps) {
   const [searchQuery, setSearchQuery] = useState<string>('')
-
-  const categoryStats = useMemo(
-    () =>
-      categories.map((cat) => {
-        const inCat = posts.filter((p) =>
-          p.categories?.some((c) => (typeof c === 'object' ? c.slug === cat.slug : c === cat.slug)),
-        )
-        return { ...cat, count: inCat.length }
-      }),
-    [categories, posts],
-  )
 
   const matches = useMemo(() => {
     const q = searchQuery.trim().toLowerCase()
     return posts.filter((post) => {
-      const inCategory =
-        selectedCategory === 'all' ||
-        post.categories?.some((cat) => (typeof cat === 'object' ? cat.slug === selectedCategory : cat === selectedCategory))
       const inSearch = !q || post.title.toLowerCase().includes(q) || post.meta?.description?.toLowerCase().includes(q)
-      return inCategory && inSearch
+      return inSearch
     })
-  }, [posts, selectedCategory, searchQuery])
+  }, [posts, searchQuery])
 
   const shown = matches.slice(0, MAX_HOME_POSTS)
   const lead = shown[0]
@@ -371,33 +356,70 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware, gea
         </div>
       </section>
 
+      {/* SOFTWARE: the specimens, priced. A quieter, denser passage on indigo */}
+      <section className="fg-field-ink py-16 sm:py-24">
+        <div className={`${WRAP} grid gap-12 lg:grid-cols-12 lg:gap-16`}>
+          <div className="lg:col-span-4">
+            <div className="lg:sticky lg:top-28">
+              <h2 className="fg-t-headline">Software, priced</h2>
+              <p className="fg-muted fg-t-lede mt-5 max-w-sm">
+                Starting prices in Australian dollars, whether there is a free plan, and who each tool suits.
+              </p>
+              <Link href="/tools" className="fg-btn mt-8">
+                All tools
+                <ArrowRight aria-hidden className="size-5" />
+              </Link>
+            </div>
+          </div>
+          <ol className="divide-y divide-white/15 border-y border-white/15 lg:col-span-8">
+            {tools.map((tool, i) => (
+              <li key={tool.id}>
+                <Link href={`/tools/${tool.slug}`} className="fg-row group flex items-center gap-4 py-5 sm:gap-6">
+                  <span className="fg-cap hidden w-12 shrink-0 text-white/70 sm:block">Fig. {i + 1}</span>
+                  <BrandMark slug={tool.slug} name={tool.name} className="size-14 sm:size-16" />
+                  <span className="min-w-0 flex-1">
+                    <span className="fg-t-title-lg block group-hover:underline">
+                      {tool.name}
+                    </span>
+                    {tool.tagline ? <span className="fg-muted mt-1 block fg-t-small">{tool.tagline}</span> : null}
+                    {tool.pros?.[0]?.pro || tool.cons?.[0]?.con ? (
+                      <span className="mt-2 line-clamp-3 block fg-t-small">
+                        {tool.pros?.[0]?.pro ? (
+                          <>
+                            <strong className="text-[color:var(--fg-coral)]">Good:</strong> {tool.pros[0].pro}.{' '}
+                          </>
+                        ) : null}
+                        {tool.cons?.[0]?.con ? (
+                          <>
+                            <strong className="text-[color:var(--fg-coral)]">Watch:</strong> {tool.cons[0].con}.
+                          </>
+                        ) : null}
+                      </span>
+                    ) : null}
+                  </span>
+                  <span className="max-w-[9rem] shrink-0 text-right [overflow-wrap:anywhere] sm:max-w-[13rem]">
+                    <span className="fg-t-title-lg num block">{tool.startingPrice || 'Free'}</span>
+                    <span className="num fg-muted block text-xs">
+                      {tool.pricingType}
+                      {tool.rating ? ` · ${tool.rating}/5` : ''}
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       {/* FIELD NOTES: the guides, with photographs doing half the talking */}
       <section id="guides" tabIndex={-1} className="fg-field-salt scroll-mt-4 py-16 outline-none sm:py-24">
         <div className={WRAP}>
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div className="flex items-end justify-between gap-6">
             <h2 className="fg-t-headline">Field notes</h2>
-            <div
-              className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
-              role="group"
-              aria-label="Filter guides by category"
-            >
-              {[{ id: 'all', title: 'All', slug: 'all', count: posts.length }, ...categoryStats].map((cat) => {
-                const on = selectedCategory === cat.slug
-                return (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    aria-pressed={on}
-                    onClick={() => setSelectedCategory(cat.slug)}
-                    className={`fg-chip min-h-11 shrink-0 whitespace-nowrap rounded-full px-4 text-sm font-bold ring-2 ring-inset ring-[color:var(--fg-ink)] transition-colors ${
-                      on ? 'bg-[color:var(--fg-ink)] text-[color:var(--fg-salt)]' : 'hover:bg-[color:var(--fg-salt-2)]'
-                    }`}
-                  >
-                    {cat.title} <span className="num opacity-70">{cat.count}</span>
-                  </button>
-                )
-              })}
-            </div>
+            <Link href="/posts" className="fg-link hidden sm:inline-flex">
+              Browse all by topic
+              <ArrowRight aria-hidden className="size-4" />
+            </Link>
           </div>
 
           {searchQuery ? (
@@ -409,20 +431,17 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware, gea
           {shown.length === 0 ? (
             <div className="mt-12 rounded-md border-2 border-dashed border-[color:var(--fg-ink)] p-12 text-center">
               <p className="fg-t-title-lg">No guides match that.</p>
-              <p className="fg-muted mt-2 text-sm">Try fewer words, or pick another category.</p>
+              <p className="fg-muted mt-2 text-sm">Try fewer words, or browse the guides by topic.</p>
               <button
                 type="button"
-                onClick={() => {
-                  setSelectedCategory('all')
-                  setSearchQuery('')
-                }}
+                onClick={() => setSearchQuery('')}
                 className="fg-btn mt-6"
               >
-                Show all guides
+                Clear search
               </button>
             </div>
           ) : (
-            <div key={selectedCategory} className="mt-12 grid gap-12 lg:grid-cols-12 lg:gap-14">
+            <div className="mt-12 grid gap-12 lg:grid-cols-12 lg:gap-14">
               {lead ? (
                 <article className="fg-settle group lg:col-span-7" style={{ ['--i' as any]: 0 }}>
                   <Link href={`/posts/${lead.slug}`} className="block">
@@ -488,61 +507,6 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware, gea
               <ArrowRight aria-hidden className="size-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* SOFTWARE: the specimens, priced. A quieter, denser passage on indigo */}
-      <section className="fg-field-ink py-16 sm:py-24">
-        <div className={`${WRAP} grid gap-12 lg:grid-cols-12 lg:gap-16`}>
-          <div className="lg:col-span-4">
-            <div className="lg:sticky lg:top-28">
-              <h2 className="fg-t-headline">Software, priced</h2>
-              <p className="fg-muted fg-t-lede mt-5 max-w-sm">
-                Starting prices in Australian dollars, whether there is a free plan, and who each tool suits.
-              </p>
-              <Link href="/tools" className="fg-btn mt-8">
-                All tools
-                <ArrowRight aria-hidden className="size-5" />
-              </Link>
-            </div>
-          </div>
-          <ol className="divide-y divide-white/15 border-y border-white/15 lg:col-span-8">
-            {tools.map((tool, i) => (
-              <li key={tool.id}>
-                <Link href={`/tools/${tool.slug}`} className="fg-row group flex items-center gap-4 py-5 sm:gap-6">
-                  <span className="fg-cap hidden w-12 shrink-0 text-white/70 sm:block">Fig. {i + 1}</span>
-                  <BrandMark slug={tool.slug} name={tool.name} className="size-14 sm:size-16" />
-                  <span className="min-w-0 flex-1">
-                    <span className="fg-t-title-lg block group-hover:underline">
-                      {tool.name}
-                    </span>
-                    {tool.tagline ? <span className="fg-muted mt-1 block fg-t-small">{tool.tagline}</span> : null}
-                    {tool.pros?.[0]?.pro || tool.cons?.[0]?.con ? (
-                      <span className="mt-2 line-clamp-3 block fg-t-small">
-                        {tool.pros?.[0]?.pro ? (
-                          <>
-                            <strong className="text-[color:var(--fg-coral)]">Good:</strong> {tool.pros[0].pro}.{' '}
-                          </>
-                        ) : null}
-                        {tool.cons?.[0]?.con ? (
-                          <>
-                            <strong className="text-[color:var(--fg-coral)]">Watch:</strong> {tool.cons[0].con}.
-                          </>
-                        ) : null}
-                      </span>
-                    ) : null}
-                  </span>
-                  <span className="max-w-[9rem] shrink-0 text-right [overflow-wrap:anywhere] sm:max-w-[13rem]">
-                    <span className="fg-t-title-lg num block">{tool.startingPrice || 'Free'}</span>
-                    <span className="num fg-muted block text-xs">
-                      {tool.pricingType}
-                      {tool.rating ? ` · ${tool.rating}/5` : ''}
-                    </span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ol>
         </div>
       </section>
 
@@ -617,12 +581,6 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware, gea
                     Reader-supported: some links earn us a commission. It never changes what we list or the order.
                   </dd>
                 </div>
-                <div>
-                  <dt className="fg-cap opacity-80">Prices</dt>
-                  <dd className="mt-1 leading-snug">
-                    Australian dollars. Conversions are estimates, so confirm the price at checkout.
-                  </dd>
-                </div>
               </dl>
               <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-2">
                 <Link href="/about" className="fg-btn">
@@ -631,9 +589,6 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware, gea
                 </Link>
                 <Link href="/contact" className="fg-link">
                   Contact us
-                </Link>
-                <Link href="/faqs" className="fg-link">
-                  How we choose
                 </Link>
               </div>
             </div>
@@ -654,45 +609,50 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware, gea
                 </div>
                 <figcaption className="fg-cap mt-3 opacity-90">A desk set up for one. Image generated with AI.</figcaption>
               </figure>
-
-              <h3 className="mt-12 fg-t-title-lg">What you can use</h3>
-              <ul className="mt-4 divide-y fg-divide fg-hair border-y">
-                {services.map((s) => (
-                  <li key={s.title}>
-                    <Link href={s.href} className="fg-row group flex items-start gap-4 py-4">
-                      <span className="min-w-0 flex-1">
-                        <span className="fg-t-title block group-hover:underline">{s.title}</span>
-                        <span className="mt-1 block fg-t-small opacity-90">{s.body}</span>
-                      </span>
-                      <span className="num fg-cap shrink-0 pt-1 opacity-90">{s.note}</span>
-                      <ArrowRight aria-hidden className="fg-arrow mt-1 size-5 shrink-0" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* DISCLOSURE: how the site is paid, plainly */}
-      <section className="fg-field-salt py-14">
-        <div className={`${WRAP} flex flex-col gap-6 md:flex-row md:items-center md:justify-between`}>
-          <div className="max-w-3xl">
-            <p className="fg-t-title-lg text-balance">
-              Some links earn SoloStack a commission at no extra cost to you. It never changes what we list or the order we
-              list it in.
-            </p>
-            <p className="fg-muted mt-4 border-t border-[color:var(--fg-rule)] pt-4 fg-t-small">
-              <strong>Price note:</strong> Prices are subject to change and may be out of date. Some prices are converted from
-              other currencies, such as US dollars, to Australian dollars, so they may not be 100% accurate. Always confirm
-              the final price with the seller before you buy.
-            </p>
+      {/* SERVICES AND DISCLOSURE: what the site offers, then how it is paid, on one calm field */}
+      <section className="fg-field-salt py-16 sm:py-20">
+        <div className={WRAP}>
+          <h2 className="fg-t-subhead">What you can use</h2>
+          <ul className="mt-8 grid gap-x-10 border-t-2 border-[color:var(--fg-ink)] sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((s) => (
+              <li key={s.title} className="border-b border-[color:var(--fg-rule)] sm:border-b-0">
+                <Link href={s.href} className="fg-row group flex h-full flex-col gap-2 py-6">
+                  <span className="fg-cap fg-muted">{s.note}</span>
+                  <span className="fg-t-title group-hover:underline">{s.title}</span>
+                  <span className="fg-muted fg-t-small">{s.body}</span>
+                  <ArrowRight aria-hidden className="fg-arrow mt-auto size-5" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-12 flex flex-col gap-6 border-t border-[color:var(--fg-rule)] pt-10 md:flex-row md:items-center md:justify-between">
+            <div className="max-w-3xl">
+              <p className="fg-t-title-lg text-balance">
+                Some links earn SoloStack a commission at no extra cost to you. It never changes what we list or the order we
+                list it in.
+              </p>
+              <p className="fg-muted fg-t-small mt-4">
+                <strong>Price note:</strong> Prices are subject to change and may be out of date. Some prices are converted from
+                other currencies, such as US dollars, to Australian dollars, so they may not be 100% accurate. Always confirm
+                the final price with the seller before you buy.
+              </p>
+            </div>
+            <div className="flex shrink-0 flex-col items-start gap-1">
+              <Link href="/affiliate-disclosure" className="fg-btn fg-btn-line group">
+                Affiliate disclosure
+                <ArrowRight aria-hidden className="size-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link href="/faqs" className="fg-link">
+                How we choose
+              </Link>
+            </div>
           </div>
-          <Link href="/affiliate-disclosure" className="fg-btn fg-btn-line group shrink-0">
-            Affiliate disclosure
-            <ArrowRight aria-hidden className="size-5 transition-transform group-hover:translate-x-1" />
-          </Link>
         </div>
       </section>
     </main>
