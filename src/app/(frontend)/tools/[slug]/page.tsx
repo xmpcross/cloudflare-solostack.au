@@ -10,6 +10,7 @@ import { generateSoftwareSchema } from '@/utilities/generateJsonLd'
 import { ArrowLeft, Wrench, ShieldCheck, Tag, Star } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 export const revalidate = 600
 
@@ -91,18 +92,7 @@ export default async function ToolDetailPage({ params: paramsPromise }: Args) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Breadcrumb Navigation */}
-      <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
-        <Link href="/" className="hover:text-foreground transition-colors">
-          Home
-        </Link>
-        <span>/</span>
-        <Link href="/tools" className="hover:text-foreground transition-colors">
-          Software Directory
-        </Link>
-        <span>/</span>
-        <span className="text-foreground font-medium truncate">{tool.name}</span>
-      </nav>
+      <Breadcrumbs items={[{ name: 'Software Directory', href: '/tools' }, { name: tool.name }]} className="mb-8" />
 
       {/* Header */}
       <div className="space-y-4 mb-8">
