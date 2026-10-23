@@ -114,7 +114,7 @@ export default async function ToolDetailPage({ params: paramsPromise }: Args) {
           )}
         </div>
 
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-neutral-900 dark:text-white leading-[1.1]">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 dark:text-white leading-[1.1]">
           {tool.name}
         </h1>
 

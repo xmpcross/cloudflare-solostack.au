@@ -40,7 +40,7 @@ export default async function StacksPage() {
           <Layers className="h-4 w-4" />
           <span>Tested Workflows</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
           Solopreneur Stack Directory
         </h1>
         <p className="text-lg text-muted-foreground leading-relaxed">

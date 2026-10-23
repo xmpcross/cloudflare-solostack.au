@@ -21,6 +21,13 @@
     font-size: unset;
     font-family: var(--font-heading);
   }
+
+  /* h1, h2 and h3 use Inter; h4 to h6 and body text stay on Be Vietnam Pro. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-inter), var(--font-heading);
+  }
 }
 
 @plugin "@tailwindcss/typography";
@@ -223,4 +230,9 @@ html {
 html[data-theme='dark'],
 html[data-theme='light'] {
   opacity: initial;
+}
+
+/* Bold (700) is the heaviest weight on the site. The typography plugin sets article H1s to 800, so pin them. */
+.prose :where(h1, h2, h3, h4, strong, b, th):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  font-weight: 700;
 }

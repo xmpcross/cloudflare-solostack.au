@@ -30,7 +30,7 @@ export default function ContactPage() {
         <div className="mt-8 grid items-start gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700 dark:text-emerald-400">Contact</p>
-            <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">Write to us. A real person reads it.</h1>
+            <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">Write to us. A real person reads it.</h1>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
               Email is the quickest way to reach the SoloStack team. We reply within {BUSINESS.replyTime}.
             </p>

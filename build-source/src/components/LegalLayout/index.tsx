@@ -29,7 +29,7 @@ export function LegalLayout({
 
         <header className="mt-8 max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700 dark:text-emerald-400">Legal</p>
-          <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">{title}</h1>
+          <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">{title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">{intro}</p>
           <p className="mt-3 text-sm text-neutral-500">Last updated {BUSINESS.policiesUpdated}</p>
         </header>

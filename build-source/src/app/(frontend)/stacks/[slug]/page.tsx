@@ -110,7 +110,7 @@ export default async function StackDetailPage({ params: paramsPromise }: Args) {
           </Badge>
         </div>
 
-        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">{title}</h1>
+        <h1 className="text-3xl md:text-5xl font-bold tracking-tight">{title}</h1>
 
         {description && (
           <p className="text-xl text-muted-foreground leading-relaxed">{description}</p>

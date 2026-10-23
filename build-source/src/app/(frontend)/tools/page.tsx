@@ -39,7 +39,7 @@ export default async function ToolsDirectoryPage() {
           <Wrench className="h-4 w-4" />
           <span>Curated SaaS</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
           B2B Software & Tool Directory
         </h1>
         <p className="text-lg text-muted-foreground leading-relaxed">

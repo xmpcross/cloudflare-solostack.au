@@ -42,7 +42,7 @@ export default async function ComparisonsDirectoryPage() {
           <Swords className="h-4 w-4" />
           <span>Head-to-Head Showdowns</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
           Software & Hardware Comparisons
         </h1>
         <p className="text-lg text-muted-foreground leading-relaxed">

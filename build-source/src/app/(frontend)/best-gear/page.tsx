@@ -251,7 +251,7 @@ export default async function BestGearPage() {
               <p className="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                 Buying guide · Updated 2026
               </p>
-              <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight leading-[1.1]">
+              <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight leading-[1.1]">
                 The gear that makes one person look like a studio
               </h1>
               <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">

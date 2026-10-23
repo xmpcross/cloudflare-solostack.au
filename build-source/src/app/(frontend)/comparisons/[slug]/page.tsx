@@ -90,7 +90,7 @@ export default async function ComparisonDetailPage({ params: paramsPromise }: Ar
           <span>Head-to-Head Battle</span>
         </div>
 
-        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">{title}</h1>
+        <h1 className="text-3xl md:text-5xl font-bold tracking-tight">{title}</h1>
       </div>
 
       {/* Feature Comparison Table */}

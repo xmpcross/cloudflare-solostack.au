@@ -60,7 +60,7 @@ export function CouponCard({
         {/* Left main info */}
         <div className="flex-1 flex flex-col sm:flex-row items-start gap-4 p-4 sm:p-5">
           {/* Store Logo / Initials Avatar */}
-          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg border border-slate-200 dark:border-neutral-750 bg-neutral-50 dark:bg-neutral-800 flex items-center justify-center font-extrabold text-base sm:text-lg text-slate-800 dark:text-neutral-200 shrink-0 shadow-2xs select-none">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg border border-slate-200 dark:border-neutral-750 bg-neutral-50 dark:bg-neutral-800 flex items-center justify-center font-bold text-base sm:text-lg text-slate-800 dark:text-neutral-200 shrink-0 shadow-2xs select-none">
             {storeInitials}
           </div>
 

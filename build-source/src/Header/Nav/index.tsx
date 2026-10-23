@@ -40,7 +40,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
             href={item.url}
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs lg:text-sm font-bold transition-all duration-200 ${
               isActive
-                ? 'bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 font-extrabold shadow-2xs'
+                ? 'bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 font-bold shadow-2xs'
                 : 'text-slate-800 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100/90 dark:hover:bg-slate-900/80'
             }`}
           >

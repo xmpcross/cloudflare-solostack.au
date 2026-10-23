@@ -25,9 +25,15 @@ const beVietnamPro = localFont({
     { path: '../../fonts/be-vietnam-pro/BeVietnamPro-500-latin.woff2', weight: '500', style: 'normal' },
     { path: '../../fonts/be-vietnam-pro/BeVietnamPro-600-latin.woff2', weight: '600', style: 'normal' },
     { path: '../../fonts/be-vietnam-pro/BeVietnamPro-700-latin.woff2', weight: '700', style: 'normal' },
-    { path: '../../fonts/be-vietnam-pro/BeVietnamPro-800-latin.woff2', weight: '800', style: 'normal' },
   ],
   variable: '--font-be-vietnam-pro',
+  display: 'swap',
+})
+
+// Inter (variable, so every weight from one file) for h1, h2 and h3 only. The Latin set covers English text.
+const inter = localFont({
+  src: [{ path: '../../fonts/inter/Inter-Variable-latin.woff2', weight: '100 900', style: 'normal' }],
+  variable: '--font-inter',
   display: 'swap',
 })
 
@@ -35,7 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html
-      className={cn(beVietnamPro.variable, GeistSans.variable, GeistMono.variable)}
+      className={cn(beVietnamPro.variable, inter.variable, GeistSans.variable, GeistMono.variable)}
       data-theme="light"
       lang="en-AU"
       suppressHydrationWarning

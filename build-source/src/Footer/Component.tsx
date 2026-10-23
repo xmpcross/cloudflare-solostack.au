@@ -67,7 +67,7 @@ export async function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm text-neutral-600 dark:text-neutral-400">
               <li>
-                <Link href="/faqs" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-emerald-600 dark:hover:text-white transition-colors">
                   About Us
                 </Link>
               </li>
