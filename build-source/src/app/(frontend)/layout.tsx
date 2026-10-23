@@ -17,23 +17,20 @@ import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
-// Be Vietnam Pro for headings and body text, Geist Mono for numbers and labels (owner, 23 Oct 2026). The font files are
-// kept in src/fonts so the build needs no network; next/font serves them from this site.
-const beVietnamPro = localFont({
+// Manrope for headings and Mulish for body text, the pair used by blush.xocoweb.workers.dev (owner, 23 Oct 2026). Both are
+// variable fonts under the SIL Open Font License; the Latin subsets are kept in src/fonts so the build needs no network.
+const mulish = localFont({
   src: [
-    { path: '../../fonts/be-vietnam-pro/BeVietnamPro-400-latin.woff2', weight: '400', style: 'normal' },
-    { path: '../../fonts/be-vietnam-pro/BeVietnamPro-500-latin.woff2', weight: '500', style: 'normal' },
-    { path: '../../fonts/be-vietnam-pro/BeVietnamPro-600-latin.woff2', weight: '600', style: 'normal' },
-    { path: '../../fonts/be-vietnam-pro/BeVietnamPro-700-latin.woff2', weight: '700', style: 'normal' },
+    { path: '../../fonts/mulish/Mulish-Variable-latin.woff2', weight: '200 1000', style: 'normal' },
+    { path: '../../fonts/mulish/Mulish-Variable-italic-latin.woff2', weight: '200 1000', style: 'italic' },
   ],
-  variable: '--font-be-vietnam-pro',
+  variable: '--font-mulish',
   display: 'swap',
 })
 
-// Inter (variable, so every weight from one file) for h1, h2 and h3 only. The Latin set covers English text.
-const inter = localFont({
-  src: [{ path: '../../fonts/inter/Inter-Variable-latin.woff2', weight: '100 900', style: 'normal' }],
-  variable: '--font-inter',
+const manrope = localFont({
+  src: [{ path: '../../fonts/manrope/Manrope-Variable-latin.woff2', weight: '200 800', style: 'normal' }],
+  variable: '--font-manrope',
   display: 'swap',
 })
 
@@ -41,7 +38,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html
-      className={cn(beVietnamPro.variable, inter.variable, GeistSans.variable, GeistMono.variable)}
+      className={cn(mulish.variable, manrope.variable, GeistSans.variable, GeistMono.variable)}
       data-theme="light"
       lang="en-AU"
       suppressHydrationWarning
