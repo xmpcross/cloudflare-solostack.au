@@ -63,6 +63,20 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           src="https://convertlink.com/script/ce8f3235-a4ab-4b5b-bde4-b86890fd281b/bundle.js"
           strategy="lazyOnload"
         />
+        {/* Sovrn Commerce (VigLink), added at the end of the body as Sovrn instructs. */}
+        <Script
+          id="vglnk-loader"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `var vglnk = {key: 'c8e0277878ff223506949e2999123ff0'};
+(function(d, t) {var s = d.createElement(t);
+  s.type = 'text/javascript';s.async = true;
+  s.src = '//cdn.viglink.com/api/vglnk.js';
+  var r = d.getElementsByTagName(t)[0];
+  r.parentNode.insertBefore(s, r);
+}(document, 'script'));`,
+          }}
+        />
       </body>
     </html>
   )
