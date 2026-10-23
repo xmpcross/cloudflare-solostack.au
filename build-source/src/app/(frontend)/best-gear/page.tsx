@@ -6,7 +6,10 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 
 import { FAQSection, type FAQItem } from '@/components/FAQSection'
-import { Media } from '@/components/Media'
+import Image from 'next/image'
+import { BrandMark } from '@/components/marketing/BrandMark'
+import { DisclosureBand, RoadHero, WRAP } from '@/components/marketing/RoadChrome'
+import { bestOffer, formatAud, formatDay, logoKeyOf, mediaUrl, type BestOffer } from '@/utilities/gearOffers'
 
 export const revalidate = 3600
 
@@ -146,6 +149,14 @@ const SECTIONS: Section[] = [
   },
 ]
 
+const SECTION_IMAGES: Record<string, { src: string; alt: string }> = {
+  audio: { src: '/api/media/file/solo-podcast-recording-workflow-1.webp', alt: 'Podcast recording workflow for solo hosts' },
+  lighting: { src: '/api/media/file/batch-content-recording-1.webp', alt: 'Key light, camera and tripod set up for batch recording' },
+  camera: { src: '/api/media/file/1-person-video-podcast-setup.webp', alt: 'One-person video podcast setup with microphone, camera and lamp' },
+  headphones: { src: '/api/media/file/solo-podcaster-stack-3.webp', alt: 'Microphone and over-ear headphones' },
+  desk: { src: '/api/media/file/herman-miller-embody.webp', alt: 'Ergonomic chair at a desk by a window' },
+}
+
 const ORDER = [
   { title: 'Microphone', note: 'Clear sound keeps people watching and listening.', href: '#audio' },
   { title: 'Light', note: 'One soft light beside your screen.', href: '#lighting' },
@@ -161,6 +172,8 @@ type Pick = {
   bestFor?: string | null
   specs: string[]
   price?: string | null
+  rating?: number | null
+  offer?: BestOffer | null
   image: any
 }
 
@@ -188,6 +201,8 @@ async function getPicks(): Promise<Pick[]> {
       blurb: typeof h.verdict === 'string' ? h.verdict : null,
       specs: Array.isArray(h.specs) ? h.specs.map((x: any) => x?.spec).filter(Boolean) : [],
       price: h.priceRange,
+      rating: null,
+      offer: null,
       image: h.image && typeof h.image === 'object' ? h.image : null,
     }))
     const fromProducts: Pick[] = (products.docs as any[]).map((p) => ({
@@ -197,6 +212,8 @@ async function getPicks(): Promise<Pick[]> {
       blurb: p.summary,
       bestFor: p.bestFor,
       specs: Array.isArray(p.specs) ? p.specs.slice(0, 3).map((x: any) => `${x.label}: ${x.value}`) : [],
+      rating: typeof p.rating === 'number' ? p.rating : null,
+      offer: bestOffer(p.offers),
       image: p.image && typeof p.image === 'object' ? p.image : null,
     }))
     return [...fromHardware, ...fromProducts]
@@ -237,179 +254,218 @@ export default async function BestGearPage() {
     },
   ]
 
+  const stamp = formatDay(
+    picks
+      .map((p) => p.offer?.checkedAt)
+      .filter(Boolean)
+      .sort()
+      .pop() as string | undefined,
+  )
+
   return (
-    <div className="pb-24">
+    <div className="road">
       {jsonLd.map((data, i) => (
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
       ))}
 
-      {/* Hero */}
-      <header className="border-b border-border bg-neutral-50/70 dark:bg-card/40">
-        <div className="mx-auto max-w-[1366px] px-4 md:px-8 pt-12 pb-12 lg:pb-16">
-          <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-            <div className="space-y-5">
-              <p className="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-                Buying guide · Updated 2026
-              </p>
-              <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight leading-[1.1]">
-                The gear that makes one person look like a studio
-              </h1>
-              <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
-                You do not need a studio. You need clear sound, one good light, a steady camera and a chair you can
-                live in. Here is what to buy, in what order, and what to skip.
-              </p>
-              <nav aria-label="On this page" className="flex flex-wrap gap-2 pt-1">
-                {SECTIONS.map((sec) => (
-                  <a
-                    key={sec.id}
-                    href={`#${sec.id}`}
-                    className="rounded-full border border-border bg-background px-3.5 py-1.5 text-sm font-medium hover:border-emerald-500 hover:text-emerald-700 transition-colors"
-                  >
-                    {sec.nav}
-                  </a>
-                ))}
-              </nav>
+      <RoadHero
+        title="The gear that makes one person look like a studio."
+        intro="You do not need a studio. You need clear sound, one good light, a steady camera and a chair you can live in. Here is what to buy, in what order, and what to skip."
+        facts={[
+          { label: 'Gear picks', value: String(picks.filter((p) => p.key.startsWith('p-')).length) },
+          { label: 'Guides below', value: String(SECTIONS.length) },
+        ]}
+        aside={
+          <div className="panel overflow-hidden p-3 sm:p-4">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-lg">
+              <Image
+                src="/api/media/file/shure-sm7b.webp"
+                alt="Shure SM7B microphone on a boom arm in a home studio"
+                fill
+                priority
+                sizes="(min-width: 1024px) 640px, 100vw"
+                className="object-cover"
+                unoptimized
+              />
             </div>
-
-            <aside className="rounded-[8px] border border-border bg-background p-6 shadow-sm">
-              <h2 className="text-base font-bold mb-4">Buy in this order</h2>
-              <ol className="space-y-4">
-                {ORDER.map((item, i) => (
-                  <li key={item.title}>
-                    <a href={item.href} className="group flex items-start gap-3">
-                      <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-sm font-bold text-white">
-                        {i + 1}
-                      </span>
-                      <span>
-                        <span className="block font-semibold group-hover:text-emerald-700 transition-colors">{item.title}</span>
-                        <span className="block text-sm text-muted-foreground">{item.note}</span>
-                      </span>
-                    </a>
-                  </li>
-                ))}
-              </ol>
-            </aside>
+            <ol className="mt-3 grid divide-y divide-white/25 sm:grid-cols-2 sm:divide-y-0">
+              {ORDER.map((item, i) => (
+                <li key={item.title}>
+                  <a href={item.href} className="lane group flex items-start gap-3 rounded-lg px-3 py-3 hover:bg-white/10">
+                    <span className="num sign-type grid size-8 shrink-0 place-items-center rounded-full bg-[color:var(--sign-yellow)] text-sm font-bold text-[color:var(--road-green-deep)]">
+                      {i + 1}
+                    </span>
+                    <span>
+                      <span className="sign-type block font-bold">{item.title}</span>
+                      <span className="block text-sm leading-snug text-white/75">{item.note}</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ol>
           </div>
-        </div>
-      </header>
+        }
+      />
 
-      {/* Sections */}
-      <div className="mx-auto max-w-[1366px] px-4 md:px-8">
-        {SECTIONS.map((section) => {
-          const Icon = section.icon
-          const sectionPicks = picksFor(section)
-          return (
-            <section
-              key={section.id}
-              id={section.id}
-              aria-labelledby={`${section.id}-h`}
-              className="scroll-mt-24 border-b border-border py-14 last:border-b-0"
+      <nav aria-label="On this page" className="sticky top-0 z-20 border-b border-[color:var(--road-rule)] bg-[color:var(--road-ground)]/95 backdrop-blur">
+        <div className={`${WRAP} flex gap-2 overflow-x-auto py-3`}>
+          {SECTIONS.map((sec) => (
+            <a
+              key={sec.id}
+              href={`#${sec.id}`}
+              className="sign-type whitespace-nowrap rounded-full border-2 border-[color:var(--road-green)] px-4 py-1.5 text-sm font-bold hover:bg-[color:var(--road-green)] hover:text-[color:var(--sign-white)]"
             >
-              <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
-                <div className="space-y-5">
-                  <h2 id={`${section.id}-h`} className="flex items-start gap-3 text-2xl md:text-3xl font-bold tracking-tight">
-                    <Icon className="mt-1 size-7 shrink-0 text-emerald-600" aria-hidden />
+              {sec.nav}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      {SECTIONS.map((section, idx) => {
+        const sectionPicks = picksFor(section)
+        const photo = SECTION_IMAGES[section.id]
+        return (
+          <section
+            key={section.id}
+            id={section.id}
+            aria-labelledby={`${section.id}-h`}
+            className={`scroll-mt-16 border-b border-[color:var(--road-rule)] py-14 sm:py-20 ${
+              idx % 2 ? 'bg-[color:var(--sign-white)]' : ''
+            }`}
+          >
+            <div className={`${WRAP} grid gap-10 lg:grid-cols-12 lg:gap-14`}>
+              <div className="lg:col-span-5">
+                <div className="lg:sticky lg:top-20">
+                  {photo ? (
+                    <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-[color:var(--road-rule)]">
+                      <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" unoptimized />
+                    </div>
+                  ) : null}
+                  <h2 id={`${section.id}-h`} className="sign-type mt-6 text-balance text-3xl font-bold leading-tight tracking-tight">
                     {section.heading}
                   </h2>
-                  <p className="leading-relaxed text-muted-foreground">{section.intro}</p>
-                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                    <div className="rounded-[8px] border border-emerald-200 bg-emerald-50/70 p-4 dark:border-emerald-900 dark:bg-emerald-950/30">
-                      <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
+                  <p className="mt-3 leading-relaxed text-[color:var(--road-muted)]">{section.intro}</p>
+
+                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                    <div className="rounded-xl bg-[color:var(--road-green)] p-4 text-[color:var(--sign-white)]">
+                      <p className="sign-type flex items-center gap-1.5 text-sm font-bold text-[color:var(--sign-yellow)]">
                         <CheckCircle2 className="size-4" aria-hidden /> Buy this
                       </p>
                       <p className="mt-1.5 text-sm leading-relaxed">{section.buyThis}</p>
                     </div>
-                    <div className="rounded-[8px] border border-border bg-muted/40 p-4">
-                      <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                    <div className="rounded-xl border-2 border-[color:var(--road-green)] p-4">
+                      <p className="sign-type flex items-center gap-1.5 text-sm font-bold">
                         <XCircle className="size-4" aria-hidden /> Skip this
                       </p>
                       <p className="mt-1.5 text-sm leading-relaxed">{section.skipThis}</p>
                     </div>
                   </div>
-                </div>
 
-                <div className="space-y-6">
-                  <ul className="space-y-4">
+                  <dl className="mt-6 grid gap-4">
                     {section.points.map(([label, text]) => (
-                      <li key={label} className="rounded-[8px] border border-border bg-card p-5">
-                        <h3 className="font-semibold">{label}</h3>
-                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{text}</p>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {sectionPicks.length > 0 && (
-                    <div>
-                      <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-muted-foreground">Our picks</h3>
-                      <div className="grid gap-4 sm:grid-cols-2">
-                        {sectionPicks.map((pick) => (
-                          <article key={pick.key} className="flex flex-col overflow-hidden rounded-[8px] border border-border bg-card">
-                            {pick.image && (
-                              <div className="aspect-16/9 overflow-hidden bg-neutral-100 dark:bg-neutral-800">
-                                <Media
-                                  resource={pick.image}
-                                  size="33vw"
-                                  className="size-full"
-                                  imgClassName="size-full object-cover object-center"
-                                />
-                              </div>
-                            )}
-                            <div className="flex flex-1 flex-col gap-1.5 p-4">
-                              {pick.brand && (
-                                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{pick.brand}</p>
-                              )}
-                              <h4 className="font-bold leading-snug">{pick.name}</h4>
-                              {pick.blurb && <p className="text-sm leading-relaxed">{pick.blurb}</p>}
-                              {pick.bestFor && (
-                                <p className="text-sm text-muted-foreground">
-                                  <strong className="text-foreground">Best for:</strong> {pick.bestFor}
-                                </p>
-                              )}
-                              {pick.specs.length > 0 && (
-                                <p className="text-xs text-muted-foreground">{pick.specs.join(' • ')}</p>
-                              )}
-                              {pick.price && <p className="mt-auto pt-2 text-sm font-semibold">Typical price: {pick.price}</p>}
-                            </div>
-                          </article>
-                        ))}
+                      <div key={label} className="border-t-2 border-[color:var(--road-green)] pt-3">
+                        <dt className="sign-type font-bold">{label}</dt>
+                        <dd className="mt-1 text-sm leading-relaxed text-[color:var(--road-muted)]">{text}</dd>
                       </div>
-                    </div>
-                  )}
+                    ))}
+                  </dl>
                 </div>
               </div>
-            </section>
-          )
-        })}
 
-        {/* Software CTA */}
-        <section className="my-14 rounded-[8px] border border-border bg-neutral-50/70 p-8 dark:bg-card/40 md:p-10">
-          <div className="grid gap-6 md:grid-cols-[1.5fr_1fr] md:items-center">
-            <div>
-              <h2 className="text-2xl font-bold tracking-tight">Pair your gear with the right software</h2>
-              <p className="mt-2 max-w-2xl leading-relaxed text-muted-foreground">
-                Good hardware is half the setup. See the tools we use to record, edit, invoice and automate a
-                one-person business, and the stacks that put them together.
-              </p>
+              <div className="lg:col-span-7">
+                {sectionPicks.length > 0 ? (
+                  <>
+                    <h3 className="sign-type border-b-2 border-[color:var(--road-green)] pb-3 text-xl font-bold">
+                      Our picks <span className="num text-[color:var(--road-muted)]">({sectionPicks.length})</span>
+                    </h3>
+                    <ul className="divide-y divide-[color:var(--road-rule)]">
+                      {sectionPicks.map((pick) => {
+                        const photoUrl = mediaUrl(pick.image)
+                        return (
+                          <li key={pick.key} className="grid grid-cols-[auto_1fr] gap-4 py-5 sm:grid-cols-[auto_1fr_auto] sm:gap-5">
+                            {photoUrl ? (
+                              <span className="relative block size-16 shrink-0 overflow-hidden rounded-lg bg-[color:var(--road-rule)] ring-1 ring-black/10">
+                                <Image src={photoUrl} alt="" fill sizes="64px" className="object-cover" unoptimized />
+                              </span>
+                            ) : (
+                              <BrandMark slug={logoKeyOf(pick.brand)} name={pick.brand || pick.name} className="size-16" />
+                            )}
+                            <div className="min-w-0">
+                              <h4 className="sign-type text-lg font-bold leading-snug">{pick.name}</h4>
+                              {pick.blurb ? <p className="mt-1 text-sm leading-relaxed">{pick.blurb}</p> : null}
+                              {pick.bestFor ? (
+                                <p className="mt-1 text-sm text-[color:var(--road-muted)]">
+                                  <strong className="font-bold text-[color:var(--road-ink)]">Best for:</strong> {pick.bestFor}
+                                </p>
+                              ) : null}
+                            </div>
+                            <div className="col-span-2 flex items-center justify-between gap-4 sm:col-span-1 sm:block sm:text-right">
+                              {pick.offer ? (
+                                <a
+                                  href={pick.offer.url || '#'}
+                                  target="_blank"
+                                  rel="sponsored nofollow noopener noreferrer"
+                                  className="lane group inline-flex flex-col items-start rounded-lg border-2 border-[color:var(--road-green)] px-3 py-2 hover:bg-[color:var(--road-green)] hover:text-[color:var(--sign-white)] sm:items-end"
+                                >
+                                  <span className="num sign-type text-xl font-bold leading-none">{formatAud(pick.offer.price)}</span>
+                                  <span className="mt-1 text-xs">at {pick.offer.merchant}</span>
+                                </a>
+                              ) : pick.price ? (
+                                <span className="num sign-type block text-lg font-bold">{pick.price}</span>
+                              ) : null}
+                              {pick.rating ? (
+                                <span className="num block text-xs text-[color:var(--road-muted)] sm:mt-1.5">{pick.rating}/5 rating</span>
+                              ) : null}
+                              {pick.offer && pick.offer.retailers > 1 ? (
+                                <span className="block text-xs text-[color:var(--road-muted)]">{pick.offer.retailers} retailers</span>
+                              ) : null}
+                            </div>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </>
+                ) : null}
+              </div>
             </div>
-            <div className="flex flex-wrap gap-3 md:justify-end">
-              <Link href="/tools" className="inline-flex items-center gap-1.5 rounded-[8px] bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground">
-                Software directory <ArrowRight className="size-4" />
-              </Link>
-              <Link href="/stacks" className="inline-flex items-center gap-1.5 rounded-[8px] border border-border px-4 py-2.5 text-sm font-semibold hover:bg-muted">
-                Stack blueprints <ArrowRight className="size-4" />
-              </Link>
-            </div>
+          </section>
+        )
+      })}
+
+      <section className="bg-[color:var(--road-green-deep)] py-14 text-[color:var(--sign-white)] sm:py-20">
+        <div className={`${WRAP} grid gap-8 md:grid-cols-[1.5fr_1fr] md:items-center`}>
+          <div>
+            <h2 className="sign-type text-balance text-3xl font-bold tracking-tight sm:text-4xl">
+              Pair your gear with the right software
+            </h2>
+            <p className="mt-3 max-w-2xl text-lg leading-relaxed text-white/80">
+              Good hardware is half the setup. See the tools we use to record, edit, invoice and automate a one-person
+              business, and the stacks that put them together.
+            </p>
           </div>
-        </section>
+          <div className="flex flex-wrap gap-3 md:justify-end">
+            <Link href="/tools" className="sign-type inline-flex items-center gap-2 rounded-xl bg-[color:var(--sign-yellow)] px-5 py-3.5 text-sm font-bold text-[color:var(--road-green-deep)] hover:brightness-95">
+              Software directory <ArrowRight className="size-4" />
+            </Link>
+            <Link href="/stacks" className="sign-type inline-flex items-center gap-2 rounded-xl border-2 border-white/70 px-5 py-3.5 text-sm font-bold hover:bg-white/10">
+              Stack blueprints <ArrowRight className="size-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
-        <div className="mx-auto max-w-4xl">
+      <div className="py-14 sm:py-20">
+        <div className="mx-auto max-w-4xl px-4 sm:px-8">
           <FAQSection title="Creator gear FAQ" items={FAQS} />
-          <p className="mt-8 text-xs text-muted-foreground">
-            SoloStack is reader-supported. Some links may earn us a commission at no extra cost to you. See our{' '}
-            <Link href="/affiliate-disclosure" className="underline">affiliate disclosure</Link>.
-          </p>
+          {stamp ? (
+            <p className="mt-8 text-sm text-[color:var(--road-muted)]">
+              Prices are the lowest Australian-dollar offer found at the last check ({stamp}). Prices move often, so
+              confirm with the retailer before you buy.
+            </p>
+          ) : null}
         </div>
       </div>
+      <DisclosureBand text="SoloStack is reader-supported. Some links may earn us a commission at no extra cost to you." />
     </div>
   )
 }

@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Search, BookOpen, X } from 'lucide-react'
-import { BRAND_LOGOS } from '@/utilities/brandLogos'
+import { BrandMark } from '@/components/marketing/BrandMark'
 
 export interface CategoryData {
   id: string | number
@@ -86,19 +86,6 @@ const postCategory = (post: PostData) => {
 const formatDate = (iso?: string) => {
   if (!iso) return ''
   return new Date(iso).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })
-}
-
-function BrandMark({ slug, name }: { slug: string; name: string }) {
-  const src = BRAND_LOGOS[slug]
-  return (
-    <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-white p-1.5 ring-1 ring-black/10">
-      {src ? (
-        <Image src={src} alt="" width={36} height={36} className="size-full object-contain" unoptimized />
-      ) : (
-        <span className="sign-type text-lg font-bold text-[color:var(--road-green)]">{name.charAt(0)}</span>
-      )}
-    </span>
-  )
 }
 
 export function HomePageClient({
