@@ -731,6 +731,17 @@ h3.sign-type,
   }
 }
 
+/* A framed print pinned to the plate corner: salt mount, thin ink frame, soft lift. */
+.fg .fg-print {
+  background: var(--fg-salt);
+  padding: 5px;
+  border-radius: 3px;
+  box-shadow:
+    0 0 0 1px var(--fg-ink),
+    0 18px 26px -14px oklch(15% 0.05 215deg / 0.55);
+  z-index: 1;
+}
+
 /* Catalogue rows: hairline-ruled lists with hover that moves the arrow, not the layout. */
 .fg .fg-row {
   transition: background-color 0.2s;

@@ -68,7 +68,7 @@ interface HomePageClientProps {
 }
 
 // Posts shown in the guides section: one lead plus the list beside it (newest first).
-const MAX_HOME_POSTS = 7
+const MAX_HOME_POSTS = 6
 
 const WRAP = 'mx-auto w-full max-w-[1366px] px-4 sm:px-8'
 
@@ -230,9 +230,6 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware, gea
   const stackTotal = monthlyTotal(stackTools)
   const stackCost = stackTotal ? `≈A$${stackTotal}/mo` : stack?.monthlySoftwareCost
 
-  // A photograph for the business section: the newest post with an image that is not the lead guide.
-  const aboutPost = posts.find((p) => postImage(p) && p.slug !== lead?.slug)
-
   // Move focus to the guides so keyboard and screen-reader users land where the list changed.
   const jumpToGuides = () => {
     const el = document.getElementById('guides')
@@ -319,8 +316,18 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware, gea
           {stack ? (
             <figure className="relative lg:col-span-6 lg:pl-6">
               <div className="fg-plate p-6 sm:p-9">
-                <Sprig draw className="pointer-events-none absolute -right-3 -top-8 h-28 w-auto rotate-[24deg] sm:-right-8 sm:-top-16 sm:h-64" />
-                <h2 className="max-w-[15ch] pr-14 fg-t-subhead sm:pr-0">{stack.title}</h2>
+                <span className="fg-print pointer-events-none absolute -right-3 -top-7 w-[5.5rem] rotate-3 sm:-right-6 sm:-top-9 sm:w-[9.5rem]">
+                  <Image
+                    src="/art/field-print.webp"
+                    alt=""
+                    width={640}
+                    height={640}
+                    sizes="152px"
+                    className="block h-auto w-full"
+                    unoptimized
+                  />
+                </span>
+                <h2 className="max-w-[15ch] pr-16 fg-t-subhead sm:pr-24">{stack.title}</h2>
                 <p className="num fg-muted mt-3 text-base">
                   {stackCost ? (
                     <>
@@ -451,7 +458,7 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware, gea
                         ) : null}
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="fg-t-title block group-hover:underline">
+                        <span className="fg-t-title line-clamp-2 mb-[10px] group-hover:underline">
                           {post.title}
                         </span>
                         <span className="fg-cap fg-muted mt-1 block">
@@ -610,23 +617,21 @@ export function HomePageClient({ categories, posts, stacks, tools, hardware, gea
             </div>
 
             <div className="lg:col-span-6">
-              {aboutPost ? (
-                <figure>
-                  <div className="fg-plate fg-plate-photo">
-                    <div className="relative aspect-[4/3] overflow-hidden bg-[color:var(--fg-salt-2)]">
-                      <Image
-                        src={postImage(aboutPost) as string}
-                        alt=""
-                        fill
-                        sizes="(min-width: 1024px) 640px, 100vw"
-                        className="object-cover"
-                        unoptimized
-                      />
-                    </div>
+              <figure>
+                <div className="fg-plate fg-plate-photo">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-[color:var(--fg-salt-2)]">
+                    <Image
+                      src="/art/studio-desk.webp"
+                      alt="A tidy desk by a window with a laptop, a teal lamp and a boom-arm microphone against a coral wall"
+                      fill
+                      sizes="(min-width: 1024px) 640px, 100vw"
+                      className="object-cover"
+                      unoptimized
+                    />
                   </div>
-                  <figcaption className="fg-cap mt-3 opacity-90">From the guides: {aboutPost.title}</figcaption>
-                </figure>
-              ) : null}
+                </div>
+                <figcaption className="fg-cap mt-3 opacity-90">A desk set up for one. Image generated with AI.</figcaption>
+              </figure>
 
               <h3 className="mt-12 fg-t-title-lg">What you can use</h3>
               <ul className="mt-4 divide-y fg-divide fg-hair border-y">
