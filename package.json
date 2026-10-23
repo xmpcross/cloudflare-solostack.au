@@ -1,0 +1,15 @@
+{
+  "name": "solostack-au",
+  "private": true,
+  "type": "module",
+  "description": "Static export of solostack.au for Cloudflare Pages",
+  "scripts": {
+    "export": "python3 scripts/export.py",
+    "dev": "wrangler pages dev dist",
+    "check": "python3 scripts/smoke.py",
+    "deploy": "wrangler pages deploy dist --project-name solostack-au --branch main"
+  },
+  "devDependencies": {
+    "wrangler": "4.149.0"
+  }
+}
