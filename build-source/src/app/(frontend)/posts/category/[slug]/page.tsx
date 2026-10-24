@@ -56,7 +56,7 @@ export default async function CategoryPage({ params }: Args) {
         aside={
           meta ? (
             <div className="panel overflow-hidden p-3 sm:p-4">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-lg">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[6px]">
                 <Image
                   src={`/api/media/file/${meta.image}.webp`}
                   alt={meta.alt}

@@ -30,7 +30,7 @@ export default async function Page() {
                 const meta = TOPIC_META[c.slug]
                 return (
                   <li key={c.slug}>
-                    <Link href={`/posts/category/${c.slug}`} className="group relative block aspect-[4/3] overflow-hidden rounded-lg bg-[color:var(--road-rule)]">
+                    <Link href={`/posts/category/${c.slug}`} className="group relative block aspect-[4/3] overflow-hidden rounded-[6px] bg-[color:var(--road-rule)]">
                       {meta ? (
                         <Image
                           src={`/api/media/file/${meta.image}.webp`}

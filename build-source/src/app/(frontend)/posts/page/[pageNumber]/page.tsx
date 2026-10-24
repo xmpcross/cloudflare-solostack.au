@@ -6,6 +6,7 @@ import { Pagination } from '@/components/Pagination'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
+import { PageHeader } from '@/components/marketing/RoadChrome'
 import PageClient from './page.client'
 import { notFound } from 'next/navigation'
 
@@ -38,13 +39,10 @@ export default async function Page({ params: paramsPromise }: Args) {
   }
 
   return (
-    <div className="pt-24 pb-24">
+    <div className="road pb-24">
       <PageClient />
-      <div className="container mb-16">
-        <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
-        </div>
-      </div>
+      <PageHeader kicker="Guides" title="All guides" />
+      <div className="h-12" />
 
       <div className="container mb-8">
         <PageRange

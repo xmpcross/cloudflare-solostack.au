@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { Accordion } from '@/components/Accordion'
+import { PageHeader, WRAP } from '@/components/marketing/RoadChrome'
 import { BUSINESS } from '@/utilities/business'
 
 export const metadata: Metadata = {
@@ -138,27 +139,24 @@ export default function FaqsPage() {
   }
 
   return (
-    <div className="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
+    <div className="road">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <div className="mx-auto w-full max-w-[1366px] px-4 pb-24 pt-8 sm:px-6 lg:px-8">
+      <PageHeader
+        kicker="Help"
+        title="Frequently asked questions"
+        intro="Short answers about who we are, how we choose what to recommend, and how affiliate links work."
+      />
 
-        <header className="mt-8 max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700 dark:text-emerald-400">Help</p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">Frequently asked questions</h1>
-          <p className="mt-4 text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
-            Short answers about who we are, how we choose what to recommend, and how affiliate links work.
-          </p>
-        </header>
-
-        <div className="mt-12 grid gap-12 lg:grid-cols-[15rem_minmax(0,1fr)]">
+      <div className={`${WRAP} pb-24 pt-12 sm:pt-16`}>
+        <div className="grid gap-12 lg:grid-cols-[15rem_minmax(0,1fr)]">
           <nav aria-label="Topics" className="lg:sticky lg:top-28 lg:self-start">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">Topics</p>
-            <ul className="mt-3 space-y-1 border-l border-border text-sm">
+            <p className="cap text-[color:var(--road-muted)]">Topics</p>
+            <ul className="mt-3 space-y-1 border-l border-[color:var(--road-rule)] text-sm">
               {GROUPS.map((g) => (
                 <li key={g.id}>
                   <a
                     href={`#${g.id}`}
-                    className="-ml-px block border-l border-transparent py-1.5 pl-4 text-neutral-600 transition-colors hover:border-emerald-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+                    className="-ml-px block border-l-2 border-transparent py-1.5 pl-4 text-[color:var(--road-muted)] transition-colors hover:border-[color:var(--sign-yellow)] hover:text-[color:var(--road-ink)]"
                   >
                     {g.title}
                   </a>
@@ -170,7 +168,7 @@ export default function FaqsPage() {
           <div className="max-w-3xl space-y-14">
             {GROUPS.map((g) => (
               <section key={g.id} id={g.id} aria-labelledby={`${g.id}-h`} className="scroll-mt-28">
-                <h2 id={`${g.id}-h`} className="text-2xl font-bold tracking-tight">
+                <h2 id={`${g.id}-h`} className="sign-type border-b border-[color:var(--road-ink)] pb-3 text-2xl font-bold tracking-tight">
                   {g.title}
                 </h2>
                 <Accordion
@@ -183,15 +181,10 @@ export default function FaqsPage() {
               </section>
             ))}
 
-            <aside className="rounded-2xl border border-border bg-neutral-50 p-6 dark:bg-neutral-900/60">
-              <p className="text-lg font-semibold">Still have a question?</p>
-              <p className="mt-1 text-neutral-600 dark:text-neutral-400">
-                Email us and we will reply within {BUSINESS.replyTime}.
-              </p>
-              <Link
-                href="/contact"
-                className="mt-4 inline-flex items-center rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-700 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200"
-              >
+            <aside className="panel p-8 sm:p-10">
+              <p className="sign-type text-xl font-semibold">Still have a question?</p>
+              <p className="mt-1 text-[color:var(--road-muted)]">Email us and we will reply within {BUSINESS.replyTime}.</p>
+              <Link href="/contact" className="btn mt-5">
                 Contact us
               </Link>
             </aside>

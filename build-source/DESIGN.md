@@ -17,32 +17,32 @@ colors:
   leaf: "oklch(52% 0.09 170deg)"
 typography:
   display:
-    fontFamily: "Urbanist, 'Segoe UI', system-ui, sans-serif"
+    fontFamily: "'Geist Sans', 'Segoe UI', system-ui, sans-serif"
     fontSize: "clamp(2.8rem, 5.6vw, 5.2rem)"
     fontWeight: 700
     lineHeight: 1
     letterSpacing: "-0.035em"
     fontFeature: "lining-nums tabular-nums"
   headline:
-    fontFamily: "Urbanist, 'Segoe UI', system-ui, sans-serif"
+    fontFamily: "'Geist Sans', 'Segoe UI', system-ui, sans-serif"
     fontSize: "clamp(2.25rem, 4.6vw, 3.9rem)"
     fontWeight: 700
     lineHeight: 1.04
     letterSpacing: "-0.03em"
   subhead:
-    fontFamily: "Urbanist, 'Segoe UI', system-ui, sans-serif"
+    fontFamily: "'Geist Sans', 'Segoe UI', system-ui, sans-serif"
     fontSize: "clamp(1.75rem, 3.2vw, 2.6rem)"
     fontWeight: 700
     lineHeight: 1.08
     letterSpacing: "-0.025em"
   title-lg:
-    fontFamily: "Urbanist, 'Segoe UI', system-ui, sans-serif"
+    fontFamily: "'Geist Sans', 'Segoe UI', system-ui, sans-serif"
     fontSize: "clamp(1.375rem, 2.2vw, 1.625rem)"
     fontWeight: 600
     lineHeight: 1.3
     letterSpacing: "-0.015em"
   title:
-    fontFamily: "Urbanist, 'Segoe UI', system-ui, sans-serif"
+    fontFamily: "'Geist Sans', 'Segoe UI', system-ui, sans-serif"
     fontSize: "1.25rem"
     fontWeight: 600
     lineHeight: 1.3
@@ -115,7 +115,7 @@ components:
 
 # Design System: SoloStack
 
-> Scope: this system is built on the homepage (`.fg` scope in `src/app/(frontend)/globals.css`, markup in `HomePageClient.tsx`) and applied site-wide through the shared tokens: Urbanist and Figtree, the remapped Tailwind ramps (indigo is sea-green, emerald is coral, slate is marine), the semantic colour tokens, the `.road` directory-page tokens, the header and the footer. Inner-page layouts are still the earlier templates recoloured, not rebuilt as specimen plates.
+> Scope: this system is built on the homepage (`.fg` scope in `src/app/(frontend)/globals.css`, markup in `HomePageClient.tsx`) and applied site-wide through the shared tokens: Geist Sans and Figtree, the remapped Tailwind ramps (indigo is sea-green, emerald is coral, slate is marine), the semantic colour tokens, the `.road` directory-page tokens, the header and the footer. Inner pages (directories, guides index, about, FAQs, contact, legal, search) use the same fields, plates, pill buttons and ruled rows through the `.road` scope and the shared `RoadChrome` hero, disclosure band and page header; article pages keep the earlier layout.
 
 ## Overview
 
@@ -123,14 +123,14 @@ components:
 
 SoloStack reads as a printed field guide to the one-person business. Every tool, stack and gear item is a catalogued specimen: a framed salt-white plate with a figure number, a name, a tagline, an A$ price and a verdict. Sections are saturated fields that swap as the visitor scrolls (sea, salt, ink, salt-2, coral), one idea per field.
 
-Bass Strait sea-green carries the cover, deep marine ink carries the software catalogue, and a single coral does all the acting: buttons, prices, and the drenched business section. Urbanist over Figtree, with tracked uppercase captions, makes the page recognisable with its content removed. Drawn eucalyptus sprigs and one drawn mark per gear kind are the recurring devices.
+Bass Strait sea-green carries the cover, deep marine ink carries the software catalogue, and a single coral does all the acting: buttons, prices, and the drenched business section. Geist Sans over Figtree, with tracked uppercase captions, makes the page recognisable with its content removed. Drawn eucalyptus sprigs and one drawn mark per gear kind are the recurring devices.
 
 The page is dense with real data (prices, verdicts, ratings) and calm in its chrome: no gradients, no decorative icon tiles, no card grids of identical shape.
 
 **Key Characteristics:**
 - Full-bleed field colour per section; content centred at 1366px.
 - Salt plates with a fine double frame as the only container language for specimens.
-- Geometric sans display (Urbanist), friendly sans text (Figtree), uppercase tracked captions for catalogue data.
+- Geometric sans display (Geist Sans), friendly sans text (Figtree), uppercase tracked captions for catalogue data.
 - One action colour (coral); its text-safe variant for coral type on light fields.
 - Dotted leaders and hairline-ruled rows, as in a printed catalogue.
 
@@ -166,7 +166,7 @@ Cold marine neutrals (hue 195 to 215) with one warm coral (hue 35 to 42) and a s
 
 ## Typography
 
-**Display Font:** Urbanist (with Segoe UI, system-ui, sans-serif), variable 100 to 900, used at 700 for display, headline and subhead and 600 for titles, loaded as `--font-display`.
+**Display Font:** Geist Sans (with Segoe UI, system-ui, sans-serif), used at 700 for display, headline and subhead and 600 for titles, loaded as `--font-geist-sans`.
 **Body Font:** Figtree (with Segoe UI, sans-serif), variable 300 to 900, loaded as `--font-body`.
 
 **Character:** A geometric, round-bowled display sans for names, prices and headlines, set against a friendly geometric text sans for reading and uppercase tracked captions for catalogue data.

@@ -24,7 +24,7 @@ export function InlineProduct({ product }: { product: PostProduct }) {
   return (
     <aside
       aria-label={`Related: ${product.name}`}
-      className="road not-prose my-9 grid grid-cols-[auto_1fr] items-center gap-x-5 gap-y-4 rounded-xl border-2 border-[color:var(--road-green)] bg-[color:var(--sign-white)] p-4 sm:grid-cols-[auto_1fr_auto] sm:p-5"
+      className="road not-prose my-9 grid grid-cols-[auto_1fr] items-center gap-x-5 gap-y-4 rounded-[6px] border border-[color:var(--road-ink)] bg-[color:var(--sign-white)] p-4 sm:grid-cols-[auto_1fr_auto] sm:p-5"
     >
       {photo ? (
         <span className="relative block size-20 shrink-0 overflow-hidden rounded-lg bg-[color:var(--road-rule)] ring-1 ring-black/10 sm:size-24">
@@ -56,7 +56,7 @@ export function InlineProduct({ product }: { product: PostProduct }) {
           {...(internal
             ? {}
             : { target: '_blank', rel: tracked ? 'sponsored nofollow noopener noreferrer' : 'nofollow noopener noreferrer' })}
-          className="sign-type group inline-flex items-center gap-2 rounded-xl bg-[color:var(--road-green)] px-4 py-2.5 text-sm font-bold text-[color:var(--sign-white)] hover:brightness-110"
+          className="btn group "
         >
           {internal ? 'See the profile' : `View at ${offer.merchant}`}
           {internal ? (

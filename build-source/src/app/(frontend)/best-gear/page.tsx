@@ -277,7 +277,7 @@ export default async function BestGearPage() {
         ]}
         aside={
           <div className="panel overflow-hidden p-3 sm:p-4">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-lg">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[6px]">
               <Image
                 src="/api/media/file/shure-sm7b.webp"
                 alt="Shure SM7B microphone on a boom arm in a home studio"
@@ -337,7 +337,7 @@ export default async function BestGearPage() {
               <div className="lg:col-span-5">
                 <div className="lg:sticky lg:top-20">
                   {photo ? (
-                    <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-[color:var(--road-rule)]">
+                    <div className="relative aspect-[16/10] overflow-hidden rounded-[6px] bg-[color:var(--road-rule)]">
                       <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" unoptimized />
                     </div>
                   ) : null}
@@ -347,13 +347,13 @@ export default async function BestGearPage() {
                   <p className="mt-3 leading-relaxed text-[color:var(--road-muted)]">{section.intro}</p>
 
                   <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-xl border-2 border-[color:var(--road-green)] bg-[color:var(--road-tint)] p-4">
+                    <div className="rounded-[6px] border border-[color:var(--road-ink)] bg-[color:var(--road-tint)] p-4">
                       <p className="sign-type flex items-center gap-1.5 text-sm font-bold text-[color:var(--road-green)]">
                         <CheckCircle2 className="size-4" aria-hidden /> Buy this
                       </p>
                       <p className="mt-1.5 text-sm leading-relaxed">{section.buyThis}</p>
                     </div>
-                    <div className="rounded-xl border-2 border-[color:var(--road-green)] p-4">
+                    <div className="rounded-[6px] border border-[color:var(--road-ink)] p-4">
                       <p className="sign-type flex items-center gap-1.5 text-sm font-bold">
                         <XCircle className="size-4" aria-hidden /> Skip this
                       </p>
@@ -405,7 +405,7 @@ export default async function BestGearPage() {
                                   href={pick.offer.url || '#'}
                                   target="_blank"
                                   rel="sponsored nofollow noopener noreferrer"
-                                  className="lane group inline-flex flex-col items-start rounded-lg border-2 border-[color:var(--road-green)] px-3 py-2 hover:bg-[color:var(--road-green)] hover:text-[color:var(--sign-white)] sm:items-end"
+                                  className="lane group inline-flex flex-col items-start rounded-[6px] border border-[color:var(--road-ink)] px-3 py-2 hover:bg-[color:var(--road-green)] hover:text-[color:var(--sign-white)] sm:items-end"
                                 >
                                   <span className="num sign-type text-xl font-bold leading-none">{formatAud(pick.offer.price)}</span>
                                   <span className="mt-1 text-xs">at {pick.offer.merchant}</span>
@@ -444,10 +444,10 @@ export default async function BestGearPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-3 md:justify-end">
-            <Link href="/tools" className="sign-type inline-flex items-center gap-2 rounded-xl bg-[color:var(--sign-yellow)] px-5 py-3.5 text-sm font-bold text-[color:var(--road-green-deep)] hover:brightness-95">
+            <Link href="/tools" className="btn ">
               Software directory <ArrowRight className="size-4" />
             </Link>
-            <Link href="/stacks" className="sign-type inline-flex items-center gap-2 rounded-xl border-2 border-[color:var(--road-green)] px-5 py-3.5 text-sm font-bold hover:bg-[color:var(--road-green)]/10">
+            <Link href="/stacks" className="btn btn-line">
               Stack blueprints <ArrowRight className="size-4" />
             </Link>
           </div>

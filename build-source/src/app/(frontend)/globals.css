@@ -22,7 +22,7 @@
     font-family: var(--font-heading);
   }
 
-  /* Headings use Urbanist, body text Figtree. */
+  /* Headings use Geist Sans, body text Figtree. */
   h1,
   h2,
   h3,
@@ -68,7 +68,7 @@
   --breakpoint-2xl: 86rem;
   --font-mono: var(--font-geist-mono);
   --font-sans: var(--font-body), 'Segoe UI', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-  --font-heading: var(--font-display), var(--font-body), 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-geist-sans), 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
 
   /* Site palette. Tailwind's indigo ramp becomes the Bass Strait sea-green, emerald becomes coral, and slate takes a marine tint,
      so every existing utility (text-indigo-600, bg-emerald-50, border-slate-200 and so on) lands on the field-guide palette. */
@@ -314,7 +314,7 @@ h3.sign-type,
   font-weight: 700;
 }
 
-/* Directory pages (stacks, tools, gear, guides): the same field-guide palette as the homepage. The variable names are historical: --road-green is the sea-green, --sign-yellow is the coral accent. */
+/* Directory and info pages (stacks, tools, gear, guides): the Field Guide system of the homepage. The variable names are historical: --road-green is Bass Strait sea, --sign-yellow is action coral, --road-ink is marine ink. */
 .road {
   --road-green: oklch(40% 0.075 197deg);
   --road-green-deep: oklch(24% 0.05 215deg);
@@ -348,15 +348,96 @@ h3.sign-type,
 .road .num {
   font-variant-numeric: tabular-nums;
 }
-/* A sign panel: a green border inset from the edge of a white face, like a road sign. */
+/* A plate: salt-white sheet with a fine double frame, lifted off its field by a soft offset shadow (same as .fg-plate). */
 .road .panel {
   background: var(--sign-white);
   color: var(--road-ink);
-  border-radius: 14px;
+  border-radius: 6px;
   box-shadow:
-    inset 0 0 0 3px var(--sign-white),
-    inset 0 0 0 6px var(--road-green),
-    0 18px 30px -20px oklch(30% 0.1 277deg / 0.35);
+    inset 0 0 0 7px var(--road-ground),
+    inset 0 0 0 8px var(--road-ink),
+    0 28px 40px -24px oklch(18% 0.08 40deg / 0.55);
+}
+/* Fields: full-bleed sections that swap colour, each with its paired text colour. */
+.road .field-sea {
+  background: var(--road-green);
+  color: var(--road-ground);
+}
+.road .field-ink {
+  background: var(--road-ink);
+  color: var(--road-ground);
+}
+.road .field-coral {
+  background: var(--sign-yellow);
+  color: var(--road-ink);
+}
+.road .field-salt2 {
+  background: var(--road-tint);
+  color: var(--road-ink);
+}
+.road .field-sea .muted,
+.road .field-ink .muted {
+  color: color-mix(in oklch, var(--road-ground) 86%, transparent);
+}
+.road .field-coral .muted {
+  color: color-mix(in oklch, var(--road-ink) 88%, transparent);
+}
+/* Pill buttons: coral is the one action colour, flipping to ink on the coral field. */
+.road .btn {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border-radius: 999px;
+  background: var(--sign-yellow);
+  color: var(--road-ink);
+  padding: 0.85rem 1.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.2s;
+}
+.road .btn:hover {
+  transform: translateY(-2px);
+  background: oklch(77% 0.16 42deg);
+}
+.road .btn:active {
+  transform: scale(0.97);
+}
+.road .field-coral .btn {
+  background: var(--road-ink);
+  color: var(--road-ground);
+}
+.road .field-coral .btn:hover {
+  background: oklch(28% 0.05 215deg);
+}
+.road .btn-line {
+  background: transparent;
+  color: inherit;
+  box-shadow: inset 0 0 0 2px currentColor;
+}
+.road .btn-line:hover {
+  background: color-mix(in oklch, currentColor 10%, transparent);
+}
+/* Caption voice: small caps, tracked, used for catalogue data. */
+.road .cap {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.road .field-sea a:focus-visible,
+.road .field-ink a:focus-visible {
+  outline-color: var(--road-ground);
+}
+@media (prefers-reduced-motion: reduce) {
+  .road .btn:hover,
+  .road .btn:active {
+    transform: none;
+  }
 }
 .road .lane {
   transition:
@@ -406,7 +487,7 @@ h3.sign-type,
 
 /* ---------------------------------------------------------------------------------------------------------------------
    Homepage: a field guide to the one-person business. Bass Strait sea-green, salt-white plates, deep marine ink and one
-   coral action colour. Display type is Urbanist, text is Figtree; weights stay at or under 700.
+   coral action colour. Display type is Geist Sans, text is Figtree; weights stay at or under 700.
    --------------------------------------------------------------------------------------------------------------------- */
 .fg {
   --fg-sea: oklch(40% 0.075 197deg);
@@ -423,7 +504,7 @@ h3.sign-type,
   --fg-coral-text: oklch(49% 0.16 35deg);
   --fg-leaf: oklch(52% 0.09 170deg);
   --road-green: var(--fg-ink);
-  --font-display-stack: var(--font-display), 'Segoe UI', system-ui, sans-serif;
+  --font-display-stack: var(--font-geist-sans), 'Segoe UI', system-ui, sans-serif;
   background: var(--fg-salt);
   color: var(--fg-ink);
   font-family: var(--font-body), 'Segoe UI', sans-serif;

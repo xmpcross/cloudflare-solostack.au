@@ -108,7 +108,7 @@ export default async function StacksPage() {
           featured ? (
             <Link href={`/stacks/${featured.slug}`} className="panel group block overflow-hidden p-3 sm:p-4" aria-label={`Open ${featured.title}`}>
               {featuredImage ? (
-                <div className="relative aspect-[16/10] overflow-hidden rounded-lg">
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[6px]">
                   <Image
                     src={featuredImage}
                     alt={featured.title}
@@ -201,7 +201,7 @@ export default async function StacksPage() {
             <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-14">
               <article className="group lg:col-span-7">
                 <Link href={`/posts/${lead.slug}`} className="block">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-[color:var(--road-rule)]">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-[6px] bg-[color:var(--road-rule)]">
                     {imageUrl(lead.heroImage || lead.meta?.image) ? (
                       <Image
                         src={imageUrl(lead.heroImage || lead.meta?.image) as string}
@@ -235,7 +235,7 @@ export default async function StacksPage() {
                 {rest.map((post) => (
                   <li key={post.id}>
                     <Link href={`/posts/${post.slug}`} className="lane group grid grid-cols-[9.5rem_1fr] gap-5 sm:grid-cols-[12rem_1fr]">
-                      <span className="relative block aspect-[3/2] overflow-hidden rounded-lg bg-[color:var(--road-rule)]">
+                      <span className="relative block aspect-[3/2] overflow-hidden rounded-[6px] bg-[color:var(--road-rule)]">
                         {imageUrl(post.heroImage || post.meta?.image) ? (
                           <Image
                             src={imageUrl(post.heroImage || post.meta?.image) as string}

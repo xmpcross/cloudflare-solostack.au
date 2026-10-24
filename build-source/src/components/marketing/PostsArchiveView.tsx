@@ -99,7 +99,7 @@ export function PostsArchiveView({
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search guides"
-                className="h-11 w-56 rounded-xl border-2 border-[color:var(--road-green)] bg-[color:var(--sign-white)] pl-9 pr-9 text-sm placeholder:text-[color:var(--road-muted)]"
+                className="h-11 w-56 rounded-[6px] border border-[color:var(--road-ink)] bg-[color:var(--sign-white)] pl-9 pr-9 text-sm placeholder:text-[color:var(--road-muted)]"
               />
               {query ? (
                 <button
@@ -117,7 +117,7 @@ export function PostsArchiveView({
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as typeof sort)}
-                className="h-11 cursor-pointer rounded-xl border-2 border-[color:var(--road-green)] bg-[color:var(--sign-white)] px-3 text-sm font-semibold"
+                className="h-11 cursor-pointer rounded-[6px] border border-[color:var(--road-ink)] bg-[color:var(--sign-white)] px-3 text-sm font-semibold"
               >
                 <option value="newest">Newest first</option>
                 <option value="oldest">Oldest first</option>
@@ -147,7 +147,7 @@ export function PostsArchiveView({
           <>
             {lead ? (
               <article className="group mt-8 grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
-                <Link href={`/posts/${lead.slug}`} className="relative block aspect-[16/10] overflow-hidden rounded-xl bg-[color:var(--road-rule)] lg:col-span-7">
+                <Link href={`/posts/${lead.slug}`} className="relative block aspect-[16/10] overflow-hidden rounded-[6px] bg-[color:var(--road-rule)] lg:col-span-7">
                   {lead.image ? (
                     <Image
                       src={lead.image}
@@ -197,7 +197,7 @@ export function PostsArchiveView({
               {rest.map((g) => (
                 <li key={g.id}>
                   <article className="group">
-                    <Link href={`/posts/${g.slug}`} className="relative block aspect-[3/2] overflow-hidden rounded-xl bg-[color:var(--road-rule)]">
+                    <Link href={`/posts/${g.slug}`} className="relative block aspect-[3/2] overflow-hidden rounded-[6px] bg-[color:var(--road-rule)]">
                       {g.image ? (
                         <Image
                           src={g.image}
@@ -231,7 +231,7 @@ export function PostsArchiveView({
                 <button
                   type="button"
                   onClick={() => setVisible((n) => n + PAGE_SIZE)}
-                  className="sign-type rounded-xl border-2 border-[color:var(--road-green)] px-6 py-3 text-base font-bold hover:bg-[color:var(--road-green)] hover:text-[color:var(--sign-white)]"
+                  className="sign-type rounded-[6px] border border-[color:var(--road-ink)] px-6 py-3 text-base font-bold hover:bg-[color:var(--road-green)] hover:text-[color:var(--sign-white)]"
                 >
                   Show {Math.min(PAGE_SIZE, remaining)} more
                 </button>

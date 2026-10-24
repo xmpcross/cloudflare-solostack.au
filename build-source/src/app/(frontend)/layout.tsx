@@ -17,14 +17,7 @@ import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
-// Site type: Urbanist for display and headings, Figtree for text (SIL Open Font License, Latin subsets kept in src/fonts).
-const urbanist = localFont({
-  src: [{ path: '../../fonts/urbanist/Urbanist-Variable-latin.woff2', weight: '100 900', style: 'normal' }],
-  variable: '--font-display',
-  display: 'swap',
-  adjustFontFallback: 'Arial',
-})
-
+// Site type: Figtree for text (SIL Open Font License, Latin subset kept in src/fonts); headings use Geist Sans.
 const figtree = localFont({
   src: [{ path: '../../fonts/figtree/Figtree-Variable-latin.woff2', weight: '300 900', style: 'normal' }],
   variable: '--font-body',
@@ -36,7 +29,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html
-      className={cn(urbanist.variable, figtree.variable, GeistSans.variable, GeistMono.variable)}
+      className={cn(figtree.variable, GeistSans.variable, GeistMono.variable)}
       data-theme="light"
       lang="en-AU"
       suppressHydrationWarning

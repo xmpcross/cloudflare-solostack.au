@@ -95,7 +95,7 @@ function ComparisonTable({ rows }: { rows: Row[] }) {
                   href={r.offer.url || '#'}
                   target="_blank"
                   rel="sponsored nofollow noopener noreferrer"
-                  className="lane group inline-flex flex-col rounded-lg border-2 border-[color:var(--road-green)] px-3 py-1.5 hover:bg-[color:var(--road-green)] hover:text-[color:var(--sign-white)] md:items-end"
+                  className="lane group inline-flex flex-col rounded-[6px] border border-[color:var(--road-ink)] px-3 py-1.5 hover:bg-[color:var(--road-green)] hover:text-[color:var(--sign-white)] md:items-end"
                 >
                   <span className="num sign-type text-lg font-bold leading-none">{formatAud(r.offer.price)}</span>
                   <span className="mt-0.5 text-xs">at {r.offer.merchant}</span>
@@ -213,7 +213,7 @@ export default async function ComparisonsDirectoryPage() {
             href="/posts/website-builder-vs-wordpress"
             className="panel group block overflow-hidden p-3 sm:p-4"
           >
-            <div className="relative aspect-[16/10] overflow-hidden rounded-lg">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-[6px]">
               <Image
                 src="/api/media/file/website-builder-vs-wordpress-1.webp"
                 alt="Two laptops side by side, one showing a design tool and one showing code"
@@ -246,7 +246,7 @@ export default async function ComparisonsDirectoryPage() {
                 <li key={comp.id}>
                   <Link
                     href={`/comparisons/${comp.slug}`}
-                    className="lane group block rounded-xl border-2 border-[color:var(--road-green)] p-6 hover:bg-[color:var(--road-green)] hover:text-[color:var(--sign-white)]"
+                    className="lane group block rounded-[6px] border border-[color:var(--road-ink)] p-6 hover:bg-[color:var(--road-green)] hover:text-[color:var(--sign-white)]"
                   >
                     {comp.winnerBadge ? (
                       <span className="sign-type mb-3 inline-flex items-center gap-1.5 rounded bg-[color:var(--sign-yellow)] px-2.5 py-1 text-xs font-bold text-[color:var(--road-green-deep)]">
@@ -279,7 +279,7 @@ export default async function ComparisonsDirectoryPage() {
           <div className={`${WRAP} grid gap-10 lg:grid-cols-12 lg:gap-14`}>
             <div className="lg:col-span-4">
               <div className="lg:sticky lg:top-8">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-[color:var(--road-rule)]">
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[6px] bg-[color:var(--road-rule)]">
                   <Image
                     src={`/api/media/file/${g.image}.webp`}
                     alt={g.alt}
@@ -324,7 +324,7 @@ export default async function ComparisonsDirectoryPage() {
           <div className={`${WRAP} grid gap-10 lg:grid-cols-12 lg:gap-14`}>
             <div className="lg:col-span-4">
               <div className="lg:sticky lg:top-8">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-[color:var(--road-rule)]">
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[6px] bg-[color:var(--road-rule)]">
                   <Image
                     src="/api/media/file/how-to-choose-web-hosting-1.webp"
                     alt="Rows of web servers in a data centre"
@@ -365,7 +365,7 @@ export default async function ComparisonsDirectoryPage() {
               {guides.map((post) => (
                 <li key={post.id}>
                   <Link href={`/posts/${post.slug}`} className="group block">
-                    <span className="relative block aspect-[3/2] overflow-hidden rounded-lg bg-[color:var(--road-rule)]">
+                    <span className="relative block aspect-[3/2] overflow-hidden rounded-[6px] bg-[color:var(--road-rule)]">
                       <Image
                         src={mediaUrl(post.heroImage || post.meta?.image) as string}
                         alt=""

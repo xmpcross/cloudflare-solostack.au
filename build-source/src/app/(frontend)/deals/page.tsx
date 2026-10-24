@@ -87,7 +87,7 @@ export default async function DealsPage() {
       <div className="sm:col-span-3 sm:text-right">
         <Link
           href={`/tools/${tool.slug}`}
-          className="sign-type group inline-flex items-center gap-2 rounded-xl bg-[color:var(--road-green)] px-5 py-3 text-sm font-bold text-[color:var(--sign-white)] hover:brightness-110"
+          className="btn group "
         >
           See the details
           <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
@@ -138,7 +138,7 @@ export default async function DealsPage() {
                           href={o.url}
                           target="_blank"
                           rel="sponsored nofollow noopener"
-                          className="sign-type group mt-4 inline-flex items-center gap-2 rounded-xl bg-[color:var(--road-green)] px-5 py-3 text-sm font-bold text-[color:var(--sign-white)] hover:brightness-110"
+                          className="btn group mt-4"
                         >
                           Get this deal
                           <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
@@ -176,7 +176,7 @@ export default async function DealsPage() {
             </>
           ) : null}
 
-          <div className="mt-16 rounded-xl border-2 border-[color:var(--road-green)] p-6 sm:p-8">
+          <div className="mt-16 rounded-[6px] border border-[color:var(--road-ink)] p-6 sm:p-8">
             <p className="flex items-start gap-3 leading-relaxed">
               <Check aria-hidden className="mt-1 size-5 shrink-0 text-[color:var(--road-green)]" />
               Looking for hardware such as microphones, cameras and desk gear? Compare it with the stores that stock it on{' '}

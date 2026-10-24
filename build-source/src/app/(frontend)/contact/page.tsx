@@ -2,6 +2,7 @@ import { ArrowUpRight } from 'lucide-react'
 import type { Metadata } from 'next'
 import React from 'react'
 
+import { PageHeader, WRAP } from '@/components/marketing/RoadChrome'
 import { BUSINESS } from '@/utilities/business'
 
 import { CopyEmail } from './CopyEmail'
@@ -24,50 +25,43 @@ const TOPICS = [
 
 export default function ContactPage() {
   return (
-    <div className="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
-      <div className="mx-auto w-full max-w-[1366px] px-4 pb-24 pt-8 sm:px-6 lg:px-8">
+    <div className="road">
+      <PageHeader
+        kicker="Contact"
+        title="Write to us. A real person reads it."
+        intro={`Email is the quickest way to reach the SoloStack team. We reply within ${BUSINESS.replyTime}.`}
+      />
 
-        <div className="mt-8 grid items-start gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
+      <div className={`${WRAP} pb-24 pt-12 sm:pt-16`}>
+        <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700 dark:text-emerald-400">Contact</p>
-            <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">Write to us. A real person reads it.</h1>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
-              Email is the quickest way to reach the SoloStack team. We reply within {BUSINESS.replyTime}.
-            </p>
-
-            <div className="mt-8 rounded-2xl border border-border p-6 sm:p-8">
-              <p className="text-sm font-medium text-neutral-500">Email</p>
+            <div className="panel p-8 sm:p-10">
+              <p className="cap text-[color:var(--road-muted)]">Email</p>
               <a
                 href={`mailto:${BUSINESS.email}`}
-                className="mt-1 block break-all text-2xl font-bold tracking-tight underline decoration-emerald-600 decoration-2 underline-offset-4 sm:text-3xl"
+                className="sign-type mt-2 block break-all text-2xl font-bold tracking-tight underline decoration-[color:var(--sign-yellow)] decoration-2 underline-offset-4 sm:text-3xl"
               >
                 {BUSINESS.email}
               </a>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <a
-                  href={`mailto:${BUSINESS.email}`}
-                  className="inline-flex items-center rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-neutral-700 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200"
-                >
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a href={`mailto:${BUSINESS.email}`} className="btn">
                   Write an email
                 </a>
                 <CopyEmail email={BUSINESS.email} />
               </div>
             </div>
 
-            <h2 className="mt-12 text-xl font-bold tracking-tight">What is it about?</h2>
-            <p className="mt-1 text-sm text-neutral-500">Pick one and your email app opens with the subject filled in.</p>
-            <ul className="mt-4 divide-y divide-border border-y border-border">
+            <h2 className="sign-type mt-14 text-2xl font-bold tracking-tight">What is it about?</h2>
+            <p className="mt-1 text-sm text-[color:var(--road-muted)]">Pick one and your email app opens with the subject filled in.</p>
+            <ul className="mt-4 divide-y divide-[color:var(--road-rule)] border-y border-[color:var(--road-rule)]">
               {TOPICS.map((t) => (
                 <li key={t.title}>
-                  <a href={mail(t.subject)} className="group flex items-center justify-between gap-4 py-4">
+                  <a href={mail(t.subject)} className="lane group flex items-center justify-between gap-4 py-5">
                     <span>
-                      <span className="block font-semibold">{t.title}</span>
-                      <span className="mt-0.5 block text-sm text-neutral-600 dark:text-neutral-400">{t.hint}</span>
+                      <span className="sign-type block text-lg font-semibold">{t.title}</span>
+                      <span className="mt-0.5 block text-sm text-[color:var(--road-muted)]">{t.hint}</span>
                     </span>
-                    <ArrowUpRight
-                      className="size-5 flex-none text-neutral-400 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-emerald-600"
-                      aria-hidden
-                    />
+                    <ArrowUpRight className="lane-arrow size-5 flex-none" aria-hidden />
                   </a>
                 </li>
               ))}
@@ -75,29 +69,29 @@ export default function ContactPage() {
           </div>
 
           <div className="lg:sticky lg:top-28">
-            <div className="overflow-hidden rounded-2xl border border-border">
+            <div className="panel p-3">
               <img
                 src="/api/media/file/solo-consultant-tech-stack.webp"
                 alt="A laptop, notebook and cup of coffee on a bright wooden desk by a window"
                 width={1024}
                 height={576}
                 loading="eager"
-                className="aspect-[16/10] w-full object-cover"
+                className="aspect-[16/10] w-full rounded-[2px] object-cover"
               />
             </div>
 
-            <dl className="mt-6 grid gap-x-6 gap-y-3 text-sm sm:grid-cols-[8rem_1fr]">
-              <dt className="text-neutral-500">Operated by</dt>
+            <dl className="mt-8 grid gap-x-6 gap-y-3 text-sm sm:grid-cols-[8rem_1fr]">
+              <dt className="cap text-[color:var(--road-muted)]">Operated by</dt>
               <dd>{BUSINESS.operator}</dd>
-              <dt className="text-neutral-500">ABN</dt>
+              <dt className="cap text-[color:var(--road-muted)]">ABN</dt>
               <dd>{BUSINESS.abn}</dd>
-              <dt className="text-neutral-500">Post</dt>
+              <dt className="cap text-[color:var(--road-muted)]">Post</dt>
               <dd>{BUSINESS.address}</dd>
-              <dt className="text-neutral-500">Reply time</dt>
+              <dt className="cap text-[color:var(--road-muted)]">Reply time</dt>
               <dd>Within {BUSINESS.replyTime}</dd>
             </dl>
-            <p className="mt-6 text-sm text-neutral-500">
-              Looking for quick answers first? Try the <a className="font-medium text-emerald-700 underline underline-offset-2 dark:text-emerald-400" href="/faqs">FAQs</a>.
+            <p className="mt-6 text-sm text-[color:var(--road-muted)]">
+              Looking for quick answers first? Try the <a className="font-semibold text-[color:var(--road-ink)] underline underline-offset-4" href="/faqs">FAQs</a>.
             </p>
           </div>
         </div>

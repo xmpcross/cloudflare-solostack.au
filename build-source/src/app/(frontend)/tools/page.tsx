@@ -87,7 +87,7 @@ export default async function ToolsDirectoryPage() {
         aside={
           featured && featuredImg ? (
             <Link href={`/posts/${featured.slug}`} className="panel group block overflow-hidden p-3 sm:p-4">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-lg">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[6px]">
                 <Image
                   src={featuredImg}
                   alt={featured.title}
@@ -156,7 +156,7 @@ export default async function ToolsDirectoryPage() {
                     </div>
                     <Link
                       href={`/tools/${tool.slug}`}
-                      className="sign-type group inline-flex items-center gap-2 rounded-xl bg-[color:var(--road-green)] px-5 py-3 text-sm font-bold text-[color:var(--sign-white)] hover:brightness-110"
+                      className="btn group "
                     >
                       Read the specs
                       <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
@@ -186,7 +186,7 @@ export default async function ToolsDirectoryPage() {
                 return (
                   <li key={post.id}>
                     <Link href={`/posts/${post.slug}`} className="group block">
-                      <span className="relative block aspect-[3/2] overflow-hidden rounded-lg bg-[color:var(--road-rule)]">
+                      <span className="relative block aspect-[3/2] overflow-hidden rounded-[6px] bg-[color:var(--road-rule)]">
                         {img ? (
                           <Image
                             src={img}

@@ -105,7 +105,7 @@ export default async function AboutPage() {
         facts={facts}
         aside={
           <div className="panel overflow-hidden p-3 sm:p-4">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-lg">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-[6px]">
               <Image
                 src={img('ergonomic-minimalist-remote-workstation-setup')}
                 alt="A tidy standing desk with a monitor, desk lamp and ergonomic chair against a warm wall"
@@ -119,14 +119,14 @@ export default async function AboutPage() {
             <div className="flex flex-wrap gap-3 px-2 pb-2 pt-4 sm:px-3">
               <Link
                 href="/posts"
-                className="sign-type group inline-flex items-center gap-2 rounded-xl bg-[color:var(--road-green)] px-5 py-3 text-sm font-bold text-[color:var(--sign-white)] hover:brightness-110"
+                className="btn group "
               >
                 Read the guides
                 <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 href="/stacks"
-                className="sign-type inline-flex items-center rounded-xl border-2 border-[color:var(--road-green)] px-5 py-3 text-sm font-bold hover:bg-[color:var(--road-green)]/10"
+                className="btn btn-line"
               >
                 Browse stacks
               </Link>
@@ -138,7 +138,7 @@ export default async function AboutPage() {
       {/* WHAT WE DO: picture and words side by side */}
       <section className="py-16 sm:py-24">
         <div className={`${WRAP} grid items-center gap-10 lg:grid-cols-12 lg:gap-16`}>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[color:var(--road-rule)] lg:col-span-6">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-[6px] bg-[color:var(--road-rule)] lg:col-span-6">
             <Image
               src={img('solo-podcaster-stack')}
               alt="A dynamic microphone on a boom arm beside black over-ear headphones"
@@ -183,7 +183,7 @@ export default async function AboutPage() {
             {TOPICS.map((t) => (
               <li key={t.title}>
                 <Link href={t.href} className="group block">
-                  <span className="relative block aspect-[16/10] overflow-hidden rounded-xl bg-[color:var(--road-rule)]">
+                  <span className="relative block aspect-[16/10] overflow-hidden rounded-[6px] bg-[color:var(--road-rule)]">
                     <Image
                       src={img(t.image)}
                       alt=""
@@ -260,7 +260,7 @@ export default async function AboutPage() {
             </dl>
             <Link
               href="/contact"
-              className="sign-type group mt-6 inline-flex items-center gap-2 rounded-xl bg-[color:var(--road-green)] px-6 py-3.5 text-sm font-bold text-[color:var(--sign-white)] hover:brightness-110"
+              className="btn group mt-6"
             >
               Get in touch
               <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />

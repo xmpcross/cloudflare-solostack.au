@@ -91,49 +91,44 @@ export default async function StackDetailPage({ params: paramsPromise }: Args) {
   }
 
   const btn =
-    'sign-type group inline-flex items-center gap-2 rounded-xl bg-[color:var(--road-green)] px-5 py-3 text-sm font-bold text-[color:var(--sign-white)] hover:brightness-110'
+    'btn group '
 
   return (
     <div className="road">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <section className="bg-[color:var(--road-tint)] text-[color:var(--road-ink)]">
+      <section className="field-sea">
         <div className={`${WRAP} pb-12 pt-10 lg:pb-16`}>
           <Link href="/stacks" className="inline-flex items-center gap-2 text-sm font-bold underline-offset-4 hover:underline">
             <ArrowLeft aria-hidden className="size-4" /> All stack blueprints
           </Link>
-          <p className="num mt-8 text-xs font-bold uppercase tracking-wide text-[color:var(--road-green)]">
+          <p className="num cap mt-8 ">
             Built for · {BUILT_FOR[slug] || stack.businessModel}
           </p>
           <h1 className="sign-type mt-2 max-w-4xl text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">{stack.title}</h1>
-          {stack.description ? <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[color:var(--road-muted)]">{stack.description}</p> : null}
+          {stack.description ? <p className="mt-5 max-w-2xl text-lg leading-relaxed muted">{stack.description}</p> : null}
           <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
             {stack.monthlySoftwareCost ? (
               <div>
-                <dt className="text-sm text-[color:var(--road-muted)]">Software a month</dt>
-                <dd className="num sign-type text-3xl font-bold text-[color:var(--road-green)]">{stack.monthlySoftwareCost}</dd>
+                <dt className="text-sm muted">Software a month</dt>
+                <dd className="num sign-type text-3xl font-bold ">{stack.monthlySoftwareCost}</dd>
               </div>
             ) : null}
             <div>
-              <dt className="text-sm text-[color:var(--road-muted)]">Tools</dt>
-              <dd className="num sign-type text-3xl font-bold text-[color:var(--road-green)]">{tools.length}</dd>
+              <dt className="text-sm muted">Tools</dt>
+              <dd className="num sign-type text-3xl font-bold ">{tools.length}</dd>
             </div>
             {hardware.length ? (
               <div>
-                <dt className="text-sm text-[color:var(--road-muted)]">Gear</dt>
-                <dd className="num sign-type text-3xl font-bold text-[color:var(--road-green)]">{hardware.length}</dd>
+                <dt className="text-sm muted">Gear</dt>
+                <dd className="num sign-type text-3xl font-bold ">{hardware.length}</dd>
               </div>
             ) : null}
           </dl>
-          <p className="mt-6 max-w-3xl text-sm leading-relaxed text-[color:var(--road-muted)]">
+          <p className="mt-6 max-w-3xl text-sm leading-relaxed muted">
             {EXCHANGE_NOTE} Prices checked {PRICES_CHECKED}.
           </p>
         </div>
-        <div
-          aria-hidden
-          className="h-2 w-full"
-          style={{ background: 'repeating-linear-gradient(90deg, var(--sign-yellow) 0 56px, var(--road-green) 56px 96px)' }}
-        />
       </section>
 
       {wf ? (
@@ -176,7 +171,7 @@ export default async function StackDetailPage({ params: paramsPromise }: Args) {
                 ) : null}
               </div>
               {wf.australia ? (
-                <div className="rounded-xl border-2 border-[color:var(--road-green)] p-6">
+                <div className="rounded-[6px] border border-[color:var(--road-ink)] p-6">
                   <h3 className="sign-type text-lg font-bold">Australian notes</h3>
                   <p className="mt-2 leading-relaxed">{wf.australia}</p>
                 </div>

@@ -37,20 +37,20 @@ export const StaticSearch: React.FC<{ posts: CardPostData[] }> = ({ posts }) => 
 
   return (
     <>
-      <div className="container mb-16">
-        <div className="max-w-[50rem] mx-auto">
+      <div className="container mb-12">
+        <div className="max-w-[50rem]">
           <form onSubmit={(e) => e.preventDefault()}>
             <Label htmlFor="search" className="sr-only">
               Search
             </Label>
-            <Input id="search" value={value} onChange={(e) => setValue(e.target.value)} placeholder="Search" />
+            <Input id="search" value={value} onChange={(e) => setValue(e.target.value)} placeholder="Search guides, tools and gear" className="h-12 rounded-full border-foreground px-6 text-base" />
           </form>
         </div>
       </div>
       {results.length > 0 ? (
         <CollectionArchive posts={results} />
       ) : (
-        <div className="container">No results found.</div>
+        <p className="rounded-[6px] border-2 border-dashed border-foreground p-12 text-center">No results found.</p>
       )}
     </>
   )
